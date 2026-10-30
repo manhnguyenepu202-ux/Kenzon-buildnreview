@@ -61,11 +61,15 @@ export async function syncContent({ log = console.log } = {}) {
 }
 
 // Run directly (npm run content:sync). process.argv[1] can be missing under hosting process managers.
-if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
+// No top-level await: Hostinger loads server.js with require(), which rejects async ES module graphs.
+async function main() {
   const { connect } = await import('../src/db/index.js');
   const { migrate } = await import('../src/db/schema.js');
   await connect();
   await migrate();
   await syncContent();
   process.exit(0);
+}
+if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
+  main().catch((err) => { console.error(err); process.exit(1); });
 }
