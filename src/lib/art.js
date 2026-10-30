@@ -115,6 +115,15 @@ const ART = {
     <circle cx="170" cy="135" r="3" class="ad"/>
     <path d="M84 78h72M84 90h72M84 102h72" class="dim"/>
     <path d="M60 150h120" class="a"/>`,
+  'pen-plotter': `
+    <rect x="30" y="132" width="180" height="22" rx="4" class="b"/>
+    <rect x="48" y="112" width="144" height="20" rx="2" class="glass"/>
+    <path d="M40 56h160" class="l w"/>
+    <path d="M44 56v76M196 56v76" class="l"/>
+    <rect x="104" y="46" width="32" height="26" rx="4" class="t"/>
+    <path d="M120 72v30" class="l w"/>
+    <path d="M117 102l3 8 3-8" class="a"/>
+    <path d="M62 122c18-10 30 6 48-2s28-8 40 0" class="dim"/>`,
   'camera-lens': `
     <rect x="58" y="44" width="124" height="96" rx="10" class="t"/>
     <path d="M58 64h124M58 120h124" class="l"/>
