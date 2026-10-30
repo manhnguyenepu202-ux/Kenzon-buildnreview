@@ -90,6 +90,39 @@ const ART = {
     <circle cx="80" cy="70" r="18" class="b"/><circle cx="80" cy="70" r="6" class="l"/>
     <circle cx="160" cy="70" r="18" class="b"/><circle cx="160" cy="70" r="6" class="l"/>
     <circle cx="186" cy="113" r="3" class="ad"/>`,
+  '3d-scanner': `
+    <rect x="96" y="28" width="48" height="104" rx="12" class="t"/>
+    <circle cx="120" cy="50" r="8" class="b2"/>
+    <circle cx="120" cy="76" r="5" class="ad"/>
+    <circle cx="120" cy="100" r="8" class="b2"/>
+    <rect x="108" y="132" width="24" height="30" rx="6" class="b"/>
+    <path d="M144 60l46-26M144 76h50M144 92l46 26" class="dim"/>
+    <path d="M196 40v80" class="a"/>`,
+  'laser-engraver': `
+    <rect x="34" y="40" width="172" height="110" rx="8" class="b"/>
+    <rect x="46" y="52" width="148" height="62" rx="4" class="glass"/>
+    <path d="M46 70h148" class="l"/>
+    <rect x="106" y="64" width="28" height="14" rx="3" class="t"/>
+    <path d="M120 78v24" class="a"/>
+    <path d="M70 108h100" class="dim"/>
+    <rect x="46" y="124" width="148" height="14" rx="2" class="b2"/>
+    <circle cx="186" cy="131" r="3" class="ad"/>`,
+  'mini-pc': `
+    <rect x="52" y="58" width="136" height="90" rx="14" class="t"/>
+    <path d="M52 124h136" class="l"/>
+    <rect x="66" y="132" width="14" height="6" rx="1" class="b2"/>
+    <rect x="86" y="132" width="14" height="6" rx="1" class="b2"/>
+    <circle cx="170" cy="135" r="3" class="ad"/>
+    <path d="M84 78h72M84 90h72M84 102h72" class="dim"/>
+    <path d="M60 150h120" class="a"/>`,
+  'camera-lens': `
+    <rect x="58" y="44" width="124" height="96" rx="10" class="t"/>
+    <path d="M58 64h124M58 120h124" class="l"/>
+    <path d="M86 44v96M154 44v96" class="dim"/>
+    <rect x="182" y="58" width="16" height="68" rx="3" class="b2"/>
+    <rect x="42" y="52" width="16" height="80" rx="3" class="b"/>
+    <path d="M110 92h20" class="a"/>
+    <circle cx="170" cy="54" r="3" class="ad"/>`,
 };
 
 export const ART_TYPES = Object.keys(ART);

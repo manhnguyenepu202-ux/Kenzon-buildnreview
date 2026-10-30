@@ -2,6 +2,7 @@ import config from './src/config.js';
 import { connect } from './src/db/index.js';
 import { migrate, isEmpty } from './src/db/schema.js';
 import { seed } from './scripts/seed-data.js';
+import { syncContent } from './scripts/content-sync.js';
 import { createApp } from './src/app.js';
 
 async function start() {
@@ -11,6 +12,7 @@ async function start() {
     console.log('[db] Empty database: loading the starter reviews…');
     await seed();
   }
+  await syncContent();
   createApp().listen(config.port, () => {
     console.log(`BuildNReview running on http://localhost:${config.port} (database: ${dialect})`);
   });

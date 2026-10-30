@@ -244,8 +244,10 @@ async function pickSponsor(product) {
     const p = await getProduct('id', cat.sponsor_product_id);
     if (p) return p;
   }
+  // Fall back to the best-scored affiliate product, preferring the same category.
   const candidates = await listProducts({ sort: 'score', excludeId: product.id });
-  return candidates.find((p) => p.affiliate_url) || null;
+  const withLink = candidates.filter((p) => p.affiliate_url);
+  return withLink.find((p) => p.category_id === product.category_id) || withLink[0] || null;
 }
 
 /** Adds id anchors to <h2> headings and returns a table of contents. */
