@@ -1,0 +1,41 @@
+<%- include('_head') %>
+<% const c = comparison; const slugs = c.product_slugs || []; %>
+<header class="page-head">
+  <div><a class="back" href="/admin/comparisons">← Comparisons</a><h1><%= c.id ? 'Edit comparison' : 'New comparison' %></h1></div>
+</header>
+<%- include('_errors', { errors }) %>
+<form class="form narrow" method="post" action="/admin/comparisons/save">
+  <input type="hidden" name="_csrf" value="<%= csrf %>">
+  <% if (c.id) { %><input type="hidden" name="id" value="<%= c.id %>"><% } %>
+  <section class="panel">
+    <label>Title *<input name="title" value="<%= c.title || '' %>" required placeholder="Snapmaker U1 vs Bambu Lab P1S: …"></label>
+    <div class="row">
+      <label class="grow">URL slug <small>empty = product-a-vs-product-b</small><input name="slug" value="<%= c.slug || '' %>"></label>
+      <label>Status
+        <select name="status">
+          <option value="published" <%= c.status !== 'draft' ? 'selected' : '' %>>Published</option>
+          <option value="draft" <%= c.status === 'draft' ? 'selected' : '' %>>Draft</option>
+        </select>
+      </label>
+    </div>
+    <div class="row">
+      <% ['p1', 'p2', 'p3', 'p4'].forEach((name, i) => { %>
+        <label class="grow">Product <%= i + 1 %><%= i > 1 ? ' (optional)' : ' *' %>
+          <select name="<%= name %>">
+            <option value="">—</option>
+            <% products.forEach((p) => { %><option value="<%= p.slug %>" <%= slugs[i] === p.slug ? 'selected' : '' %>><%= p.name %></option><% }) %>
+          </select>
+        </label>
+      <% }) %>
+    </div>
+    <label>Intro<textarea name="intro" rows="3"><%= c.intro || '' %></textarea></label>
+    <label>Verdict: which should you buy?<textarea name="verdict" rows="4"><%= c.verdict || '' %></textarea></label>
+  </section>
+  <button class="btn btn-primary" type="submit">Save comparison</button>
+</form>
+<% if (c.id) { %>
+  <form class="danger" method="post" action="/admin/comparisons/<%= c.id %>/delete" data-confirm="Delete this comparison?">
+    <input type="hidden" name="_csrf" value="<%= csrf %>"><button class="btn btn-danger" type="submit">Delete comparison</button>
+  </form>
+<% } %>
+<%- include('_foot') %>

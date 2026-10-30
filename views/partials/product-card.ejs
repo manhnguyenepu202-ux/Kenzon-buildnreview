@@ -1,0 +1,25 @@
+<%# Product card. Locals: p (product), award (optional label), eager (optional) %>
+<article class="card">
+  <a class="card-media" href="<%= p.url %>" tabindex="-1" aria-hidden="true">
+    <%- h.productVisual(p, { eager: typeof eager !== 'undefined' && eager }) %>
+    <% if (typeof award !== 'undefined' && award) { %><span class="card-award"><%= award %></span><% } %>
+  </a>
+  <button type="button" class="compare-toggle" data-compare="<%= p.slug %>" data-name="<%= p.name %>" aria-pressed="false" title="Add to compare">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+    <span class="visually-hidden">Add <%= p.name %> to compare</span>
+  </button>
+  <div class="card-body">
+    <p class="card-brand"><%= p.brand %></p>
+    <h3 class="card-title"><a href="<%= p.url %>"><%= p.name %></a></h3>
+    <p class="card-score">
+      <svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2.8 2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4-4.7-4.4 6.4-.8z"/></svg>
+      <strong><%= p.overall.toFixed(1) %> out of 10</strong>
+      <span class="dot" aria-hidden="true"></span>
+      <span><%= p.retail_count ? `${h.fmtCount(p.retail_count)} reviews` : h.scoreWord(p.overall) %></span>
+    </p>
+    <div class="card-foot">
+      <a class="read-link" href="<%= p.url %>">Read review <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+      <% if (p.price_usd) { %><span class="card-price"><%= h.fmtPrice(p.price_usd) %></span><% } %>
+    </div>
+  </div>
+</article>

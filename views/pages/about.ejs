@@ -1,0 +1,23 @@
+<%- include('../partials/head') %>
+<%- include('../partials/simple-hero', { eyebrow: 'About us' }) %>
+<section class="section section-tight">
+  <div class="wrap prose-page">
+    <div class="prose">
+      <h2>Built by makers, for makers</h2>
+      <p>BuildNReview started with a simple frustration: most product reviews are either a list of manufacturer claims or a 40-minute video. We wanted reviews that answer three questions fast: is it good, who is it for, and what are the catches?</p>
+      <p>We cover three worlds that overlap more than you might think: <strong>3D printing</strong>, <strong>DIY tools and maker machines</strong> such as lasers and CNC routers, and the <strong>home appliances</strong> those same people rely on every day.</p>
+
+      <h2>What makes our reviews different</h2>
+      <ul>
+        <li>The same structure on every page, so comparing products takes seconds.</li>
+        <li>Four transparent sub-scores with fixed weights. <a href="/en/how-we-test/">See how we score</a>.</li>
+        <li>Head-to-head comparisons and short "best of" lists when you just want a recommendation.</li>
+        <li>Clear labels on preview reviews and affiliate links.</li>
+      </ul>
+
+      <h2>Get in touch</h2>
+      <p>Spotted an error or want us to review something? Email <a href="mailto:<%= settings.contact_email %>"><%= settings.contact_email %></a>.</p>
+    </div>
+  </div>
+</section>
+<%- include('../partials/foot') %>

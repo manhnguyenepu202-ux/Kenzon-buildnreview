@@ -1,0 +1,28 @@
+<%- include('_head') %>
+<%
+  const meta = {
+    site_tagline: ['Site tagline', 'Used in the footer and as the home page description.', 'text'],
+    affiliate_default_url: ['Default affiliate link', 'Used by the “Shop Snapmaker” button in the header and whenever a product has no link of its own.', 'url'],
+    affiliate_default_label: ['Default button text', '', 'text'],
+    sponsor_heading: ['“Maker pick” box heading', 'Small label above the promoted product on every review.', 'text'],
+    sponsor_text: ['Maker pick description (fallback)', '', 'area'],
+    disclosure_short: ['Short affiliate disclosure', 'Shown near the top of reviews, comparisons and guides (required by the FTC and most affiliate programs).', 'area'],
+    analytics_id: ['Google Analytics 4 ID', 'Format G-XXXXXXX. Leave empty to disable analytics.', 'text'],
+    contact_email: ['Contact email', '', 'email'],
+  };
+%>
+<header class="page-head"><div><h1>Settings</h1></div></header>
+<%- include('_errors', { errors }) %>
+<form class="form narrow" method="post" action="/admin/settings">
+  <input type="hidden" name="_csrf" value="<%= csrf %>">
+  <section class="panel">
+    <% keys.forEach((k) => { const [label, help, type] = meta[k] || [k, '', 'text']; %>
+      <label><%= label %><% if (help) { %> <small><%= help %></small><% } %>
+        <% if (type === 'area') { %><textarea name="<%= k %>" rows="3"><%= values[k] %></textarea>
+        <% } else { %><input type="<%= type === 'url' ? 'url' : type %>" name="<%= k %>" value="<%= values[k] %>"><% } %>
+      </label>
+    <% }) %>
+  </section>
+  <button class="btn btn-primary" type="submit">Save settings</button>
+</form>
+<%- include('_foot') %>

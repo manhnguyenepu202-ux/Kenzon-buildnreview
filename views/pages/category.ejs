@@ -1,0 +1,63 @@
+<%- include('../partials/head') %>
+<%
+  const sortLabels = { score: 'Top rated', popular: 'Most read', newest: 'Newest', price_low: 'Price: low to high', price_high: 'Price: high to low' };
+%>
+<section class="page-hero">
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="wrap">
+    <nav class="crumbs crumbs-light" aria-label="Breadcrumb">
+      <ol><li><a href="/en/">Home</a></li><li aria-current="page"><%= category.name %></li></ol>
+    </nav>
+    <p class="eyebrow eyebrow-lime"><%= category.group_name || 'Category' %></p>
+    <h1><%= category.name %></h1>
+    <p class="page-lede"><%= category.blurb %></p>
+    <p class="page-meta"><%= products.length %> reviews · scored on <%= Object.values(category.score_labels).join(', ').toLowerCase() %></p>
+  </div>
+</section>
+
+<section class="section section-tight">
+  <div class="wrap">
+    <div class="toolbar">
+      <div class="chips" role="group" aria-label="Sort reviews">
+        <% Object.entries(sortLabels).forEach(([key, label]) => { %>
+          <a class="chip" href="?sort=<%= key %>" <%- sort === key ? 'aria-current="true"' : '' %>><%= label %></a>
+        <% }) %>
+      </div>
+    </div>
+
+    <% if (products.length) { %>
+      <div class="grid-cards">
+        <% products.forEach((p, i) => { %><%- include('../partials/product-card', { p, eager: i < 4 }) %><% }) %>
+      </div>
+    <% } else { %>
+      <p class="empty">No reviews in this category yet.</p>
+    <% } %>
+  </div>
+</section>
+
+<% if (guides.length || comparisons.length) { %>
+<section class="section section-tint">
+  <div class="wrap">
+    <% if (guides.length) { %>
+      <div class="section-head"><div><p class="eyebrow">Buying guide</p><h2>Our top picks</h2></div></div>
+      <div class="guide-links">
+        <% guides.forEach((g) => { %>
+          <a class="guide-link" href="<%= g.url %>"><strong><%= g.title %></strong><span><%= h.truncate(g.intro, 140) %></span></a>
+        <% }) %>
+      </div>
+    <% } %>
+    <% if (comparisons.length) { %>
+      <div class="section-head <%= guides.length ? 'mt-xl' : '' %>"><div><p class="eyebrow">Head-to-head</p><h2>Popular comparisons</h2></div></div>
+      <div class="grid-vs">
+        <% comparisons.forEach((c) => { %>
+          <a class="vs-card" href="<%= c.url %>">
+            <div class="vs-visuals"><%- h.productVisual(c.products[0]) %><span class="vs-badge">VS</span><%- h.productVisual(c.products[1]) %></div>
+            <h3><%= c.title %></h3>
+          </a>
+        <% }) %>
+      </div>
+    <% } %>
+  </div>
+</section>
+<% } %>
+<%- include('../partials/foot') %>

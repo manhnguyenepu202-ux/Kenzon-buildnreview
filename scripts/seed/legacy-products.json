@@ -1,0 +1,1177 @@
+[
+  {
+    "slug": "anycubic-kobra-3-combo",
+    "name": "Anycubic Kobra 3 Combo",
+    "brand": "Anycubic",
+    "model": "Kobra 3 Combo",
+    "category": "3d-printers",
+    "art_type": "fdm-open",
+    "tone": "#D53F3F",
+    "released": 2024,
+    "views": 4800,
+    "price_usd": 449,
+    "title": "Anycubic Kobra 3 Combo review: affordable four-colour printing",
+    "summary": "The ACE Pro unit dries filament and swaps colours automatically.",
+    "verdict": "The Kobra 3 Combo is the cheapest way into multi-colour printing, though colour changes waste a fair amount of filament.",
+    "best_for": "People who want colour prints on a budget",
+    "body": "## Multi-colour\n\nThe ACE Pro swaps colours reliably, but each swap purges a noticeable amount of filament.\n\n## Quality\n\nSingle-colour PLA prints look good, on par with printers at this price.\n\n## Should you buy it?\n\nA good choice if colour is your priority and the budget is tight.",
+    "pros": [
+      "Four colours out of the box",
+      "ACE Pro can dry filament",
+      "Large bed"
+    ],
+    "cons": [
+      "Lots of purge waste per colour change",
+      "Open frame"
+    ],
+    "specs": [
+      {
+        "label": "Build volume",
+        "value": "250 × 250 × 260 mm"
+      },
+      {
+        "label": "Max print speed",
+        "value": "600 mm/s"
+      },
+      {
+        "label": "Max nozzle temp",
+        "value": "300 °C"
+      },
+      {
+        "label": "Max bed temp",
+        "value": "110 °C"
+      },
+      {
+        "label": "Enclosure",
+        "value": "No"
+      },
+      {
+        "label": "Multi-colour",
+        "value": "ACE Pro (4 colours)"
+      },
+      {
+        "label": "Auto bed levelling",
+        "value": "Yes"
+      },
+      {
+        "label": "Connectivity",
+        "value": "Wi-Fi, USB"
+      },
+      {
+        "label": "Weight",
+        "value": "10.5 kg"
+      }
+    ],
+    "scores": {
+      "performance": 8.6,
+      "quality": 7.9,
+      "ease": 7.8,
+      "value": 8.8
+    },
+    "published_at": "2026-09-15 09:00:00",
+    "updated_at": "2026-10-20 09:00:00",
+    "is_sample": true
+  },
+  {
+    "slug": "bambu-lab-a1-mini",
+    "name": "Bambu Lab A1 mini",
+    "brand": "Bambu Lab",
+    "model": "A1 mini",
+    "category": "3d-printers",
+    "art_type": "fdm-open",
+    "tone": "#3C9D6B",
+    "released": 2023,
+    "views": 12100,
+    "price_usd": 249,
+    "title": "Bambu Lab A1 mini review: the best first 3D printer",
+    "summary": "Small, cheap, quiet and almost tuning-free.",
+    "verdict": "The A1 mini is the best entry printer today, as long as your parts fit within 18 cm.",
+    "best_for": "Beginners, students and small desks",
+    "body": "## Design\n\nThe L-shaped frame has a small footprint and fits on a desk. The hotend comes off with one hand and nozzle swaps need no tools.\n\n## Experience\n\nAuto levelling and vibration compensation mean the very first print looks good. It is quiet enough to run overnight.\n\n## Should you buy it?\n\nIf you have never owned a 3D printer, this is the most sensible place to start.",
+    "pros": [
+      "Very approachable price",
+      "Quiet enough for a bedroom",
+      "Calibrates everything itself"
+    ],
+    "cons": [
+      "Small 18 cm bed",
+      "Not suited to ABS"
+    ],
+    "specs": [
+      {
+        "label": "Build volume",
+        "value": "180 × 180 × 180 mm"
+      },
+      {
+        "label": "Max print speed",
+        "value": "500 mm/s"
+      },
+      {
+        "label": "Max nozzle temp",
+        "value": "300 °C"
+      },
+      {
+        "label": "Max bed temp",
+        "value": "80 °C"
+      },
+      {
+        "label": "Enclosure",
+        "value": "No"
+      },
+      {
+        "label": "Multi-colour",
+        "value": "AMS lite (optional)"
+      },
+      {
+        "label": "Auto bed levelling",
+        "value": "Yes"
+      },
+      {
+        "label": "Connectivity",
+        "value": "Wi-Fi, microSD"
+      },
+      {
+        "label": "Weight",
+        "value": "5.5 kg"
+      }
+    ],
+    "scores": {
+      "performance": 8.6,
+      "quality": 8.5,
+      "ease": 9.5,
+      "value": 9.4
+    },
+    "published_at": "2026-09-15 09:00:00",
+    "updated_at": "2026-10-20 09:00:00",
+    "is_sample": true
+  },
+  {
+    "slug": "bambu-lab-p1s",
+    "name": "Bambu Lab P1S",
+    "brand": "Bambu Lab",
+    "model": "P1S",
+    "category": "3d-printers",
+    "art_type": "fdm-enclosed",
+    "tone": "#2E8B57",
+    "released": 2023,
+    "views": 9420,
+    "price_usd": 699,
+    "title": "Bambu Lab P1S review: the easiest enclosed printer at its price",
+    "summary": "Fast, enclosed and close to plug-and-play. Add the AMS and it prints four colours.",
+    "verdict": "The P1S is the safe pick if you want to print a lot without tinkering. The enclosure makes ABS and ASA far more reliable than on open-frame machines.",
+    "best_for": "Beginners who want speed and engineering filaments",
+    "body": "## Setup\n\nFrom box to first print takes about 20 minutes. The printer levels its bed, measures resonance and calibrates flow before each print.\n\n## Print quality\n\nWith PLA on the standard profile, surfaces are even with almost no ringing. The enclosure holds heat well, so large ABS parts warp less.\n\n## Should you buy it?\n\nIf you want a machine that simply works every day, the P1S is hard to fault. If you only print small PLA parts, the A1 mini costs far less.",
+    "pros": [
+      "Fully automatic bed levelling and vibration compensation",
+      "Enclosure keeps ABS/ASA prints stable",
+      "Bambu Studio is easy to learn"
+    ],
+    "cons": [
+      "Fans are loud at high speed",
+      "Fairly closed ecosystem",
+      "Low-resolution camera"
+    ],
+    "specs": [
+      {
+        "label": "Build volume",
+        "value": "256 × 256 × 256 mm"
+      },
+      {
+        "label": "Max print speed",
+        "value": "500 mm/s"
+      },
+      {
+        "label": "Max nozzle temp",
+        "value": "300 °C"
+      },
+      {
+        "label": "Max bed temp",
+        "value": "100 °C"
+      },
+      {
+        "label": "Enclosure",
+        "value": "Yes"
+      },
+      {
+        "label": "Multi-colour",
+        "value": "AMS (optional)"
+      },
+      {
+        "label": "Auto bed levelling",
+        "value": "Yes"
+      },
+      {
+        "label": "Connectivity",
+        "value": "Wi-Fi, microSD"
+      },
+      {
+        "label": "Weight",
+        "value": "12.9 kg"
+      }
+    ],
+    "scores": {
+      "performance": 9.3,
+      "quality": 8.8,
+      "ease": 9.2,
+      "value": 8.7
+    },
+    "published_at": "2026-09-15 09:00:00",
+    "updated_at": "2026-10-20 09:00:00",
+    "is_sample": true
+  },
+  {
+    "slug": "bosch-gsr-12v-15",
+    "name": "Bosch GSR 12V-15",
+    "brand": "Bosch Professional",
+    "model": "GSR 12V-15",
+    "category": "tools",
+    "art_type": "drill-driver",
+    "tone": "#1F5FAE",
+    "released": 2019,
+    "views": 10200,
+    "price_usd": 129,
+    "title": "Bosch GSR 12V-15 review: compact help for home jobs",
+    "summary": "A light 12 V drill driver you can hold all day.",
+    "verdict": "The GSR 12V-15 handles flat-pack furniture, screws, wood and thin sheet metal. For masonry you need another tool.",
+    "best_for": "Furniture assembly and household fixes",
+    "body": "## Handling\n\nAt about 1 kg it sits comfortably in the hand and fits inside cabinets.\n\n## Performance\n\nIt drives 5 × 50 mm wood screws easily, but struggles with large bits in hardwood.\n\n## Should you buy it?\n\nYes, if you want one drill for the house and value low weight.",
+    "pros": [
+      "Very light and compact",
+      "Precise clutch",
+      "Well built"
+    ],
+    "cons": [
+      "Low torque",
+      "No hammer mode"
+    ],
+    "specs": [
+      {
+        "label": "Battery voltage",
+        "value": "12 V"
+      },
+      {
+        "label": "Max torque",
+        "value": "30 Nm"
+      },
+      {
+        "label": "No-load speed",
+        "value": "0–400 / 0–1,300 rpm"
+      },
+      {
+        "label": "Chuck",
+        "value": "10 mm"
+      },
+      {
+        "label": "Brushless motor",
+        "value": "No"
+      },
+      {
+        "label": "Hammer mode",
+        "value": "No"
+      },
+      {
+        "label": "Weight",
+        "value": "1.0 kg"
+      }
+    ],
+    "scores": {
+      "performance": 7.4,
+      "quality": 8.9,
+      "ease": 9.3,
+      "value": 8.7
+    },
+    "published_at": "2026-09-15 09:00:00",
+    "updated_at": "2026-10-20 09:00:00",
+    "is_sample": true
+  },
+  {
+    "slug": "bosch-pmf-220-ce",
+    "name": "Bosch PMF 220 CE",
+    "brand": "Bosch",
+    "model": "PMF 220 CE",
+    "category": "tools",
+    "art_type": "multi-tool",
+    "tone": "#2F855A",
+    "released": 2016,
+    "views": 4300,
+    "price_usd": 99,
+    "title": "Bosch PMF 220 CE review: a budget corded multi-tool",
+    "summary": "Enough for home jobs, and it never runs flat.",
+    "verdict": "The PMF 220 CE is a cheap corded multi-tool that is strong enough for small repairs around the house.",
+    "best_for": "Beginners and small repairs",
+    "body": "## Performance\n\nIt handles grout, plastic pipe and thin timber well.\n\n## Limits\n\nThe cord is awkward when you work on a ladder.\n\n## Should you buy it?\n\nYes, if you only need one now and then.",
+    "pros": [
+      "Low price",
+      "No battery to run out",
+      "Light"
+    ],
+    "cons": [
+      "The cord gets in the way",
+      "Blade changes need a hex key"
+    ],
+    "specs": [
+      {
+        "label": "Power",
+        "value": "220 W"
+      },
+      {
+        "label": "Oscillation rate",
+        "value": "15,000–20,000 opm"
+      },
+      {
+        "label": "Brushless motor",
+        "value": "No"
+      },
+      {
+        "label": "Weight",
+        "value": "1.1 kg"
+      }
+    ],
+    "scores": {
+      "performance": 7.6,
+      "quality": 8.2,
+      "ease": 8.5,
+      "value": 9
+    },
+    "published_at": "2026-09-15 09:00:00",
+    "updated_at": "2026-10-20 09:00:00",
+    "is_sample": true
+  },
+  {
+    "slug": "cosori-pro-le",
+    "name": "Cosori Pro LE",
+    "brand": "Cosori",
+    "model": "CAF-L501",
+    "category": "home",
+    "art_type": "air-fryer",
+    "tone": "#718096",
+    "released": 2022,
+    "views": 6900,
+    "price_usd": 99,
+    "title": "Cosori Pro LE review: a compact air fryer that’s worth it",
+    "summary": "Quiet, light and well priced for 1–3 people.",
+    "verdict": "The Pro LE is the best-value fryer for small households: quiet and easy to use.",
+    "best_for": "Singles and households of 1–3",
+    "body": "## Everyday use\n\nThe simple control panel and nine presets cover everyday meals.\n\n## Limits\n\n4.7 L gets tight when cooking for four.\n\n## Should you buy it?\n\nYes, if you cook for few people.",
+    "pros": [
+      "Great price",
+      "Quiet",
+      "Compact and light"
+    ],
+    "cons": [
+      "Small capacity",
+      "Non-stick coating needs care"
+    ],
+    "specs": [
+      {
+        "label": "Capacity",
+        "value": "4.7 L"
+      },
+      {
+        "label": "Power",
+        "value": "1,500 W"
+      },
+      {
+        "label": "Cooking presets",
+        "value": "9"
+      },
+      {
+        "label": "Dual zone",
+        "value": "No"
+      },
+      {
+        "label": "Noise",
+        "value": "~ 53 dB"
+      },
+      {
+        "label": "Weight",
+        "value": "4.3 kg"
+      }
+    ],
+    "scores": {
+      "performance": 8.2,
+      "quality": 8,
+      "ease": 9,
+      "value": 9.2
+    },
+    "published_at": "2026-09-15 09:00:00",
+    "updated_at": "2026-10-20 09:00:00",
+    "is_sample": true
+  },
+  {
+    "slug": "creality-k1c",
+    "name": "Creality K1C",
+    "brand": "Creality",
+    "model": "K1C",
+    "category": "3d-printers",
+    "art_type": "fdm-enclosed",
+    "tone": "#2B6CB0",
+    "released": 2024,
+    "views": 7300,
+    "price_usd": 459,
+    "title": "Creality K1C review: enclosed, fast and affordable",
+    "summary": "A direct P1S rival with a hardened steel nozzle out of the box.",
+    "verdict": "The K1C is fast and handles carbon-fibre filament well, but its software and polish trail Bambu Lab.",
+    "best_for": "Anyone who needs an enclosure on a moderate budget",
+    "body": "## Speed\n\nIn fast mode the K1C finishes test prints as quickly as pricier machines.\n\n## Quality\n\nPLA surfaces look good, but some engineering filaments need manual tuning.\n\n## Should you buy it?\n\nA good fit if you enjoy tuning and want to save money over the P1S.",
+    "pros": [
+      "Very high speed",
+      "Hardened nozzle prints carbon-fibre blends",
+      "Good price for an enclosed machine"
+    ],
+    "cons": [
+      "Software is less polished",
+      "Needs more tuning than the P1S"
+    ],
+    "specs": [
+      {
+        "label": "Build volume",
+        "value": "220 × 220 × 250 mm"
+      },
+      {
+        "label": "Max print speed",
+        "value": "600 mm/s"
+      },
+      {
+        "label": "Max nozzle temp",
+        "value": "300 °C"
+      },
+      {
+        "label": "Max bed temp",
+        "value": "100 °C"
+      },
+      {
+        "label": "Enclosure",
+        "value": "Yes"
+      },
+      {
+        "label": "Multi-colour",
+        "value": "No"
+      },
+      {
+        "label": "Auto bed levelling",
+        "value": "Yes"
+      },
+      {
+        "label": "Connectivity",
+        "value": "Wi-Fi, USB"
+      },
+      {
+        "label": "Weight",
+        "value": "12.5 kg"
+      }
+    ],
+    "scores": {
+      "performance": 9,
+      "quality": 8.1,
+      "ease": 8.2,
+      "value": 8.6
+    },
+    "published_at": "2026-09-15 09:00:00",
+    "updated_at": "2026-10-20 09:00:00",
+    "is_sample": true
+  },
+  {
+    "slug": "dewalt-dcd791",
+    "name": "DeWalt DCD791",
+    "brand": "DeWalt",
+    "model": "DCD791",
+    "category": "tools",
+    "art_type": "drill-driver",
+    "tone": "#E0A800",
+    "released": 2017,
+    "views": 8800,
+    "price_usd": 159,
+    "title": "DeWalt DCD791 review: the most balanced 18 V drill",
+    "summary": "Brushless, strong and sure-footed in the hand.",
+    "verdict": "The DCD791 is a well-balanced all-round drill driver for trades and serious DIYers alike.",
+    "best_for": "Serious DIY, carpentry and installation",
+    "body": "## Performance\n\n70 Nm of torque handles large wood bits and long screws without pilot holes.\n\n## Handling\n\nA low centre of gravity means less fatigue when working overhead.\n\n## Should you buy it?\n\nIf you only buy one cordless drill, this is a top contender.",
+    "pros": [
+      "Strong, durable brushless motor",
+      "Three-mode LED light",
+      "Excellent balance"
+    ],
+    "cons": [
+      "No hammer mode",
+      "Batteries are pricey on their own"
+    ],
+    "specs": [
+      {
+        "label": "Battery voltage",
+        "value": "18 V (20V Max)"
+      },
+      {
+        "label": "Max torque",
+        "value": "70 Nm"
+      },
+      {
+        "label": "No-load speed",
+        "value": "0–550 / 0–2,000 rpm"
+      },
+      {
+        "label": "Chuck",
+        "value": "13 mm"
+      },
+      {
+        "label": "Brushless motor",
+        "value": "Yes"
+      },
+      {
+        "label": "Hammer mode",
+        "value": "No"
+      },
+      {
+        "label": "Weight",
+        "value": "1.4 kg"
+      }
+    ],
+    "scores": {
+      "performance": 8.8,
+      "quality": 9,
+      "ease": 8.7,
+      "value": 8.2
+    },
+    "published_at": "2026-09-15 09:00:00",
+    "updated_at": "2026-10-20 09:00:00",
+    "is_sample": true
+  },
+  {
+    "slug": "dewalt-dcs356",
+    "name": "DeWalt DCS356",
+    "brand": "DeWalt",
+    "model": "DCS356",
+    "category": "tools",
+    "art_type": "multi-tool",
+    "tone": "#D69E2E",
+    "released": 2019,
+    "views": 5100,
+    "price_usd": 179,
+    "title": "DeWalt DCS356 review: a dependable cordless multi-tool",
+    "summary": "Three speed modes and tool-free blade changes.",
+    "verdict": "The DCS356 cuts cleanly with low vibration and quick blade swaps, ideal for renovation and woodwork.",
+    "best_for": "Renovation, flooring cuts and detail sanding",
+    "body": "## Cutting\n\nIt trims door frames and floorboards neatly with straight cuts.\n\n## Convenience\n\nThe one-touch lever swaps a blade for a sanding pad in seconds.\n\n## Should you buy it?\n\nWorth it if you are already on DeWalt batteries.",
+    "pros": [
+      "Low vibration",
+      "Fast blade changes",
+      "Cordless and compact"
+    ],
+    "cons": [
+      "Expensive",
+      "Branded blades cost a lot"
+    ],
+    "specs": [
+      {
+        "label": "Battery voltage",
+        "value": "18 V (20V Max)"
+      },
+      {
+        "label": "Oscillation rate",
+        "value": "0–20,000 opm"
+      },
+      {
+        "label": "Brushless motor",
+        "value": "Yes"
+      },
+      {
+        "label": "Weight",
+        "value": "1.3 kg"
+      }
+    ],
+    "scores": {
+      "performance": 8.7,
+      "quality": 8.8,
+      "ease": 8.9,
+      "value": 7.9
+    },
+    "published_at": "2026-09-15 09:00:00",
+    "updated_at": "2026-10-20 09:00:00",
+    "is_sample": true
+  },
+  {
+    "slug": "dyson-v15-detect",
+    "name": "Dyson V15 Detect",
+    "brand": "Dyson",
+    "model": "V15 Detect",
+    "category": "home",
+    "art_type": "stick-vacuum",
+    "tone": "#B7791F",
+    "released": 2021,
+    "views": 9700,
+    "price_usd": 749,
+    "title": "Dyson V15 Detect review: the most powerful stick vacuum",
+    "summary": "A laser dust light and a particle-counting sensor.",
+    "verdict": "The V15 Detect is the strongest and smartest stick vacuum here, at a very high price.",
+    "best_for": "Pet owners and allergy sufferers",
+    "body": "## Cleaning\n\nThe laser shows fine dust on hard floors that you would otherwise miss.\n\n## Battery\n\nAbout 60 minutes in Eco, but only a few minutes on Boost.\n\n## Should you buy it?\n\nYes, if budget is not a concern.",
+    "pros": [
+      "Very strong suction",
+      "Laser reveals fine dust",
+      "Sealed filtration"
+    ],
+    "cons": [
+      "Very expensive",
+      "Loud on Boost"
+    ],
+    "specs": [
+      {
+        "label": "Suction",
+        "value": "240 AW"
+      },
+      {
+        "label": "Runtime",
+        "value": "60 min"
+      },
+      {
+        "label": "Dust bin",
+        "value": "760 ml"
+      },
+      {
+        "label": "Noise",
+        "value": "~ 76 dB"
+      },
+      {
+        "label": "Weight",
+        "value": "3.1 kg"
+      }
+    ],
+    "scores": {
+      "performance": 9.5,
+      "quality": 9.3,
+      "ease": 8.5,
+      "value": 7.2
+    },
+    "published_at": "2026-09-15 09:00:00",
+    "updated_at": "2026-10-20 09:00:00",
+    "is_sample": true
+  },
+  {
+    "slug": "elegoo-neptune-4-pro",
+    "name": "Elegoo Neptune 4 Pro",
+    "brand": "Elegoo",
+    "model": "Neptune 4 Pro",
+    "category": "3d-printers",
+    "art_type": "fdm-open",
+    "tone": "#5A67D8",
+    "released": 2023,
+    "views": 5200,
+    "price_usd": 299,
+    "title": "Elegoo Neptune 4 Pro review: Klipper on a budget",
+    "summary": "Klipper firmware, high speed, friendly price.",
+    "verdict": "The Neptune 4 Pro delivers speed for little money, in exchange for more setup and tuning.",
+    "best_for": "Tinkerers on a tight budget",
+    "body": "## Setup\n\nIt ships partly assembled and takes about an hour to build and level.\n\n## Experience\n\nThe Klipper web interface gives you lots of control, but beginners need time to get comfortable.\n\n## Should you buy it?\n\nWorth it if you want to learn how a printer works.",
+    "pros": [
+      "Great price",
+      "Runs Klipper, easy to extend",
+      "Large bed"
+    ],
+    "cons": [
+      "Longer assembly and tuning",
+      "Noisy part-cooling fan"
+    ],
+    "specs": [
+      {
+        "label": "Build volume",
+        "value": "225 × 225 × 265 mm"
+      },
+      {
+        "label": "Max print speed",
+        "value": "500 mm/s"
+      },
+      {
+        "label": "Max nozzle temp",
+        "value": "300 °C"
+      },
+      {
+        "label": "Max bed temp",
+        "value": "110 °C"
+      },
+      {
+        "label": "Enclosure",
+        "value": "No"
+      },
+      {
+        "label": "Multi-colour",
+        "value": "No"
+      },
+      {
+        "label": "Auto bed levelling",
+        "value": "Yes"
+      },
+      {
+        "label": "Connectivity",
+        "value": "Wi-Fi, USB, LAN"
+      },
+      {
+        "label": "Weight",
+        "value": "8.9 kg"
+      }
+    ],
+    "scores": {
+      "performance": 8.5,
+      "quality": 7.8,
+      "ease": 7.4,
+      "value": 8.9
+    },
+    "published_at": "2026-09-15 09:00:00",
+    "updated_at": "2026-10-20 09:00:00",
+    "is_sample": true
+  },
+  {
+    "slug": "makita-dhp485",
+    "name": "Makita DHP485",
+    "brand": "Makita",
+    "model": "DHP485",
+    "category": "tools",
+    "art_type": "drill-driver",
+    "tone": "#17899A",
+    "released": 2017,
+    "views": 9100,
+    "price_usd": 139,
+    "title": "Makita DHP485 review: a hammer drill at a fair price",
+    "summary": "A compact three-mode drill on the LXT battery platform.",
+    "verdict": "The DHP485 can handle light masonry, and its LXT batteries work across a huge tool range.",
+    "best_for": "Homes that occasionally drill into brick",
+    "body": "## Versatility\n\nHammer mode is enough for 6–8 mm wall-plug holes in brick.\n\n## Battery platform\n\nLXT packs fit hundreds of other Makita tools.\n\n## Should you buy it?\n\nYes, if you want one drill for both wood and brick.",
+    "pros": [
+      "Hammer mode included",
+      "Widespread LXT battery platform",
+      "Good price"
+    ],
+    "cons": [
+      "Less torque than the DCD791",
+      "Slightly nose-heavy"
+    ],
+    "specs": [
+      {
+        "label": "Battery voltage",
+        "value": "18 V LXT"
+      },
+      {
+        "label": "Max torque",
+        "value": "50 Nm"
+      },
+      {
+        "label": "No-load speed",
+        "value": "0–500 / 0–1,900 rpm"
+      },
+      {
+        "label": "Chuck",
+        "value": "13 mm"
+      },
+      {
+        "label": "Brushless motor",
+        "value": "Yes"
+      },
+      {
+        "label": "Hammer mode",
+        "value": "Yes"
+      },
+      {
+        "label": "Weight",
+        "value": "1.7 kg"
+      }
+    ],
+    "scores": {
+      "performance": 8.6,
+      "quality": 9.1,
+      "ease": 8.9,
+      "value": 8.5
+    },
+    "published_at": "2026-09-15 09:00:00",
+    "updated_at": "2026-10-20 09:00:00",
+    "is_sample": true
+  },
+  {
+    "slug": "milwaukee-m18-fpd3",
+    "name": "Milwaukee M18 FUEL FPD3",
+    "brand": "Milwaukee",
+    "model": "M18 FPD3",
+    "category": "tools",
+    "art_type": "drill-driver",
+    "tone": "#C53030",
+    "released": 2023,
+    "views": 5600,
+    "price_usd": 229,
+    "title": "Milwaukee M18 FUEL FPD3 review: uncompromising power",
+    "summary": "158 Nm of torque for heavy work.",
+    "verdict": "The FPD3 is for professionals who need maximum force. For household jobs it is overkill and heavy.",
+    "best_for": "Professional trades and job sites",
+    "body": "## Power\n\nIt drives large hole saws through thick timber without effort.\n\n## Safety\n\nThe electronic clutch cuts out quickly if a bit binds, reducing wrist strain.\n\n## Should you buy it?\n\nOnly if you do heavy work every day.",
+    "pros": [
+      "Huge torque",
+      "Electronic clutch for safety",
+      "Very durable"
+    ],
+    "cons": [
+      "Heavy",
+      "Expensive"
+    ],
+    "specs": [
+      {
+        "label": "Battery voltage",
+        "value": "18 V"
+      },
+      {
+        "label": "Max torque",
+        "value": "158 Nm"
+      },
+      {
+        "label": "No-load speed",
+        "value": "0–550 / 0–2,100 rpm"
+      },
+      {
+        "label": "Chuck",
+        "value": "13 mm"
+      },
+      {
+        "label": "Brushless motor",
+        "value": "Yes"
+      },
+      {
+        "label": "Hammer mode",
+        "value": "Yes"
+      },
+      {
+        "label": "Weight",
+        "value": "2.1 kg"
+      }
+    ],
+    "scores": {
+      "performance": 9.6,
+      "quality": 9.3,
+      "ease": 8,
+      "value": 7.6
+    },
+    "published_at": "2026-09-15 09:00:00",
+    "updated_at": "2026-10-20 09:00:00",
+    "is_sample": true
+  },
+  {
+    "slug": "ninja-foodi-af300",
+    "name": "Ninja Foodi Dual Zone AF300",
+    "brand": "Ninja",
+    "model": "AF300",
+    "category": "home",
+    "art_type": "air-fryer",
+    "tone": "#4A5568",
+    "released": 2021,
+    "views": 10400,
+    "price_usd": 199,
+    "title": "Ninja Foodi AF300 review: two zones, two dishes at once",
+    "summary": "Two independent drawers with a sync-finish feature.",
+    "verdict": "The AF300 is the most flexible fryer in the group: two different dishes finish together.",
+    "best_for": "Households cooking several dishes per meal",
+    "body": "## Two zones\n\nSync mode lets fish and vegetables finish together despite different cook times.\n\n## Limits\n\nEach 3.8 L drawer is too small for a whole chicken.\n\n## Should you buy it?\n\nYes, if you often cook two things at once.",
+    "pros": [
+      "Two independent zones",
+      "Sync finish",
+      "Plenty of presets"
+    ],
+    "cons": [
+      "Each drawer is narrow",
+      "Large footprint"
+    ],
+    "specs": [
+      {
+        "label": "Capacity",
+        "value": "7.6 L (2 × 3.8 L)"
+      },
+      {
+        "label": "Power",
+        "value": "2,470 W"
+      },
+      {
+        "label": "Cooking presets",
+        "value": "6"
+      },
+      {
+        "label": "Dual zone",
+        "value": "Yes"
+      },
+      {
+        "label": "Noise",
+        "value": "~ 58 dB"
+      },
+      {
+        "label": "Weight",
+        "value": "8.0 kg"
+      }
+    ],
+    "scores": {
+      "performance": 9.1,
+      "quality": 8.6,
+      "ease": 8.8,
+      "value": 8.7
+    },
+    "published_at": "2026-09-15 09:00:00",
+    "updated_at": "2026-10-20 09:00:00",
+    "is_sample": true
+  },
+  {
+    "slug": "philips-airfryer-xxl",
+    "name": "Philips Airfryer XXL HD9650",
+    "brand": "Philips",
+    "model": "HD9650",
+    "category": "home",
+    "art_type": "air-fryer",
+    "tone": "#3A3F4A",
+    "released": 2019,
+    "views": 11300,
+    "price_usd": 299,
+    "title": "Philips Airfryer XXL review: big and evenly crisp",
+    "summary": "Fat-removal technology and 7.3 L for larger families.",
+    "verdict": "The XXL crisps evenly and suits families of 4–6, but it is heavy and takes up space.",
+    "best_for": "Families of 4–6",
+    "body": "## Cooking\n\nFries and wings crisp evenly without much shaking.\n\n## Cleaning\n\nThe basket and tray are dishwasher-safe.\n\n## Should you buy it?\n\nYes, if you cook for a crowd and have counter space.",
+    "pros": [
+      "Very even crisping",
+      "Large capacity",
+      "Easy-clean basket"
+    ],
+    "cons": [
+      "Heavy and bulky",
+      "Expensive"
+    ],
+    "specs": [
+      {
+        "label": "Capacity",
+        "value": "7.3 L"
+      },
+      {
+        "label": "Power",
+        "value": "2,225 W"
+      },
+      {
+        "label": "Cooking presets",
+        "value": "5"
+      },
+      {
+        "label": "Dual zone",
+        "value": "No"
+      },
+      {
+        "label": "Noise",
+        "value": "~ 60 dB"
+      },
+      {
+        "label": "Weight",
+        "value": "8.3 kg"
+      }
+    ],
+    "scores": {
+      "performance": 8.9,
+      "quality": 9,
+      "ease": 8.4,
+      "value": 7.8
+    },
+    "published_at": "2026-09-15 09:00:00",
+    "updated_at": "2026-10-20 09:00:00",
+    "is_sample": true
+  },
+  {
+    "slug": "prusa-mk4s",
+    "name": "Original Prusa MK4S",
+    "brand": "Prusa Research",
+    "model": "MK4S",
+    "category": "3d-printers",
+    "art_type": "fdm-open",
+    "tone": "#E2661B",
+    "released": 2024,
+    "views": 6150,
+    "price_usd": 1099,
+    "title": "Original Prusa MK4S review: durable, open and repairable",
+    "summary": "Not the fastest, but a printer you can keep and upgrade for years.",
+    "verdict": "The MK4S suits people who value reliability, open software and repairability over raw speed.",
+    "best_for": "Small workshops, schools and tinkerers",
+    "body": "## Reliability\n\nA load cell in the print head probes the bed accurately everywhere, so first layers are almost always right.\n\n## Maintenance\n\nEvery part has a detailed replacement guide. That is a real difference from budget printers.\n\n## Should you buy it?\n\nIf the printer earns you money and needs to keep running, the MK4S is worth the price.",
+    "pros": [
+      "Open hardware and firmware",
+      "Excellent support and repair guides",
+      "Consistent, accurate prints"
+    ],
+    "cons": [
+      "Expensive for the spec sheet",
+      "Open frame, needs an enclosure for ABS"
+    ],
+    "specs": [
+      {
+        "label": "Build volume",
+        "value": "250 × 210 × 220 mm"
+      },
+      {
+        "label": "Max print speed",
+        "value": "~ 300 mm/s"
+      },
+      {
+        "label": "Max nozzle temp",
+        "value": "290 °C"
+      },
+      {
+        "label": "Max bed temp",
+        "value": "120 °C"
+      },
+      {
+        "label": "Enclosure",
+        "value": "No"
+      },
+      {
+        "label": "Multi-colour",
+        "value": "MMU3 (optional)"
+      },
+      {
+        "label": "Auto bed levelling",
+        "value": "Yes"
+      },
+      {
+        "label": "Connectivity",
+        "value": "Wi-Fi, Ethernet, USB"
+      },
+      {
+        "label": "Weight",
+        "value": "7 kg"
+      }
+    ],
+    "scores": {
+      "performance": 8.4,
+      "quality": 9.4,
+      "ease": 8.6,
+      "value": 7.6
+    },
+    "published_at": "2026-09-15 09:00:00",
+    "updated_at": "2026-10-20 09:00:00",
+    "is_sample": true
+  },
+  {
+    "slug": "roborock-q7-max",
+    "name": "Roborock Q7 Max",
+    "brand": "Roborock",
+    "model": "Q7 Max",
+    "category": "home",
+    "art_type": "robot-vacuum",
+    "tone": "#4A5568",
+    "released": 2021,
+    "views": 6400,
+    "price_usd": 299,
+    "title": "Roborock Q7 Max review: an affordable robot vacuum and mop",
+    "summary": "LiDAR mapping and 4,200 Pa suction at a friendly price.",
+    "verdict": "The Q7 Max brings premium robot features to a mid-range price, ideal for apartments.",
+    "best_for": "Apartments and moderate budgets",
+    "body": "## Mapping\n\nLiDAR maps quickly and splits rooms correctly on the first run.\n\n## Limits\n\nWithout a camera it snags on cables and socks.\n\n## Should you buy it?\n\nYes, if you live in an apartment and keep floors tidy.",
+    "pros": [
+      "Good price",
+      "Accurate LiDAR mapping",
+      "Large dust bin"
+    ],
+    "cons": [
+      "Basic drag mop",
+      "No camera obstacle avoidance"
+    ],
+    "specs": [
+      {
+        "label": "Suction",
+        "value": "4,200 Pa"
+      },
+      {
+        "label": "Runtime",
+        "value": "180 min"
+      },
+      {
+        "label": "Dust bin",
+        "value": "470 ml"
+      },
+      {
+        "label": "Mopping",
+        "value": "Yes"
+      },
+      {
+        "label": "Self-empty dock",
+        "value": "Q7 Max+"
+      },
+      {
+        "label": "Noise",
+        "value": "~ 67 dB"
+      },
+      {
+        "label": "Weight",
+        "value": "3.6 kg"
+      }
+    ],
+    "scores": {
+      "performance": 8.3,
+      "quality": 8.2,
+      "ease": 8.7,
+      "value": 9.1
+    },
+    "published_at": "2026-09-15 09:00:00",
+    "updated_at": "2026-10-20 09:00:00",
+    "is_sample": true
+  },
+  {
+    "slug": "roborock-s8",
+    "name": "Roborock S8",
+    "brand": "Roborock",
+    "model": "S8",
+    "category": "home",
+    "art_type": "robot-vacuum",
+    "tone": "#2D3748",
+    "released": 2023,
+    "views": 8400,
+    "price_usd": 549,
+    "title": "Roborock S8 review: an all-round robot vacuum and mop",
+    "summary": "6,000 Pa suction, sonic mopping and good obstacle avoidance.",
+    "verdict": "The S8 vacuums hard, mops well and maps accurately; worth it for larger homes.",
+    "best_for": "Multi-room homes with pets",
+    "body": "## Vacuuming\n\nIt clears pet hair from low-pile rugs in a single pass.\n\n## Mopping\n\nThe vibrating mop handles dried stains better than drag mops.\n\n## Should you buy it?\n\nYes, if you want to clean by hand as little as possible.",
+    "pros": [
+      "Strong suction",
+      "Sonic mopping lifts dried stains",
+      "Good app"
+    ],
+    "cons": [
+      "Expensive",
+      "Self-empty dock depends on bundle"
+    ],
+    "specs": [
+      {
+        "label": "Suction",
+        "value": "6,000 Pa"
+      },
+      {
+        "label": "Runtime",
+        "value": "180 min"
+      },
+      {
+        "label": "Dust bin",
+        "value": "400 ml"
+      },
+      {
+        "label": "Mopping",
+        "value": "Yes"
+      },
+      {
+        "label": "Self-empty dock",
+        "value": "Model dependent"
+      },
+      {
+        "label": "Noise",
+        "value": "~ 67 dB"
+      },
+      {
+        "label": "Weight",
+        "value": "3.7 kg"
+      }
+    ],
+    "scores": {
+      "performance": 9.2,
+      "quality": 8.9,
+      "ease": 8.8,
+      "value": 8.1
+    },
+    "published_at": "2026-09-15 09:00:00",
+    "updated_at": "2026-10-20 09:00:00",
+    "is_sample": true
+  }
+]

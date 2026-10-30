@@ -1,0 +1,30 @@
+<%- include('../partials/head') %>
+<section class="page-hero">
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="wrap">
+    <p class="eyebrow eyebrow-lime"><%= q ? 'Search results' : 'All reviews' %></p>
+    <h1><%= q ? `“${q}”` : 'Find a review' %></h1>
+    <form class="search search-hero search-page" role="search" action="/en/search/" method="get" data-search>
+      <label class="visually-hidden" for="q-page">Search reviews</label>
+      <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q-page" name="q" type="search" value="<%= q %>" autocomplete="off" placeholder="Brand, model or product type…" role="combobox" aria-expanded="false" aria-controls="q-page-list" aria-autocomplete="list">
+      <ul id="q-page-list" class="suggest" role="listbox" hidden></ul>
+    </form>
+  </div>
+</section>
+<section class="section section-tight">
+  <div class="wrap">
+    <p class="result-count" role="status"><%= results.length %> <%= results.length === 1 ? 'review' : 'reviews' %><%= q ? ` match “${q}”` : '' %></p>
+    <% if (results.length) { %>
+      <div class="grid-cards">
+        <% results.forEach((p) => { %><%- include('../partials/product-card', { p }) %><% }) %>
+      </div>
+    <% } else { %>
+      <div class="empty">
+        <p>Nothing matched. Try a brand (Snapmaker, Bambu Lab, Makita) or browse a category:</p>
+        <div class="chips"><% categories.forEach((c) => { %><a class="chip" href="<%= c.url %>"><%= c.name %></a><% }) %></div>
+      </div>
+    <% } %>
+  </div>
+</section>
+<%- include('../partials/foot') %>

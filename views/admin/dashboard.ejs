@@ -1,0 +1,53 @@
+<%- include('_head') %>
+<header class="page-head">
+  <div><h1>Dashboard</h1><p class="muted">Signed in. Here is how the site is doing.</p></div>
+  <a class="btn btn-primary" href="/admin/products/new">+ New review</a>
+</header>
+
+<section class="stats">
+  <div class="stat"><span>Reviews</span><strong><%= products.length %></strong><small><%= drafts %> drafts</small></div>
+  <div class="stat"><span>Page views</span><strong><%= totals.views.toLocaleString('en-US') %></strong><small>all reviews</small></div>
+  <div class="stat"><span>Affiliate clicks</span><strong><%= totals.clicks.toLocaleString('en-US') %></strong><small>via /go/ links</small></div>
+  <div class="stat"><span>Comparisons · Guides</span><strong><%= comparisons.length %> · <%= guides.length %></strong><small><%= categories.length %> categories</small></div>
+</section>
+
+<% if (samples || missingAffiliate) { %>
+  <section class="panel tips">
+    <h2>To do</h2>
+    <ul>
+      <% if (samples) { %><li><strong><%= samples %></strong> reviews still show the “Preview review” notice. Untick <em>Preview review</em> after you verify or test a product.</li><% } %>
+      <% if (missingAffiliate) { %><li><strong><%= missingAffiliate %></strong> reviews have no product affiliate link. They still show the Snapmaker “Maker pick” box; add a product link when you join that brand’s program.</li><% } %>
+    </ul>
+  </section>
+<% } %>
+
+<div class="two-col">
+  <section class="panel">
+    <h2>Most read</h2>
+    <table class="table">
+      <thead><tr><th>Review</th><th class="r">Views</th><th class="r">Score</th></tr></thead>
+      <tbody>
+        <% products.slice(0, 8).forEach((p) => { %>
+          <tr><td><a href="/admin/products/<%= p.id %>"><%= p.name %></a></td><td class="r"><%= p.views.toLocaleString('en-US') %></td><td class="r"><%= p.overall.toFixed(1) %></td></tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </section>
+  <section class="panel">
+    <h2>Top affiliate clicks</h2>
+    <table class="table">
+      <thead><tr><th>Product</th><th class="r">Clicks</th><th class="r">CTR</th></tr></thead>
+      <tbody>
+        <% topClicks.forEach((p) => { %>
+          <tr>
+            <td><a href="/admin/products/<%= p.id %>"><%= p.name %></a></td>
+            <td class="r"><%= p.clicks %></td>
+            <td class="r"><%= p.views ? ((p.clicks / p.views) * 100).toFixed(1) + '%' : '—' %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+    <p class="muted small">Clicks on “Maker pick” boxes count toward the promoted Snapmaker product.</p>
+  </section>
+</div>
+<%- include('_foot') %>

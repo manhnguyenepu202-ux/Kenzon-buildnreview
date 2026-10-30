@@ -1,82 +1,103 @@
 # BuildNReview
 
-Website review, so sánh và chấm điểm sản phẩm cho ba ngách: **máy in 3D**, **DIY/dụng cụ**, **đồ gia dụng**.
-Song ngữ Việt (`/vi/`) và Anh (`/en/`), xây bằng [Astro](https://astro.build) (Node.js), xuất ra site tĩnh nên chạy được trên mọi gói Hostinger.
+Website review, so sánh và chấm điểm sản phẩm cho các ngách **máy in 3D**, **laser/CNC & DIY**, **dụng cụ điện** và **đồ gia dụng**.
+Tiếng Anh, chạy bằng **Node.js (Express + EJS)**, dữ liệu trong **MySQL**, có **trang Admin** để thêm/sửa bài.
 
-Website: https://buildnreview.com
+Website: https://buildnreview.com/en/
 
-## Chạy ở máy
+## Chạy thử trên máy
 
-Cần Node.js 22.23 trở lên.
+Cần Node.js 22.5 trở lên (để dùng SQLite có sẵn khi chạy ở máy; trên Hostinger dùng MySQL, Node 20+ là đủ).
 
 ```bash
 npm install
-npm run dev        # http://localhost:4321
-npm run build      # xuất site vào dist/
-npm run preview    # xem bản build
-npm run check      # kiểm tra kiểu và lỗi template
+npm run dev
 ```
 
-## Tính năng
+Mở http://localhost:3000/en/. Không cần cài MySQL: khi không có `DB_HOST`, site tự tạo file `data/dev.sqlite` và nạp 24 bài mẫu.
+Trang quản trị: http://localhost:3000/admin, đăng nhập bằng `admin@buildnreview.com` / `admin123` (chỉ dùng ở máy, trên server bắt buộc đặt mật khẩu riêng).
 
-| Trang | Đường dẫn | Ghi chú |
-|---|---|---|
-| Trang chủ | `/vi/` | Hero có ô tìm kiếm, phiếu chấm sản phẩm điểm cao nhất, danh mục, "Đọc nhiều tuần này", đối đầu, quy trình chấm |
-| Danh mục | `/vi/category/3d-printers/` | Lọc theo loại, sắp xếp theo điểm, giá, năm ra mắt |
-| Review | `/vi/review/<slug>/` | Điểm tổng và 4 điểm thành phần, ưu/nhược, kết luận, thông số, nút affiliate, sản phẩm liên quan |
-| So sánh | `/vi/compare/?p=a,b,c` | Chọn tối đa 3 máy cùng danh mục, tô sáng dòng khác nhau, lọc "chỉ khác nhau", link chia sẻ được |
-| Đối đầu | `/vi/compare/<a>-vs-<b>/` | Trang tĩnh cho từng cặp (tốt cho SEO), khai báo trong `matchups` ở `src/lib/catalog.ts` |
-| Tìm kiếm | `/vi/search/?q=` | Tìm tức thì, không phân biệt dấu ("noi chien" ra "Nồi chiên") |
-| Cách chấm điểm, Công bố affiliate, 404 | | |
+| Lệnh | Tác dụng |
+|---|---|
+| `npm start` | Chạy server (dùng trên Hostinger) |
+| `npm run dev` | Chạy và tự khởi động lại khi sửa code |
+| `npm run db:migrate` | Tạo các bảng còn thiếu |
+| `npm run db:seed` | Nạp các bài mẫu còn thiếu (chạy lại nhiều lần không sao) |
+| `npm run db:reset` | **Xóa toàn bộ** bài, danh mục, so sánh, guide, cài đặt rồi nạp lại bài mẫu |
 
-SEO: schema `Product` + `Review` + `BreadcrumbList` trên trang review, `ItemList` trên danh mục, `WebSite` + `SearchAction` trên trang chủ; `hreflang` vi/en; canonical; Open Graph; `sitemap-index.xml`; `robots.txt`.
+## Các trang
 
-## Thêm hoặc sửa sản phẩm
+| Trang | Đường dẫn |
+|---|---|
+| Trang chủ | `/en/`: hero tìm kiếm, "Reviews readers love", danh mục, spotlight, đối đầu, best-of, cách chấm điểm |
+| Danh mục | `/en/category/<slug>/`: sắp xếp theo điểm, lượt đọc, giá |
+| Review | `/en/review/<slug>/`: điểm tổng, 4 điểm thành phần, ưu/nhược, kết luận, bài viết, thông số, nút affiliate, ô "Maker pick" |
+| So sánh tự chọn | `/en/compare/?items=a,b,c`: tối đa 4 sản phẩm, bấm dấu + trên thẻ sản phẩm để thêm |
+| Đối đầu | `/en/compare/<slug>/`: bài so sánh do bạn viết trong Admin |
+| Best-of | `/en/best/<slug>/`: danh sách xếp hạng kèm giải thưởng |
+| Tìm kiếm | `/en/search/?q=` và gợi ý tức thì |
+| Khác | How we test, Affiliate disclosure, About, Privacy, 404 |
 
-Mỗi sản phẩm gồm **1 file dữ liệu + 2 file bài viết**:
+SEO: schema `Product` + `Review` + `BreadcrumbList` + `ItemList`, canonical, Open Graph, `/sitemap.xml`, `/robots.txt`.
+Đường dẫn cũ của bản Astro (`/vi/...`, `/sitemap-index.xml`) tự chuyển hướng 301 sang bản mới.
 
-1. `src/content/products/<slug>.yaml`: hãng, model, danh mục, loại, điểm 4 tiêu chí, giá (VND và USD), thông số, link affiliate.
-2. `src/content/reviews/vi/<slug>.md` và `src/content/reviews/en/<slug>.md`: tiêu đề, tóm tắt, kết luận, ưu/nhược, nội dung bài.
+## Link affiliate
 
-Sao chép một sản phẩm có sẵn rồi sửa là nhanh nhất. Điểm tổng tự tính theo trọng số trong `src/lib/catalog.ts` (35% hiệu năng, 25% hoàn thiện, 20% dễ dùng, 20% giá trị).
+- Mỗi sản phẩm có ô **Product affiliate URL** trong Admin. Nút "Check price" trỏ qua `/go/<slug>` để đếm lượt click, rồi chuyển tới link thật.
+- 6 sản phẩm Snapmaker đã gắn sẵn link trang sản phẩm kèm mã `?ref=tatsuki_mura`.
+- **Mọi bài review** đều có ô **"Maker pick"** quảng bá một sản phẩm Snapmaker (link affiliate). Chọn sản phẩm cho từng danh mục ở Admin → Categories.
+- Link mặc định `https://us.snapmaker.com/?ref=tatsuki_mura` (nút "Shop Snapmaker" ở menu) đổi trong Admin → Settings.
+- Lượt click hiện ở Dashboard.
 
-**Quan trọng:** 18 sản phẩm hiện có là **dữ liệu mẫu** để dựng giao diện. Điểm, thông số và nội dung chưa được kiểm chứng. Mỗi trang review hiện thông báo "bài mẫu" khi file YAML có `sample: true`. Sau khi bạn tự kiểm chứng một bài, đổi thành `sample: false`. Trang chủ cũng mô tả quy trình "mua hoặc mượn bản bán lẻ" ở `src/pages/[lang]/index.astro`: sửa cho khớp với cách bạn thật sự đánh giá.
+## Nội dung mẫu: việc cần làm trước khi quảng bá
 
-Link affiliate: thay link tìm kiếm Shopee/Amazon trong `offers:` bằng link affiliate thật của bạn. `lang: vi` hiện ở bản tiếng Việt, `lang: en` ở bản tiếng Anh, `lang: all` ở cả hai. Link có sẵn `rel="sponsored nofollow"`.
+- 24 bài đều bật **Preview review**: trang hiện ghi chú "biên soạn từ thông số nhà sản xuất". Sau khi tự kiểm chứng hoặc dùng thử, bỏ tick ô này.
+- 6 bài Snapmaker: thông số và giá lấy từ us.snapmaker.com (10/2026). Điểm số là đánh giá biên tập, nên xem lại.
+- 18 bài cũ (chuyển từ bản Astro): nội dung còn ngắn và số liệu chưa kiểm chứng. Nên viết thêm và thêm ảnh thật.
+- Ảnh: sản phẩm chưa có ảnh sẽ hiện hình vẽ minh họa. Upload ảnh ở Admin → Images hoặc dán URL ảnh.
+- Ô "Retail rating" (ví dụ 4.6/5 từ 7.1K đánh giá) chỉ nên điền số liệu thật lấy từ trang bán hàng.
 
-Ảnh sản phẩm: hiện dùng hình minh họa dạng bản vẽ (`src/components/ProductArt.astro`) vì ảnh của hãng thường có bản quyền. Khi có ảnh được phép dùng, truyền prop `image` cho `ProductArt`.
+## Deploy lên Hostinger (Node.js Web App + MySQL)
 
-## Mã nguồn
+Site cũ (Astro) đang tự deploy từ nhánh `main`. Bản mới nằm ở nhánh `express-mysql`. Làm theo thứ tự dưới đây để không làm sập site:
 
-Repo: https://github.com/manhnguyenepu202-ux/Kenzon-buildnreview (nhánh `main`).
+1. **Tạo database:** hPanel → Databases → **MySQL Databases** → tạo database, user và mật khẩu. Ghi lại tên database, user, mật khẩu (dạng `u123456789_...`).
+2. **Đổi cấu hình app:** hPanel → Websites → buildnreview.com → **Node.js** (Deployments / Settings):
+   - Framework: **Express** (hoặc "Other")
+   - Entry file: **`server.js`**
+   - Node version: **22.x** (hoặc 20.x)
+   - Install command: `npm install`; Build command: để trống; Start command: `npm start`
+3. **Biến môi trường** (Environment variables), xem mẫu ở `.env.example`:
+   - `NODE_ENV=production`
+   - `SITE_URL=https://buildnreview.com`
+   - `DB_HOST=localhost`, `DB_PORT=3306`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`
+   - `ADMIN_EMAIL`, `ADMIN_PASSWORD` (mật khẩu dài)
+   - `SESSION_SECRET` (chuỗi ngẫu nhiên ≥ 24 ký tự)
+4. **Đưa code lên `main`:** merge nhánh `express-mysql` vào `main` rồi push. Hostinger tự cài và khởi động.
+5. Lần chạy đầu, server tự tạo bảng và nạp 24 bài mẫu (tắt bằng `AUTO_SEED=false`).
+6. Vào `https://buildnreview.com/admin` đăng nhập, đổi nội dung theo ý.
+7. Google Search Console: gửi `https://buildnreview.com/sitemap.xml`.
 
-## Deploy lên Hostinger
+Nếu app không chạy: xem log ở hPanel. Thiếu `ADMIN_PASSWORD` hoặc `SESSION_SECRET` thì server dừng ngay và ghi rõ biến nào thiếu. Sai thông tin MySQL thì log báo lỗi kết nối.
 
-Website đang chạy tại **https://buildnreview.com**, dùng tính năng Node.js Web App của Hostinger kết nối thẳng với repo GitHub này.
-
-- **Tự động:** mỗi lần push lên `main`, Hostinger tự chạy `npm run build` và đăng thư mục `dist/`. Xem tiến trình ở hPanel → **Deployments**; bấm **Redeploy** nếu cần chạy lại.
-- **Cấu hình:** framework Astro, build và output mặc định, Node 22.x, thư mục gốc `./`.
-- **Đổi tên miền:** đặt biến môi trường `SITE_URL` (hPanel → **Environment variables**), ví dụ `https://ten-mien-moi.com`, rồi Redeploy. Biến này dùng cho canonical, hreflang và sitemap.
-
-Dự phòng nếu chuyển sang gói chỉ có hosting tĩnh: chạy `npm run build`, nén **nội dung bên trong** `dist/` (gồm cả file ẩn `.htaccess`), upload vào **File Manager → public_html** và giải nén.
-
-### Sau khi lên mạng
-
-- Gửi `https://buildnreview.com/sitemap-index.xml` vào Google Search Console.
-- Kiểm tra dữ liệu có cấu trúc bằng [Rich Results Test](https://search.google.com/test/rich-results).
-- `public/.htaccess` chuyển HTTP sang HTTPS, bỏ `www`, chọn ngôn ngữ ở trang gốc và đặt cache.
+Ảnh upload được lưu **trong MySQL** nên không bị mất khi Hostinger deploy lại.
 
 ## Cấu trúc
 
 ```
+server.js                 điểm khởi động: kết nối DB, tạo bảng, nạp dữ liệu mẫu, chạy Express
 src/
-  content/products/*.yaml        dữ liệu sản phẩm
-  content/reviews/{vi,en}/*.md   bài review
-  i18n/ui.ts                     chuỗi giao diện hai ngôn ngữ
-  lib/catalog.ts                 danh mục, nhãn thông số, trọng số điểm, cặp đối đầu
-  components/                    ScoreRuler (thước điểm), ProductCard, CompareTable...
-  pages/[lang]/                  các trang theo ngôn ngữ
-  scripts/                       tìm kiếm tức thì, danh sách so sánh
-public/.htaccess                 HTTPS, chọn ngôn ngữ ở trang gốc, cache, 404
-docs/design-system.md            nhận diện và quy tắc thiết kế
+  app.js                  middleware, bảo mật (helmet, CSP), session admin
+  config.js               đọc biến môi trường
+  db/index.js             adapter MySQL / SQLite
+  db/schema.js            định nghĩa bảng
+  models/                 catalog (danh mục, sản phẩm), content (so sánh, guide), settings (cài đặt, ảnh)
+  routes/public.js        các trang công khai, /go/ affiliate, sitemap
+  routes/admin.js         trang quản trị
+  lib/                    helpers, hình vẽ SVG, đăng nhập/CSRF
+views/                    giao diện EJS (pages/, partials/, admin/)
+public/                   CSS, JS, favicon, ảnh OG
+scripts/                  migrate, seed và dữ liệu mẫu (scripts/seed/)
 ```
+
+Repo: https://github.com/manhnguyenepu202-ux/Kenzon-buildnreview

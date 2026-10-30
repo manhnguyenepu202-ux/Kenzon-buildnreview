@@ -1,0 +1,39 @@
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="logo" href="/en/" aria-label="BuildNReview home">
+      <span class="logo-mark" aria-hidden="true">B</span>
+      <span class="logo-text">BuildN<em>Review</em></span>
+    </a>
+
+    <form class="search search-header" role="search" action="/en/search/" method="get" data-search>
+      <label class="visually-hidden" for="q-header">Search reviews</label>
+      <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q-header" name="q" type="search" autocomplete="off" placeholder="Search products…" role="combobox" aria-expanded="false" aria-controls="q-header-list" aria-autocomplete="list">
+      <ul id="q-header-list" class="suggest" role="listbox" hidden></ul>
+    </form>
+
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav" data-menu>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <span class="visually-hidden">Menu</span>
+    </button>
+
+    <nav id="site-nav" class="nav" aria-label="Main">
+      <a href="/en/" <%- path === '/en/' ? 'aria-current="page"' : '' %>>Home</a>
+      <div class="dropdown" data-dropdown>
+        <button type="button" class="dropdown-btn" aria-expanded="false">Categories
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="dropdown-menu">
+          <% navCategories.forEach((c) => { %>
+            <a href="<%= c.url %>" <%- path.startsWith(c.url) ? 'aria-current="page"' : '' %>>
+              <span><%= c.name %></span><small><%= c.product_count %> reviews</small>
+            </a>
+          <% }) %>
+        </div>
+      </div>
+      <a href="/en/best/" <%- path.startsWith('/en/best/') ? 'aria-current="page"' : '' %>>Best of</a>
+      <a href="/en/compare/" <%- path.startsWith('/en/compare/') ? 'aria-current="page"' : '' %>>Compare</a>
+      <a class="nav-cta" href="/go/" rel="sponsored nofollow noopener" target="_blank">Shop Snapmaker</a>
+    </nav>
+  </div>
+</header>

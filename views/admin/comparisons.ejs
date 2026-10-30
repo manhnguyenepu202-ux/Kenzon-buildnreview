@@ -1,0 +1,21 @@
+<%- include('_head') %>
+<header class="page-head">
+  <div><h1>Comparisons</h1><p class="muted">Head-to-head pages at /en/compare/…</p></div>
+  <a class="btn btn-primary" href="/admin/comparisons/new">+ New comparison</a>
+</header>
+<div class="panel flush">
+  <table class="table">
+    <thead><tr><th>Title</th><th>Products</th><th>Status</th><th></th></tr></thead>
+    <tbody>
+      <% comparisons.forEach((c) => { %>
+        <tr>
+          <td><a class="strong" href="/admin/comparisons/<%= c.id %>"><%= c.title %></a></td>
+          <td><%= c.products.map((p) => p.name).join(' vs ') %></td>
+          <td><span class="tag <%= c.status === 'published' ? 'tag-ok' : 'tag-muted' %>"><%= c.status %></span></td>
+          <td class="r"><a href="<%= c.url %>" target="_blank" rel="noopener">View ↗</a></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+<%- include('_foot') %>

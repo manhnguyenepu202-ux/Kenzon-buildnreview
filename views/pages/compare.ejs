@@ -1,0 +1,66 @@
+<%- include('../partials/head') %>
+<%
+  // A winner badge only when one product strictly out-scores the rest.
+  const ranked = [...comparison.products].sort((a, b) => b.overall - a.overall);
+  const winner = ranked[0].overall > ranked[1].overall ? ranked[0] : { id: null };
+%>
+<section class="page-hero">
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="wrap">
+    <nav class="crumbs crumbs-light" aria-label="Breadcrumb">
+      <ol><li><a href="/en/">Home</a></li><li><a href="/en/compare/">Compare</a></li><li aria-current="page"><%= comparison.products.map((p) => p.model || p.name).join(' vs ') %></li></ol>
+    </nav>
+    <p class="eyebrow eyebrow-lime">Head-to-head</p>
+    <h1><%= comparison.title %></h1>
+    <p class="page-lede"><%= comparison.intro %></p>
+    <p class="page-meta">Updated <%= h.fmtDate(comparison.updated_at) %></p>
+  </div>
+</section>
+
+<section class="section section-tight">
+  <div class="wrap">
+    <p class="disclosure-line"><%= settings.disclosure_short %> <a href="/en/disclosure/">Learn more</a></p>
+    <div class="vs-summary">
+      <% comparison.products.forEach((p, i) => { %>
+        <article class="vs-side <%= p.id === winner.id ? 'is-winner' : '' %>">
+          <a href="<%= p.url %>"><%- h.productVisual(p) %></a>
+          <p class="card-brand"><%= p.brand %><% if (p.id === winner.id) { %> <span class="badge-win">Higher score</span><% } %></p>
+          <h2><a href="<%= p.url %>"><%= p.name %></a></h2>
+          <span class="score-pill big <%= p.id === winner.id ? 'is-best' : '' %>"><%= p.overall.toFixed(1) %></span>
+          <p class="vs-best"><span>Best for</span> <%= p.best_for %></p>
+          <% if (p.affiliate_url) { %>
+            <a class="btn btn-lime" href="<%= h.goUrl(p) %>" rel="sponsored nofollow noopener" target="_blank"><%= p.affiliate_label || 'Check price' %></a>
+          <% } else { %>
+            <a class="btn btn-dark" href="<%= p.url %>">Read review</a>
+          <% } %>
+        </article>
+        <% if (i === 0) { %><div class="vs-divider" aria-hidden="true">VS</div><% } %>
+      <% }) %>
+    </div>
+
+    <section class="verdict mt-xl">
+      <h2>Which should you buy?</h2>
+      <p><%= comparison.verdict %></p>
+    </section>
+
+    <h2 class="block-title">Full comparison</h2>
+    <%- include('../partials/compare-table', { products: comparison.products, scoreKeys }) %>
+  </div>
+</section>
+
+<% if (others.length) { %>
+<section class="section section-tint">
+  <div class="wrap">
+    <div class="section-head"><div><p class="eyebrow">More head-to-heads</p><h2>Other comparisons</h2></div></div>
+    <div class="grid-vs">
+      <% others.forEach((c) => { %>
+        <a class="vs-card" href="<%= c.url %>">
+          <div class="vs-visuals"><%- h.productVisual(c.products[0]) %><span class="vs-badge">VS</span><%- h.productVisual(c.products[1]) %></div>
+          <h3><%= c.title %></h3>
+        </a>
+      <% }) %>
+    </div>
+  </div>
+</section>
+<% } %>
+<%- include('../partials/foot') %>

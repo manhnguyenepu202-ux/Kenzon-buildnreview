@@ -1,0 +1,46 @@
+<%- include('_head') %>
+<% const c = category; const labels = c.score_labels || {}; %>
+<header class="page-head">
+  <div><a class="back" href="/admin/categories">← Categories</a><h1><%= c.id ? c.name : 'New category' %></h1></div>
+</header>
+<%- include('_errors', { errors }) %>
+<form class="form narrow" method="post" action="/admin/categories/save">
+  <input type="hidden" name="_csrf" value="<%= csrf %>">
+  <% if (c.id) { %><input type="hidden" name="id" value="<%= c.id %>"><% } %>
+  <section class="panel">
+    <div class="row">
+      <label class="grow">Name *<input name="name" value="<%= c.name || '' %>" required></label>
+      <label>URL slug<input name="slug" value="<%= c.slug || '' %>" placeholder="auto"></label>
+    </div>
+    <div class="row">
+      <label class="grow">Group label <small>small text above the title, e.g. “DIY”</small><input name="group_name" value="<%= c.group_name || '' %>"></label>
+      <label>Menu order<input type="number" name="sort_order" value="<%= c.sort_order ?? 10 %>"></label>
+    </div>
+    <label>Description<textarea name="blurb" rows="3"><%= c.blurb || '' %></textarea></label>
+    <label>Card image URL <small>leave empty to use the drawing</small><input name="image_url" value="<%= c.image_url || '' %>"></label>
+    <div class="row">
+      <label>Drawing<select name="art_type"><% artTypes.forEach((a) => { %><option <%= c.art_type === a ? 'selected' : '' %>><%= a %></option><% }) %></select></label>
+      <label>Tone<input type="color" name="tone" value="<%= c.tone || '#7a8b5c' %>"></label>
+    </div>
+  </section>
+  <section class="panel">
+    <h2>Score labels</h2>
+    <p class="hint">How the four scores are named for this kind of product.</p>
+    <div class="row">
+      <% scoreKeys.forEach((k) => { %><label class="grow"><%= k %><input name="score_labels[<%= k %>]" value="<%= labels[k] || '' %>"></label><% }) %>
+    </div>
+  </section>
+  <section class="panel">
+    <h2>Maker pick (affiliate box)</h2>
+    <label>Product promoted on this category’s reviews
+      <select name="sponsor_product_id">
+        <option value="">Automatic (best-scoring product with an affiliate link)</option>
+        <% products.filter((p) => p.affiliate_url).forEach((p) => { %>
+          <option value="<%= p.id %>" <%= Number(c.sponsor_product_id) === p.id ? 'selected' : '' %>><%= p.name %></option>
+        <% }) %>
+      </select>
+    </label>
+  </section>
+  <button class="btn btn-primary" type="submit">Save category</button>
+</form>
+<%- include('_foot') %>

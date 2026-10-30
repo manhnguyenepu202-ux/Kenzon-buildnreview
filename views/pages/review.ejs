@@ -1,0 +1,176 @@
+<%- include('../partials/head') %>
+<% const p = product; const cat = p.category; const labels = cat ? cat.score_labels : {}; %>
+<article class="review">
+  <header class="review-top">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="/en/">Home</a></li>
+          <% if (cat) { %><li><a href="<%= cat.url %>"><%= cat.name %></a></li><% } %>
+          <li aria-current="page"><%= p.name %></li>
+        </ol>
+      </nav>
+
+      <div class="review-intro">
+        <div class="review-gallery" data-gallery>
+          <div class="gallery-main"><%- h.productVisual(p, { eager: true, width: 1000 }) %></div>
+          <% if (p.gallery.length) { %>
+            <div class="gallery-thumbs">
+              <% [p.image_url, ...p.gallery].filter(Boolean).forEach((src, i) => { %>
+                <button type="button" class="thumb" data-src="<%= h.img(src, 1000) %>" aria-label="Show image <%= i + 1 %>" aria-pressed="<%= i === 0 %>">
+                  <img src="<%= h.img(src, 160) %>" alt="" width="96" height="96" loading="lazy" decoding="async">
+                </button>
+              <% }) %>
+            </div>
+          <% } %>
+        </div>
+
+        <div class="review-info">
+          <p class="eyebrow"><%= p.brand %><% if (cat) { %> · <%= cat.name %><% } %></p>
+          <h1><%= p.title || `${p.name} review` %></h1>
+          <p class="review-summary"><%= p.summary %></p>
+
+          <div class="scorecard">
+            <div class="score-ring big" style="--v:<%= p.overall * 10 %>">
+              <strong><%= p.overall.toFixed(1) %></strong><small>/10</small>
+            </div>
+            <div>
+              <p class="score-word"><%= h.scoreWord(p.overall) %></p>
+              <% if (p.best_for) { %><p class="best-for"><span>Best for</span> <%= p.best_for %></p><% } %>
+              <% if (p.retail_rating) { %>
+                <p class="retail"><svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2.8 2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4-4.7-4.4 6.4-.8z"/></svg>
+                <%= p.retail_rating.toFixed(1) %> out of 5 from <%= h.fmtCount(p.retail_count) %> buyer ratings</p>
+              <% } %>
+            </div>
+          </div>
+
+          <div class="buybox">
+            <% if (p.price_usd) { %><p class="price"><span>List price</span><strong><%= h.fmtPrice(p.price_usd) %></strong></p><% } %>
+            <div class="buy-actions">
+              <% if (p.affiliate_url) { %>
+                <a class="btn btn-lime btn-lg" href="<%= h.goUrl(p) %>" rel="sponsored nofollow noopener" target="_blank">
+                  <%= p.affiliate_label || 'Check price' %><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+                </a>
+              <% } %>
+              <button type="button" class="btn btn-outline btn-lg compare-toggle-wide" data-compare="<%= p.slug %>" data-name="<%= p.name %>" aria-pressed="false">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span data-label>Add to compare</span>
+              </button>
+            </div>
+            <p class="byline">By the BuildNReview team · Updated <time datetime="<%= h.isoDate(p.updated_at) %>"><%= h.fmtDate(p.updated_at) %></time></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap review-layout">
+    <div class="review-main">
+      <p class="disclosure-line"><%= settings.disclosure_short %> <a href="/en/disclosure/">Learn more</a></p>
+      <% if (p.is_sample) { %>
+        <p class="notice"><strong>Preview review.</strong> Compiled from manufacturer specifications and published information. We will update the scores after hands-on testing.</p>
+      <% } %>
+
+      <section class="verdict">
+        <h2>Our verdict</h2>
+        <p><%= p.verdict %></p>
+      </section>
+
+      <section class="proscons" aria-label="Pros and cons">
+        <div class="pros">
+          <h2>What we like</h2>
+          <ul><% p.pros.forEach((x) => { %><li><%= x %></li><% }) %></ul>
+        </div>
+        <div class="cons">
+          <h2>What could be better</h2>
+          <ul><% p.cons.forEach((x) => { %><li><%= x %></li><% }) %></ul>
+        </div>
+      </section>
+
+      <section class="breakdown" aria-labelledby="breakdown-h">
+        <h2 id="breakdown-h">Score breakdown</h2>
+        <% scoreKeys.forEach((k) => { const v = Number(p.scores[k]) || 0; %>
+          <div class="bar-row">
+            <span><%= labels[k] || k %></span>
+            <div class="meter"><span style="width:<%= v * 10 %>%"></span></div>
+            <strong><%= v.toFixed(1) %></strong>
+          </div>
+        <% }) %>
+        <p class="small-print">Overall = 35% <%= labels.performance %> + 25% <%= labels.quality %> + 20% <%= labels.ease %> + 20% <%= labels.value %>. <a href="/en/how-we-test/">How we test</a></p>
+      </section>
+
+      <% if (!p.affiliate_url || sponsor) { %><%- include('../partials/sponsor', { sponsor, compact: false }) %><% } %>
+
+      <div class="prose"><%- bodyHtml %></div>
+
+      <% if (p.specs.length) { %>
+        <section class="specs" id="specs">
+          <h2>Full specifications</h2>
+          <table>
+            <tbody>
+              <% p.specs.forEach((s) => { %><tr><th scope="row"><%= s.label %></th><td><%= s.value %></td></tr><% }) %>
+              <% if (p.released) { %><tr><th scope="row">Released</th><td><%= p.released %></td></tr><% } %>
+            </tbody>
+          </table>
+        </section>
+      <% } %>
+
+      <% if (p.affiliate_url) { %>
+        <div class="end-cta">
+          <div>
+            <p class="eyebrow">Ready to buy?</p>
+            <h3><%= p.name %></h3>
+            <% if (p.price_usd) { %><p>List price <strong><%= h.fmtPrice(p.price_usd) %></strong>. Prices change often, so check the current deal.</p><% } %>
+          </div>
+          <a class="btn btn-lime btn-lg" href="<%= h.goUrl(p) %>" rel="sponsored nofollow noopener" target="_blank"><%= p.affiliate_label || 'Check price' %><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        </div>
+      <% } %>
+    </div>
+
+    <aside class="review-side">
+      <div class="side-sticky">
+        <% if (toc.length) { %>
+          <nav class="toc" aria-label="On this page">
+            <p class="eyebrow">On this page</p>
+            <ol>
+              <li><a href="#breakdown-h">Score breakdown</a></li>
+              <% toc.forEach((t) => { %><li><a href="#<%= t.id %>"><%= t.text %></a></li><% }) %>
+              <% if (p.specs.length) { %><li><a href="#specs">Full specifications</a></li><% } %>
+            </ol>
+          </nav>
+        <% } %>
+        <% if (sponsor) { %><%- include('../partials/sponsor', { sponsor, compact: true }) %><% } %>
+      </div>
+    </aside>
+  </div>
+
+  <% if (comparisons.length) { %>
+    <section class="section section-tint">
+      <div class="wrap">
+        <div class="section-head"><div><p class="eyebrow">Head-to-head</p><h2><%= p.name %> compared</h2></div></div>
+        <div class="grid-vs">
+          <% comparisons.forEach((c) => { %>
+            <a class="vs-card" href="<%= c.url %>">
+              <div class="vs-visuals"><%- h.productVisual(c.products[0]) %><span class="vs-badge">VS</span><%- h.productVisual(c.products[1]) %></div>
+              <h3><%= c.title %></h3>
+            </a>
+          <% }) %>
+        </div>
+      </div>
+    </section>
+  <% } %>
+
+  <% if (related.length) { %>
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <div><p class="eyebrow">Keep reading</p><h2>More <%= cat ? cat.name.toLowerCase() : 'reviews' %></h2></div>
+          <% if (cat) { %><a class="text-link" href="<%= cat.url %>">See all</a><% } %>
+        </div>
+        <div class="grid-cards">
+          <% related.forEach((r) => { %><%- include('../partials/product-card', { p: r }) %><% }) %>
+        </div>
+      </div>
+    </section>
+  <% } %>
+</article>
+<%- include('../partials/foot') %>

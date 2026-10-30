@@ -1,0 +1,53 @@
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div class="footer-brand">
+      <a class="logo logo-light" href="/en/">
+        <span class="logo-mark" aria-hidden="true">B</span>
+        <span class="logo-text">BuildN<em>Review</em></span>
+      </a>
+      <p><%= settings.site_tagline %></p>
+      <p class="footer-disclosure"><%= settings.disclosure_short %> <a href="/en/disclosure/">Learn more</a>.</p>
+    </div>
+    <div>
+      <h2>Categories</h2>
+      <ul><% navCategories.forEach((c) => { %><li><a href="<%= c.url %>"><%= c.name %></a></li><% }) %></ul>
+    </div>
+    <div>
+      <h2>Explore</h2>
+      <ul>
+        <li><a href="/en/best/">Best-of guides</a></li>
+        <li><a href="/en/compare/">Compare products</a></li>
+        <li><a href="/en/how-we-test/">How we test</a></li>
+        <li><a href="/en/search/">Search</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>About</h2>
+      <ul>
+        <li><a href="/en/about/">About us</a></li>
+        <li><a href="/en/disclosure/">Affiliate disclosure</a></li>
+        <li><a href="/en/privacy/">Privacy policy</a></li>
+        <li><a href="mailto:<%= settings.contact_email %>"><%= settings.contact_email %></a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-base">
+    <p>© <%= new Date().getFullYear() %> BuildNReview. All rights reserved.</p>
+    <p>Product names and logos belong to their owners.</p>
+  </div>
+</footer>
+
+<aside class="tray" data-tray hidden aria-live="polite">
+  <div class="wrap tray-inner">
+    <p class="tray-label"><strong data-tray-count>0</strong> of 4 selected to compare</p>
+    <ul class="tray-items" data-tray-items></ul>
+    <div class="tray-actions">
+      <button type="button" class="btn btn-ghost-light" data-tray-clear>Clear</button>
+      <a class="btn btn-lime" href="/en/compare/" data-tray-go>Compare now</a>
+    </div>
+  </div>
+</aside>
+<script src="/js/site.js?v=2" defer></script>
+</body>
+</html>

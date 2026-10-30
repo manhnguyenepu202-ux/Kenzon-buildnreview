@@ -1,0 +1,82 @@
+<%#
+  Side-by-side table. Locals: products (2-4), scoreKeys
+  Spec rows are the union of every product's spec labels, in first-seen order.
+%>
+<%
+  const labels = products[0].category ? products[0].category.score_labels : {};
+  const specLabels = [];
+  products.forEach((p) => p.specs.forEach((s) => { if (!specLabels.includes(s.label)) specLabels.push(s.label); }));
+  const best = Math.max(...products.map((p) => p.overall));
+  const tied = products.filter((p) => p.overall === best).length > 1;
+  const specOf = (p, label) => (p.specs.find((s) => s.label === label) || {}).value || '—';
+%>
+<div class="cmp-scroll">
+  <table class="cmp" style="--cols:<%= products.length %>">
+    <caption class="visually-hidden">Comparison of <%= products.map((p) => p.name).join(', ') %></caption>
+    <thead>
+      <tr>
+        <th scope="col" class="cmp-corner"><span class="visually-hidden">Feature</span></th>
+        <% products.forEach((p) => { %>
+          <th scope="col" class="cmp-head">
+            <a href="<%= p.url %>" class="cmp-visual"><%- h.productVisual(p) %></a>
+            <span class="card-brand"><%= p.brand %></span>
+            <a class="cmp-name" href="<%= p.url %>"><%= p.name %></a>
+            <% if (p.overall === best && !tied) { %><span class="badge-win">Top score</span><% } %>
+          </th>
+        <% }) %>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="cmp-score-row">
+        <th scope="row">Overall score</th>
+        <% products.forEach((p) => { %><td><span class="score-pill <%= p.overall === best ? 'is-best' : '' %>"><%= p.overall.toFixed(1) %></span></td><% }) %>
+      </tr>
+      <% scoreKeys.forEach((k) => {
+        const top = Math.max(...products.map((p) => Number(p.scores[k]) || 0)); %>
+        <tr>
+          <th scope="row"><%= labels[k] || k %></th>
+          <% products.forEach((p) => { const v = Number(p.scores[k]) || 0; %>
+            <td>
+              <div class="meter <%= v === top ? 'is-best' : '' %>"><span style="width:<%= v * 10 %>%"></span></div>
+              <span class="meter-num"><%= v.toFixed(1) %></span>
+            </td>
+          <% }) %>
+        </tr>
+      <% }) %>
+      <tr>
+        <th scope="row">Price (USD)</th>
+        <% products.forEach((p) => { %><td class="num"><%= p.price_usd ? h.fmtPrice(p.price_usd) : '—' %></td><% }) %>
+      </tr>
+      <tr>
+        <th scope="row">Best for</th>
+        <% products.forEach((p) => { %><td><%= p.best_for || '—' %></td><% }) %>
+      </tr>
+      <tr>
+        <th scope="row">Pros</th>
+        <% products.forEach((p) => { %><td><ul class="mini-list good"><% p.pros.slice(0, 3).forEach((x) => { %><li><%= x %></li><% }) %></ul></td><% }) %>
+      </tr>
+      <tr>
+        <th scope="row">Cons</th>
+        <% products.forEach((p) => { %><td><ul class="mini-list bad"><% p.cons.slice(0, 3).forEach((x) => { %><li><%= x %></li><% }) %></ul></td><% }) %>
+      </tr>
+      <tr class="cmp-section"><th scope="rowgroup" colspan="<%= products.length + 1 %>">Specifications</th></tr>
+      <% specLabels.forEach((label) => { %>
+        <tr>
+          <th scope="row"><%= label %></th>
+          <% products.forEach((p) => { %><td><%= specOf(p, label) %></td><% }) %>
+        </tr>
+      <% }) %>
+      <tr class="cmp-cta">
+        <th scope="row"><span class="visually-hidden">Links</span></th>
+        <% products.forEach((p) => { %>
+          <td>
+            <a class="btn btn-sm btn-dark" href="<%= p.url %>">Read review</a>
+            <% if (p.affiliate_url) { %>
+              <a class="btn btn-sm btn-lime" href="<%= h.goUrl(p) %>" rel="sponsored nofollow noopener" target="_blank"><%= p.affiliate_label || 'Check price' %></a>
+            <% } %>
+          </td>
+        <% }) %>
+      </tr>
+    </tbody>
+  </table>
+</div>

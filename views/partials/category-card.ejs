@@ -1,0 +1,18 @@
+<%# Dark category tile. Locals: c (category) %>
+<a class="cat-card" href="<%= c.url %>">
+  <div class="cat-media" style="--tone:<%= c.tone || '#7a8b5c' %>">
+    <% if (c.image_url) { %>
+      <img src="<%= c.image_url %>" alt="" loading="lazy" decoding="async" width="600" height="440">
+    <% } else { %>
+      <div class="cat-art"><%- h.productVisual({ name: c.name, art_type: c.art_type, tone: c.tone }) %></div>
+    <% } %>
+  </div>
+  <div class="cat-body">
+    <span class="pill"><span class="pill-dot"></span>Explore</span>
+    <h3><%= c.name %></h3>
+    <div class="cat-foot">
+      <span><%= c.product_count %> <%= c.product_count === 1 ? 'review' : 'reviews' %></span>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+    </div>
+  </div>
+</a>

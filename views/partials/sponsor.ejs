@@ -1,0 +1,19 @@
+<%# "Maker pick" affiliate box. Locals: sponsor (product), compact (bool) %>
+<% if (sponsor) { %>
+<aside class="sponsor <%= typeof compact !== 'undefined' && compact ? 'is-compact' : '' %>" aria-label="Sponsored pick">
+  <div class="sponsor-media"><%- h.productVisual(sponsor) %></div>
+  <div class="sponsor-body">
+    <p class="eyebrow eyebrow-lime"><%= settings.sponsor_heading %></p>
+    <h3><a href="<%= sponsor.url %>"><%= sponsor.name %></a></h3>
+    <p><%= sponsor.summary %></p>
+    <div class="sponsor-actions">
+      <a class="btn btn-lime" href="<%= h.goUrl(sponsor) %>" rel="sponsored nofollow noopener" target="_blank">
+        <%= sponsor.affiliate_label || settings.affiliate_default_label %>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+      </a>
+      <% if (sponsor.price_usd) { %><span class="sponsor-price">from <strong><%= h.fmtPrice(sponsor.price_usd) %></strong></span><% } %>
+    </div>
+    <p class="sponsor-note">Affiliate link. <a href="/en/disclosure/">How we earn money</a></p>
+  </div>
+</aside>
+<% } %>

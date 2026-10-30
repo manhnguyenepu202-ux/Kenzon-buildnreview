@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title><%= title %> · BuildNReview Admin</title>
+  <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&display=swap">
+  <link rel="stylesheet" href="/css/admin.css?v=2">
+</head>
+<body data-csrf="<%= csrf %>">
+<% const nav = [
+  ['/admin', 'Dashboard', 'M3 12 12 4l9 8M5 10v10h14V10'],
+  ['/admin/products', 'Reviews', 'M4 5h16v14H4zM8 9h8M8 13h5'],
+  ['/admin/categories', 'Categories', 'M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z'],
+  ['/admin/comparisons', 'Comparisons', 'M8 4v16M16 4v16M3 8h5M16 16h5'],
+  ['/admin/guides', 'Best-of guides', 'M5 4h14v16l-7-4-7 4z'],
+  ['/admin/media', 'Images', 'M4 5h16v14H4zM4 15l5-5 5 5 3-3 3 3'],
+  ['/admin/settings', 'Settings', 'M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM19 12l2-1-2-4-2 1-2-2V4h-6v2L7 8 5 7l-2 4 2 1v0l-2 1 2 4 2-1 2 2v2h6v-2l2-2 2 1 2-4z'],
+]; %>
+<div class="shell">
+  <aside class="side">
+    <a class="side-logo" href="/admin"><span class="logo-mark">B</span><span>BuildN<em>Review</em></span></a>
+    <nav>
+      <% nav.forEach(([href, label, d]) => {
+        const active = href === '/admin' ? adminPath === '/' : ('/admin' + adminPath).startsWith(href); %>
+        <a href="<%= href %>" class="<%= active ? 'active' : '' %>"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="<%= d %>"/></svg><%= label %></a>
+      <% }) %>
+    </nav>
+    <div class="side-foot">
+      <a href="/en/" target="_blank" rel="noopener">View site ↗</a>
+      <form method="post" action="/admin/logout"><input type="hidden" name="_csrf" value="<%= csrf %>"><button type="submit">Sign out</button></form>
+    </div>
+  </aside>
+  <main class="main">
+    <% if (flash) { %><div class="flash flash-<%= flash.type %>" role="status"><%= flash.text %></div><% } %>

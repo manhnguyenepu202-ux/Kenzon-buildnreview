@@ -1,0 +1,23 @@
+<%- include('../partials/head') %>
+<section class="page-hero">
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="wrap">
+    <nav class="crumbs crumbs-light" aria-label="Breadcrumb"><ol><li><a href="/en/">Home</a></li><li aria-current="page">Best of</li></ol></nav>
+    <p class="eyebrow eyebrow-lime">Buying guides</p>
+    <h1>The best, <em>ranked.</em></h1>
+    <p class="page-lede">Short lists of the products we would actually buy, ranked by score and value, with a clear pick for every kind of buyer.</p>
+  </div>
+</section>
+<section class="section section-tight">
+  <div class="wrap grid-guides">
+    <% guides.forEach((g) => { %>
+      <a class="guide-card" href="<%= g.url %>">
+        <div class="guide-thumbs"><% g.entries.slice(0, 3).forEach((e) => { %><%- h.productVisual(e.product) %><% }) %></div>
+        <h3><%= g.title %></h3>
+        <p><%= h.truncate(g.intro, 130) %></p>
+        <ol><% g.entries.slice(0, 3).forEach((e) => { %><li><span><%= e.product.name %></span><strong><%= e.product.overall.toFixed(1) %></strong></li><% }) %></ol>
+      </a>
+    <% }) %>
+  </div>
+</section>
+<%- include('../partials/foot') %>

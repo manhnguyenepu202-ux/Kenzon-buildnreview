@@ -1,0 +1,21 @@
+<%- include('../partials/head') %>
+<%- include('../partials/simple-hero', { eyebrow: 'Legal' }) %>
+<section class="section section-tight">
+  <div class="wrap prose-page">
+    <div class="prose">
+      <h2>What we collect</h2>
+      <p>BuildNReview does not ask you to create an account and does not store personal information about readers. Our server keeps standard access logs (IP address, browser and pages requested) for security and to keep the site running.</p>
+      <p>Your compare list is saved only in your own browser (local storage) and never sent to us.</p>
+
+      <h2>Analytics</h2>
+      <p>If analytics is enabled, we use Google Analytics to understand which pages are read. Google may set cookies for this purpose. You can block them with your browser settings or the Google Analytics opt-out add-on.</p>
+
+      <h2>Affiliate links</h2>
+      <p>When you click an affiliate link we count the click (without identifying you) and send you to the retailer. The retailer may set its own cookies to attribute the sale; their privacy policy applies on their site.</p>
+
+      <h2>Contact</h2>
+      <p>For any privacy question, email <a href="mailto:<%= settings.contact_email %>"><%= settings.contact_email %></a>.</p>
+    </div>
+  </div>
+</section>
+<%- include('../partials/foot') %>

@@ -1,0 +1,57 @@
+<%- include('../partials/head') %>
+<section class="page-hero">
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="wrap">
+    <nav class="crumbs crumbs-light" aria-label="Breadcrumb">
+      <ol><li><a href="/en/">Home</a></li><li><a href="/en/best/">Best of</a></li><li aria-current="page"><%= guide.title %></li></ol>
+    </nav>
+    <p class="eyebrow eyebrow-lime"><%= category ? category.name : 'Buying guide' %></p>
+    <h1><%= guide.title %></h1>
+    <p class="page-lede"><%= guide.intro %></p>
+    <p class="page-meta">Updated <%= h.fmtDate(guide.updated_at) %> · <%= guide.entries.length %> picks</p>
+  </div>
+</section>
+
+<section class="section section-tight">
+  <div class="wrap guide-layout">
+    <div>
+      <p class="disclosure-line"><%= settings.disclosure_short %> <a href="/en/disclosure/">Learn more</a></p>
+      <nav class="quick-picks" aria-label="Quick picks">
+        <p class="eyebrow">Quick picks</p>
+        <ol>
+          <% guide.entries.forEach((e, i) => { %>
+            <li><a href="#pick-<%= i + 1 %>"><span><%= e.award || `Pick ${i + 1}` %></span><strong><%= e.product.name %></strong></a></li>
+          <% }) %>
+        </ol>
+      </nav>
+
+      <% guide.entries.forEach((e, i) => { const p = e.product; %>
+        <article class="pick" id="pick-<%= i + 1 %>">
+          <div class="pick-rank"><%= i + 1 %></div>
+          <a class="pick-media" href="<%= p.url %>"><%- h.productVisual(p) %></a>
+          <div class="pick-body">
+            <% if (e.award) { %><p class="eyebrow"><%= e.award %></p><% } %>
+            <h2><a href="<%= p.url %>"><%= p.name %></a></h2>
+            <p><%= e.note || p.summary %></p>
+            <div class="pick-meta">
+              <span class="score-pill"><%= p.overall.toFixed(1) %></span>
+              <% if (p.price_usd) { %><span class="pick-price"><%= h.fmtPrice(p.price_usd) %></span><% } %>
+              <span class="pick-best">Best for: <%= p.best_for %></span>
+            </div>
+            <div class="pick-lists">
+              <ul class="mini-list good"><% p.pros.slice(0, 3).forEach((x) => { %><li><%= x %></li><% }) %></ul>
+              <ul class="mini-list bad"><% p.cons.slice(0, 2).forEach((x) => { %><li><%= x %></li><% }) %></ul>
+            </div>
+            <div class="pick-actions">
+              <% if (p.affiliate_url) { %>
+                <a class="btn btn-lime" href="<%= h.goUrl(p) %>" rel="sponsored nofollow noopener" target="_blank"><%= p.affiliate_label || 'Check price' %></a>
+              <% } %>
+              <a class="btn btn-outline" href="<%= p.url %>">Read full review</a>
+            </div>
+          </div>
+        </article>
+      <% }) %>
+    </div>
+  </div>
+</section>
+<%- include('../partials/foot') %>

@@ -1,0 +1,22 @@
+<%- include('_head') %>
+<header class="page-head">
+  <div><h1>Categories</h1><p class="muted">Shown in the menu, on the home page and as category pages.</p></div>
+  <a class="btn btn-primary" href="/admin/categories/new">+ New category</a>
+</header>
+<div class="panel flush">
+  <table class="table">
+    <thead><tr><th>Order</th><th>Name</th><th>Group</th><th class="r">Reviews</th><th>URL</th></tr></thead>
+    <tbody>
+      <% categories.forEach((c) => { %>
+        <tr>
+          <td><%= c.sort_order %></td>
+          <td><a class="strong" href="/admin/categories/<%= c.id %>"><%= c.name %></a></td>
+          <td><%= c.group_name || '—' %></td>
+          <td class="r"><%= c.product_count %></td>
+          <td><a href="<%= c.url %>" target="_blank" rel="noopener"><%= c.url %> ↗</a></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+<%- include('_foot') %>

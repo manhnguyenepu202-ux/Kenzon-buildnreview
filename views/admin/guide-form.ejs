@@ -1,0 +1,53 @@
+<%- include('_head') %>
+<% const g = guide; const items = g.items || []; %>
+<header class="page-head">
+  <div><a class="back" href="/admin/guides">← Guides</a><h1><%= g.id ? g.title : 'New guide' %></h1></div>
+</header>
+<%- include('_errors', { errors }) %>
+<form class="form narrow" method="post" action="/admin/guides/save">
+  <input type="hidden" name="_csrf" value="<%= csrf %>">
+  <% if (g.id) { %><input type="hidden" name="id" value="<%= g.id %>"><% } %>
+  <section class="panel">
+    <label>Title *<input name="title" value="<%= g.title || '' %>" required placeholder="The best 3D printers of 2026"></label>
+    <div class="row">
+      <label class="grow">URL slug<input name="slug" value="<%= g.slug || '' %>" placeholder="auto"></label>
+      <label>Category
+        <select name="category_id">
+          <option value="">—</option>
+          <% categories.forEach((c) => { %><option value="<%= c.id %>" <%= Number(g.category_id) === c.id ? 'selected' : '' %>><%= c.name %></option><% }) %>
+        </select>
+      </label>
+      <label>Status
+        <select name="status">
+          <option value="published" <%= g.status !== 'draft' ? 'selected' : '' %>>Published</option>
+          <option value="draft" <%= g.status === 'draft' ? 'selected' : '' %>>Draft</option>
+        </select>
+      </label>
+    </div>
+    <label>Intro<textarea name="intro" rows="3"><%= g.intro || '' %></textarea></label>
+  </section>
+  <section class="panel">
+    <h2>Ranked picks</h2>
+    <p class="hint">In order, best first. Empty rows are ignored. If the note is empty, the product summary is used.</p>
+    <% for (let i = 0; i < 10; i++) { const it = items[i] || {}; %>
+      <div class="row pick-row">
+        <span class="rank"><%= i + 1 %></span>
+        <label class="grow">Product
+          <select name="item_slug">
+            <option value="">—</option>
+            <% products.forEach((p) => { %><option value="<%= p.slug %>" <%= it.slug === p.slug ? 'selected' : '' %>><%= p.name %></option><% }) %>
+          </select>
+        </label>
+        <label class="grow">Award<input name="item_award" value="<%= it.award || '' %>" placeholder="Best overall"></label>
+        <label class="grow">Short note<input name="item_note" value="<%= it.note || '' %>"></label>
+      </div>
+    <% } %>
+  </section>
+  <button class="btn btn-primary" type="submit">Save guide</button>
+</form>
+<% if (g.id) { %>
+  <form class="danger" method="post" action="/admin/guides/<%= g.id %>/delete" data-confirm="Delete this guide?">
+    <input type="hidden" name="_csrf" value="<%= csrf %>"><button class="btn btn-danger" type="submit">Delete guide</button>
+  </form>
+<% } %>
+<%- include('_foot') %>

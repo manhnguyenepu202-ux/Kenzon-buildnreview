@@ -1,0 +1,59 @@
+<%- include('../partials/head') %>
+<section class="page-hero">
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="wrap">
+    <nav class="crumbs crumbs-light" aria-label="Breadcrumb">
+      <ol><li><a href="/en/">Home</a></li><li aria-current="page">Compare</li></ol>
+    </nav>
+    <p class="eyebrow eyebrow-lime">Side by side</p>
+    <h1><%= picked.length >= 2 ? picked.map((p) => p.name).join(' vs ') : 'Compare products' %></h1>
+    <p class="page-lede">Pick two to four products to line up their scores, prices, pros, cons and every spec.</p>
+  </div>
+</section>
+
+<section class="section section-tight">
+  <div class="wrap">
+    <form class="builder" action="/en/compare/" method="get" data-builder>
+      <% for (let i = 0; i < 4; i++) { const cur = picked[i]; %>
+        <label class="builder-slot">
+          <span>Product <%= i + 1 %><%= i < 2 ? '' : ' (optional)' %></span>
+          <select name="slot">
+            <option value="">Choose…</option>
+            <% categories.forEach((c) => { %>
+              <optgroup label="<%= c.name %>">
+                <% all.filter((p) => p.category_id === c.id).forEach((p) => { %>
+                  <option value="<%= p.slug %>" <%= cur && cur.slug === p.slug ? 'selected' : '' %>><%= p.name %></option>
+                <% }) %>
+              </optgroup>
+            <% }) %>
+          </select>
+        </label>
+      <% } %>
+      <button class="btn btn-dark" type="submit">Compare</button>
+    </form>
+
+    <% if (picked.length >= 2) { %>
+      <div class="mt-xl"><%- include('../partials/compare-table', { products: picked, scoreKeys }) %></div>
+    <% } else if (picked.length === 1) { %>
+      <p class="notice mt-lg">Add at least one more product to compare.</p>
+    <% } %>
+  </div>
+</section>
+
+<% if (comparisons.length) { %>
+<section class="section section-tint">
+  <div class="wrap">
+    <div class="section-head"><div><p class="eyebrow">Editor's comparisons</p><h2>Popular head-to-heads</h2></div></div>
+    <div class="grid-vs">
+      <% comparisons.forEach((c) => { %>
+        <a class="vs-card" href="<%= c.url %>">
+          <div class="vs-visuals"><%- h.productVisual(c.products[0]) %><span class="vs-badge">VS</span><%- h.productVisual(c.products[1]) %></div>
+          <h3><%= c.title %></h3>
+          <p><%= h.truncate(c.intro, 120) %></p>
+        </a>
+      <% }) %>
+    </div>
+  </div>
+</section>
+<% } %>
+<%- include('../partials/foot') %>

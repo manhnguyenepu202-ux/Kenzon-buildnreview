@@ -1,0 +1,51 @@
+<%- include('_head') %>
+<header class="page-head">
+  <div><h1>Reviews</h1><p class="muted"><%= products.length %> shown</p></div>
+  <a class="btn btn-primary" href="/admin/products/new">+ New review</a>
+</header>
+
+<form class="filters" method="get">
+  <input type="search" name="q" value="<%= query.q || '' %>" placeholder="Search name, brand, model…">
+  <select name="category">
+    <option value="">All categories</option>
+    <% categories.forEach((c) => { %><option value="<%= c.id %>" <%= String(query.category) === String(c.id) ? 'selected' : '' %>><%= c.name %></option><% }) %>
+  </select>
+  <select name="sort">
+    <% [['updated', 'Recently updated'], ['score', 'Score'], ['popular', 'Views'], ['name', 'Name']].forEach(([v, l]) => { %>
+      <option value="<%= v %>" <%= (query.sort || 'updated') === v ? 'selected' : '' %>><%= l %></option>
+    <% }) %>
+  </select>
+  <button class="btn" type="submit">Filter</button>
+</form>
+
+<div class="panel flush">
+  <table class="table">
+    <thead>
+      <tr><th></th><th>Product</th><th>Category</th><th class="r">Score</th><th class="r">Views</th><th class="r">Clicks</th><th>Status</th><th></th></tr>
+    </thead>
+    <tbody>
+      <% products.forEach((p) => { %>
+        <tr>
+          <td class="thumb-cell"><%- h.productVisual(p, { width: 120 }) %></td>
+          <td>
+            <a class="strong" href="/admin/products/<%= p.id %>"><%= p.name %></a>
+            <div class="muted small">/en/review/<%= p.slug %>/</div>
+          </td>
+          <td><%= p.category ? p.category.name : '—' %></td>
+          <td class="r"><%= p.overall.toFixed(1) %></td>
+          <td class="r"><%= p.views.toLocaleString('en-US') %></td>
+          <td class="r"><%= p.clicks %></td>
+          <td>
+            <span class="tag <%= p.status === 'published' ? 'tag-ok' : 'tag-muted' %>"><%= p.status %></span>
+            <% if (p.is_sample) { %><span class="tag tag-warn">preview</span><% } %>
+            <% if (p.affiliate_url) { %><span class="tag tag-lime">affiliate</span><% } %>
+          </td>
+          <td class="r nowrap">
+            <a href="<%= p.url %>" target="_blank" rel="noopener">View ↗</a>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+<%- include('_foot') %>

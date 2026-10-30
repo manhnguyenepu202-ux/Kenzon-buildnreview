@@ -1,0 +1,21 @@
+<%- include('_head') %>
+<header class="page-head">
+  <div><h1>Best-of guides</h1><p class="muted">Ranked lists at /en/best/…</p></div>
+  <a class="btn btn-primary" href="/admin/guides/new">+ New guide</a>
+</header>
+<div class="panel flush">
+  <table class="table">
+    <thead><tr><th>Title</th><th class="r">Picks</th><th>Status</th><th></th></tr></thead>
+    <tbody>
+      <% guides.forEach((g) => { %>
+        <tr>
+          <td><a class="strong" href="/admin/guides/<%= g.id %>"><%= g.title %></a></td>
+          <td class="r"><%= g.items.length %></td>
+          <td><span class="tag <%= g.status === 'published' ? 'tag-ok' : 'tag-muted' %>"><%= g.status %></span></td>
+          <td class="r"><a href="<%= g.url %>" target="_blank" rel="noopener">View ↗</a></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+<%- include('_foot') %>

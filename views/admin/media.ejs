@@ -1,0 +1,23 @@
+<%- include('_head') %>
+<header class="page-head"><div><h1>Images</h1><p class="muted">Uploads are stored in the database, so they survive every redeploy. Max 4 MB each.</p></div></header>
+<form class="panel upload-form" method="post" action="/admin/media" enctype="multipart/form-data">
+  <input type="hidden" name="_csrf" value="<%= csrf %>">
+  <input type="file" name="file" accept="image/*" required>
+  <button class="btn btn-primary" type="submit">Upload</button>
+</form>
+<div class="media-grid">
+  <% media.forEach((m) => { %>
+    <figure class="media-item">
+      <img src="/media/<%= m.id %>" alt="" loading="lazy">
+      <figcaption>
+        <input readonly value="/media/<%= m.id %>" data-selectaria-label="Image URL">
+        <span class="muted small"><%= m.filename %> · <%= Math.round(m.size / 1024) %> KB</span>
+        <form method="post" action="/admin/media/<%= m.id %>/delete" data-confirm="Delete this image? Reviews using it will show a broken image.">
+          <input type="hidden" name="_csrf" value="<%= csrf %>"><button class="link-danger" type="submit">Delete</button>
+        </form>
+      </figcaption>
+    </figure>
+  <% }) %>
+  <% if (!media.length) { %><p class="muted">No uploads yet.</p><% } %>
+</div>
+<%- include('_foot') %>

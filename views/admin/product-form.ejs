@@ -1,0 +1,120 @@
+<%- include('_head') %>
+<% const p = product; %>
+<header class="page-head">
+  <div>
+    <a class="back" href="/admin/products">← All reviews</a>
+    <h1><%= p.id ? p.name : 'New review' %></h1>
+  </div>
+  <% if (p.id) { %><a class="btn" href="/en/review/<%= p.slug %>/" target="_blank" rel="noopener">View live ↗</a><% } %>
+</header>
+<%- include('_errors', { errors }) %>
+
+<form class="form" method="post" action="/admin/products/save" data-product-form>
+  <input type="hidden" name="_csrf" value="<%= csrf %>">
+  <% if (p.id) { %><input type="hidden" name="id" value="<%= p.id %>"><% } %>
+
+  <div class="form-grid">
+    <div class="form-main">
+      <section class="panel">
+        <h2>Product</h2>
+        <div class="row">
+          <label class="grow">Product name *<input name="name" value="<%= p.name || '' %>" required data-slug-source></label>
+          <label>Brand<input name="brand" value="<%= p.brand || '' %>"></label>
+          <label>Model<input name="model" value="<%= p.model || '' %>"></label>
+        </div>
+        <div class="row">
+          <label class="grow">URL slug <small>buildnreview.com/en/review/<b data-slug-preview><%= p.slug || '' %></b>/</small>
+            <input name="slug" value="<%= p.slug || '' %>" placeholder="auto from name" data-slug-target></label>
+          <label>Category
+            <select name="category_id">
+              <option value="">—</option>
+              <% categories.forEach((c) => { %><option value="<%= c.id %>" <%= Number(p.category_id) === c.id ? 'selected' : '' %>><%= c.name %></option><% }) %>
+            </select>
+          </label>
+        </div>
+        <div class="row">
+          <label>Price (USD)<input name="price_usd" type="number" step="0.01" min="0" value="<%= p.price_usd ?? '' %>"></label>
+          <label>Release year<input name="released" type="number" min="1990" max="2100" value="<%= p.released || '' %>"></label>
+          <label>Retail rating (/5)<input name="retail_rating" type="number" step="0.1" min="0" max="5" value="<%= p.retail_rating ?? '' %>"></label>
+          <label>Retail rating count<input name="retail_count" type="number" min="0" value="<%= p.retail_count ?? '' %>"></label>
+        </div>
+        <p class="hint">Retail rating is optional. Only fill it with real numbers from a store page (e.g. Amazon); it shows as “4.6 out of 5 from 7.1K buyer ratings”.</p>
+      </section>
+
+      <section class="panel">
+        <h2>Review text</h2>
+        <label>Headline (page title)<input name="title" value="<%= p.title || '' %>" placeholder="Snapmaker U1 review: …" maxlength="255"></label>
+        <label>Summary <small>1–2 sentences, used under the headline and in Google results</small><textarea name="summary" rows="2" maxlength="400"><%= p.summary || '' %></textarea></label>
+        <label>Verdict<textarea name="verdict" rows="3"><%= p.verdict || '' %></textarea></label>
+        <label>Best for<input name="best_for" value="<%= p.best_for || '' %>" placeholder="Beginners who want…"></label>
+        <div class="row">
+          <label class="grow">Pros <small>one per line</small><textarea name="pros" rows="5"><%= (p.pros || []).join('\n') %></textarea></label>
+          <label class="grow">Cons <small>one per line</small><textarea name="cons" rows="5"><%= (p.cons || []).join('\n') %></textarea></label>
+        </div>
+        <label>Full review <small>Markdown: <code>## Heading</code>, <code>**bold**</code>, <code>- list item</code>. Each ## heading appears in the “On this page” menu.</small>
+          <textarea name="body" rows="18" class="mono"><%= p.body || '' %></textarea></label>
+        <label>Specifications <small>one per line as <code>Label: value</code></small>
+          <textarea name="specs" rows="8" class="mono"><%= specsToText(p.specs || []) %></textarea></label>
+      </section>
+    </div>
+
+    <div class="form-side">
+      <section class="panel">
+        <h2>Publish</h2>
+        <label>Status
+          <select name="status">
+            <option value="published" <%= p.status !== 'draft' ? 'selected' : '' %>>Published</option>
+            <option value="draft" <%= p.status === 'draft' ? 'selected' : '' %>>Draft (hidden)</option>
+          </select>
+        </label>
+        <label class="check"><input type="checkbox" name="featured" value="1" <%= p.featured ? 'checked' : '' %>> Featured on the home page</label>
+        <label class="check"><input type="checkbox" name="is_sample" value="1" <%= p.is_sample ? 'checked' : '' %>> Preview review (shows a notice)</label>
+        <button class="btn btn-primary wide" type="submit">Save review</button>
+      </section>
+
+      <section class="panel">
+        <h2>Scores <span class="overall" data-overall>—</span></h2>
+        <% scoreKeys.forEach((k) => { const cat = categories.find((c) => c.id === Number(p.category_id)); %>
+          <label class="score-input"><span><%= cat ? cat.score_labels[k] : k %></span>
+            <input type="range" name="scores[<%= k %>]" min="0" max="10" step="0.1" value="<%= p.scores?.[k] ?? 8 %>" data-score="<%= k %>">
+            <output><%= Number(p.scores?.[k] ?? 8).toFixed(1) %></output>
+          </label>
+        <% }) %>
+        <p class="hint">Overall = 35% / 25% / 20% / 20%.</p>
+      </section>
+
+      <section class="panel">
+        <h2>Affiliate link</h2>
+        <label>Product affiliate URL<input name="affiliate_url" value="<%= p.affiliate_url || '' %>" placeholder="https://us.snapmaker.com/products/…?ref=tatsuki_mura"></label>
+        <label>Button text<input name="affiliate_label" value="<%= p.affiliate_label || '' %>" placeholder="Check price at Snapmaker"></label>
+        <p class="hint">Visitors go through <code>/go/<%= p.slug || 'slug' %></code> so clicks are counted. Without a link, the button is hidden and the review still shows the Snapmaker “Maker pick” box.</p>
+      </section>
+
+      <section class="panel">
+        <h2>Images</h2>
+        <label>Main image URL<input name="image_url" value="<%= p.image_url || '' %>" data-image-input placeholder="https://… or /media/12"></label>
+        <div class="upload" data-upload>
+          <input type="file" accept="image/*" id="upload-main">
+          <label for="upload-main" class="btn small">Upload image</label>
+          <span class="muted small" data-upload-status></span>
+        </div>
+        <div class="preview" data-image-preview><% if (p.image_url) { %><img src="<%= p.image_url %>" alt=""><% } %></div>
+        <label>Gallery <small>extra image URLs, one per line</small><textarea name="gallery" rows="4" class="mono"><%= (p.gallery || []).join('\n') %></textarea></label>
+        <div class="row">
+          <label>Drawing (no photo)
+            <select name="art_type"><% artTypes.forEach((a) => { %><option <%= p.art_type === a ? 'selected' : '' %>><%= a %></option><% }) %></select>
+          </label>
+          <label>Tone<input type="color" name="tone" value="<%= p.tone || '#7a8b5c' %>"></label>
+        </div>
+      </section>
+    </div>
+  </div>
+</form>
+
+<% if (p.id) { %>
+  <form class="danger" method="post" action="/admin/products/<%= p.id %>/delete" data-confirm="Delete “<%= p.name %>” permanently?">
+    <input type="hidden" name="_csrf" value="<%= csrf %>">
+    <button class="btn btn-danger" type="submit">Delete this review</button>
+  </form>
+<% } %>
+<%- include('_foot') %>
