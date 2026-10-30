@@ -1,0 +1,30 @@
+name: "Bosch PMF 220 CE"
+brand: "Bosch"
+model: "PMF 220 CE"
+category: tools
+type: multi-tool
+sample: true
+released: 2016
+tone: "#2F855A"
+views: 4300
+scores:
+  performance: 7.6
+  quality: 8.2
+  ease: 8.5
+  value: 9
+price:
+  vnd: 2490000
+  usd: 99
+specs:
+  power: "220 W"
+  oscillation: "15,000–20,000 opm"
+  brushless: false
+  weight: "1.1 kg"
+# Thay bằng link affiliate thật (Shopee/Lazada/AccessTrade cho bản Việt, Amazon cho bản Anh).
+offers:
+  - store: Shopee
+    url: "https://shopee.vn/search?keyword=Bosch%20PMF%20220%20CE"
+    lang: vi
+  - store: Amazon
+    url: "https://www.amazon.com/s?k=Bosch%20PMF%20220%20CE"
+    lang: en

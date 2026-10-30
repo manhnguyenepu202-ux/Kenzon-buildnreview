@@ -1,0 +1,30 @@
+name: "DeWalt DCS356"
+brand: "DeWalt"
+model: "DCS356"
+category: tools
+type: multi-tool
+sample: true
+released: 2019
+tone: "#D69E2E"
+views: 5100
+scores:
+  performance: 8.7
+  quality: 8.8
+  ease: 8.9
+  value: 7.9
+price:
+  vnd: 4290000
+  usd: 179
+specs:
+  voltage: "18 V (20V Max)"
+  oscillation: "0–20,000 opm"
+  brushless: true
+  weight: "1.3 kg"
+# Thay bằng link affiliate thật (Shopee/Lazada/AccessTrade cho bản Việt, Amazon cho bản Anh).
+offers:
+  - store: Shopee
+    url: "https://shopee.vn/search?keyword=DeWalt%20DCS356"
+    lang: vi
+  - store: Amazon
+    url: "https://www.amazon.com/s?k=DeWalt%20DCS356"
+    lang: en

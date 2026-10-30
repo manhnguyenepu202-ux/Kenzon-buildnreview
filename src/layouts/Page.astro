@@ -1,0 +1,27 @@
+---
+// Bố cục cho trang nội dung tĩnh (Cách chấm điểm, Công bố affiliate...)
+import Base from './Base.astro';
+import type { Lang } from '../i18n/ui';
+interface Props { lang: Lang; title: string; description: string }
+const { lang, title, description } = Astro.props;
+---
+<Base lang={lang} title={title} description={description}>
+  <header class="head">
+    <div class="wrap">
+      <h1 class="display">{title}</h1>
+      <p>{description}</p>
+    </div>
+  </header>
+  <div class="wrap section">
+    <div class="prose"><slot /></div>
+  </div>
+</Base>
+
+<style>
+  .head { background: var(--ink); color: var(--on-ink); padding: var(--s-7) 0; }
+  h1 { font-size: var(--t-3xl); font-weight: 820; max-width: 16ch; }
+  .head p { margin-top: var(--s-3); color: var(--on-ink-muted); max-width: 60ch; }
+  .prose :global(table) { width: 100%; border-collapse: collapse; margin: var(--s-4) 0 var(--s-6); font-size: var(--t-sm); }
+  .prose :global(th), .prose :global(td) { text-align: left; padding: 10px 12px 10px 0; border-bottom: 1px solid var(--rule); }
+  .prose :global(th) { color: var(--steel); font-weight: 500; }
+</style>

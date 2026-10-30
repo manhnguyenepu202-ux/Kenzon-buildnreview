@@ -1,0 +1,31 @@
+---
+import Page from '../../layouts/Page.astro';
+import { staticPaths, type Lang } from '../../i18n/ui';
+
+export const getStaticPaths = staticPaths;
+const lang = Astro.params.lang as Lang;
+const vi = lang === 'vi';
+---
+<Page
+  lang={lang}
+  title={vi ? 'Công bố liên kết tiếp thị' : 'Affiliate disclosure'}
+  description={vi ? 'Cách BuildNReview kiếm tiền và vì sao điều đó không ảnh hưởng tới điểm số.' : 'How BuildNReview makes money, and why it does not affect scores.'}
+>
+  {vi ? (
+    <>
+      <p>Một số nút “Xem giá” trên BuildNReview là liên kết tiếp thị (affiliate). Khi bạn mua hàng qua các liên kết này, chúng tôi có thể nhận một khoản hoa hồng từ nhà bán lẻ. Giá bạn trả không thay đổi.</p>
+      <h2>Điểm số không phụ thuộc hoa hồng</h2>
+      <p>Điểm được tính theo công thức công khai ở trang Cách chấm điểm. Mức hoa hồng của từng cửa hàng không được dùng khi chấm điểm hay xếp hạng.</p>
+      <h2>Đối tác hiện tại</h2>
+      <p>Cập nhật danh sách chương trình tiếp thị mà bạn tham gia tại đây (ví dụ: Shopee Affiliate, Lazada Affiliate, AccessTrade, Amazon Associates).</p>
+    </>
+  ) : (
+    <>
+      <p>Some “Check price” buttons on BuildNReview are affiliate links. When you buy through them, we may earn a commission from the retailer. The price you pay does not change.</p>
+      <h2>Commissions don’t affect scores</h2>
+      <p>Scores follow the published formula on our How we score page. Commission rates are never used when scoring or ranking products.</p>
+      <h2>Current partners</h2>
+      <p>List the affiliate programmes you join here (for example Amazon Associates, Shopee Affiliate, Lazada Affiliate).</p>
+    </>
+  )}
+</Page>

@@ -1,0 +1,35 @@
+name: "Anycubic Kobra 3 Combo"
+brand: "Anycubic"
+model: "Kobra 3 Combo"
+category: 3d-printers
+type: fdm-open
+sample: true
+released: 2024
+tone: "#D53F3F"
+views: 4800
+scores:
+  performance: 8.6
+  quality: 7.9
+  ease: 7.8
+  value: 8.8
+price:
+  vnd: 11490000
+  usd: 449
+specs:
+  buildVolume: "250 × 250 × 260 mm"
+  maxSpeed: "600 mm/s"
+  nozzleTemp: "300 °C"
+  bedTemp: "110 °C"
+  enclosure: false
+  multiColor: "ACE Pro (4 màu / 4 colours)"
+  autoLeveling: true
+  connectivity: "Wi-Fi, USB"
+  weight: "10.5 kg"
+# Thay bằng link affiliate thật (Shopee/Lazada/AccessTrade cho bản Việt, Amazon cho bản Anh).
+offers:
+  - store: Shopee
+    url: "https://shopee.vn/search?keyword=Anycubic%20Kobra%203%20Combo"
+    lang: vi
+  - store: Amazon
+    url: "https://www.amazon.com/s?k=Anycubic%20Kobra%203%20Combo"
+    lang: en

@@ -1,0 +1,33 @@
+name: "Milwaukee M18 FUEL FPD3"
+brand: "Milwaukee"
+model: "M18 FPD3"
+category: tools
+type: drill-driver
+sample: true
+released: 2023
+tone: "#C53030"
+views: 5600
+scores:
+  performance: 9.6
+  quality: 9.3
+  ease: 8
+  value: 7.6
+price:
+  vnd: 6490000
+  usd: 229
+specs:
+  voltage: "18 V"
+  maxTorque: "158 Nm"
+  noLoadSpeed: "0–550 / 0–2,100 rpm"
+  chuck: "13 mm"
+  brushless: true
+  hammer: true
+  weight: "2.1 kg"
+# Thay bằng link affiliate thật (Shopee/Lazada/AccessTrade cho bản Việt, Amazon cho bản Anh).
+offers:
+  - store: Shopee
+    url: "https://shopee.vn/search?keyword=Milwaukee%20M18%20FUEL%20FPD3"
+    lang: vi
+  - store: Amazon
+    url: "https://www.amazon.com/s?k=Milwaukee%20M18%20FUEL%20FPD3"
+    lang: en

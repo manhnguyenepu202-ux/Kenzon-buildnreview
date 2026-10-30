@@ -1,0 +1,102 @@
+---
+import Base from '../../../layouts/Base.astro';
+import ProductCard from '../../../components/ProductCard.astro';
+import { useT, langs, type Lang } from '../../../i18n/ui';
+import { getProducts, categories, types, type CategoryInfo } from '../../../lib/catalog';
+
+export function getStaticPaths() {
+  return langs.flatMap((lang) => categories.map((c) => ({ params: { lang, cat: c.id }, props: { cat: c } })));
+}
+const { cat } = Astro.props as { cat: CategoryInfo };
+const lang = Astro.params.lang as Lang;
+const t = useT(lang);
+const items = (await getProducts()).filter((p) => p.data.category === cat.id);
+const typeIds = [...new Set(items.map((p) => p.data.type))];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: cat.name[lang],
+  itemListElement: items.map((p, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    url: new URL(`/${lang}/review/${p.id}/`, Astro.site).href,
+    name: p.data.name,
+  })),
+};
+---
+<Base lang={lang} title={`${cat.name[lang]}: review & ${lang === 'vi' ? 'so sánh' : 'comparisons'}`} description={cat.blurb[lang]} jsonLd={jsonLd}>
+  <header class="head">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href={`/${lang}/`}>{t('breadcrumb.home')}</a></nav>
+      <h1 class="display">{cat.name[lang]}</h1>
+      <p>{cat.blurb[lang]} <span class="num">{t('category.count', { n: items.length })}.</span></p>
+    </div>
+  </header>
+
+  <div class="wrap section listing" data-listing>
+    <div class="toolbar">
+      {typeIds.length > 1 && (
+        <div class="types" role="group" aria-label={t('category.type')}>
+          <button type="button" class="chip" aria-pressed="true" data-type-filter="">{t('category.all')}</button>
+          {typeIds.map((ty) => <button type="button" class="chip" aria-pressed="false" data-type-filter={ty}>{types[ty][lang]}</button>)}
+        </div>
+      )}
+      <label class="sort">
+        <span>{t('category.sort')}</span>
+        <select data-sort>
+          <option value="score">{t('category.sortScore')}</option>
+          <option value="price-asc">{t('category.sortPriceAsc')}</option>
+          <option value="price-desc">{t('category.sortPriceDesc')}</option>
+          <option value="new">{t('category.sortNew')}</option>
+        </select>
+      </label>
+    </div>
+    <p class="visually-hidden" aria-live="polite" data-count data-template={t('category.count')}></p>
+    <div class="grid" data-grid>
+      {items.map((p, i) => <ProductCard product={p} lang={lang} headingLevel="h2" compare eager={i < 4} />)}
+    </div>
+  </div>
+</Base>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('[data-listing]')) {
+    const grid = root.querySelector<HTMLElement>('[data-grid]')!;
+    const cards = [...grid.querySelectorAll<HTMLElement>('.card')];
+    const count = root.querySelector<HTMLElement>('[data-count]')!;
+    const sorters: Record<string, (a: HTMLElement, b: HTMLElement) => number> = {
+      score: (a, b) => +b.dataset.score! - +a.dataset.score!,
+      'price-asc': (a, b) => +a.dataset.price! - +b.dataset.price!,
+      'price-desc': (a, b) => +b.dataset.price! - +a.dataset.price!,
+      new: (a, b) => +b.dataset.released! - +a.dataset.released! || +b.dataset.score! - +a.dataset.score!,
+    };
+    root.querySelector<HTMLSelectElement>('[data-sort]')!.addEventListener('change', (e) => {
+      const fn = sorters[(e.target as HTMLSelectElement).value];
+      cards.sort(fn).forEach((c) => grid.append(c));
+    });
+    root.querySelectorAll<HTMLButtonElement>('[data-type-filter]').forEach((btn, _, all) => {
+      btn.addEventListener('click', () => {
+        all.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+        const ty = btn.dataset.typeFilter;
+        let n = 0;
+        for (const c of cards) { const show = !ty || c.dataset.type === ty; c.hidden = !show; if (show) n++; }
+        count.textContent = count.dataset.template!.replace('{n}', String(n));
+      });
+    });
+  }
+</script>
+
+<style>
+  .head { background: var(--ink); color: var(--on-ink); padding: var(--s-6) 0 var(--s-7);
+    background-image: linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+    background-size: 32px 32px; }
+  .crumbs a { color: var(--on-ink-muted); font-size: var(--t-sm); }
+  h1 { font-size: var(--t-3xl); font-weight: 820; margin: var(--s-3) 0; }
+  .head p { color: var(--on-ink-muted); max-width: 60ch; }
+  .toolbar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--s-4); margin-bottom: var(--s-6); }
+  .types { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+  .sort { display: inline-flex; align-items: center; gap: var(--s-3); font-size: var(--t-sm); color: var(--steel); margin-left: auto; }
+  .sort select { min-height: 44px; padding: 0 36px 0 12px; border: 1px solid var(--rule-strong); border-radius: var(--radius-s); background: var(--surface); color: var(--ink); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: var(--s-5); }
+  .grid :global(.card[hidden]) { display: none; }
+</style>

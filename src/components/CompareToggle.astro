@@ -1,0 +1,27 @@
+---
+import Icon from './Icon.astro';
+import { useT, type Lang } from '../i18n/ui';
+interface Props { lang: Lang; slug: string; category: string; name: string; compact?: boolean }
+const { lang, slug, category, name, compact = false } = Astro.props;
+const t = useT(lang);
+---
+<button
+  type="button"
+  class:list={['btn', 'btn-line', 'compare-toggle', { compact }]}
+  aria-pressed="false"
+  data-compare={slug}
+  data-category={category}
+  data-name={name}
+  data-label-add={t('compare.add')}
+  data-label-added={t('compare.added')}
+  aria-label={compact ? `${t('compare.add')}: ${name}` : undefined}
+  title={compact ? t('compare.add') : undefined}
+>
+  <Icon name="columns" />
+  <span class="txt">{t('compare.add')}</span>
+</button>
+
+<style>
+  .compact { min-height: 44px; min-width: 44px; padding: 0 10px; font-size: var(--t-xs); border-width: 1px; border-color: var(--rule-strong); white-space: nowrap; }
+  .compact .txt { display: none; }
+</style>

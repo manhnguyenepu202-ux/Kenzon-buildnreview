@@ -1,0 +1,101 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Icon from '../components/Icon.astro';
+import { useT, swapLang, langs, defaultLang, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  title: string;
+  description: string;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  ogType?: 'website' | 'article';
+  noindex?: boolean;
+  /** Đặt false cho trang không có bản ở ngôn ngữ khác (vd 404). */
+  alternates?: boolean;
+}
+const { lang, title, description, jsonLd, ogType = 'website', noindex = false, alternates = true } = Astro.props;
+const t = useT(lang);
+const site = Astro.site!;
+const path = Astro.url.pathname;
+const canonical = new URL(path, site).href;
+const fullTitle = title.includes('BuildNReview') ? title : `${title} | BuildNReview`;
+const ld = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    {alternates && langs.map((l) => <link rel="alternate" hreflang={l} href={new URL(swapLang(path, l), site).href} />)}
+    {alternates && <link rel="alternate" hreflang="x-default" href={new URL(swapLang(path, defaultLang), site).href} />}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="theme-color" content="#10284a" />
+    <meta property="og:site_name" content="BuildNReview" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={lang === 'vi' ? 'vi_VN' : 'en_US'} />
+    <meta property="og:image" content={new URL('/og.png', site).href} />
+    <meta name="twitter:card" content="summary_large_image" />
+    {ld.map((obj) => <script type="application/ld+json" set:html={JSON.stringify(obj)} />)}
+  </head>
+  <body>
+    <a class="skip" href="#main">{t('nav.skip')}</a>
+    <Header lang={lang} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer lang={lang} />
+
+    <aside class="tray" data-compare-tray data-lang={lang} hidden aria-live="polite">
+      <div class="wrap tray-inner">
+        <p class="tray-count" data-tray-label={t('compare.tray')}></p>
+        <ul class="tray-items"></ul>
+        <div class="tray-actions">
+          <button type="button" class="btn tray-clear" data-tray-clear>{t('compare.clear')}</button>
+          <a class="btn btn-buy" data-tray-go href={`/${lang}/compare/`}><Icon name="columns" />{t('compare.go')}</a>
+        </div>
+      </div>
+    </aside>
+    <div class="toast" role="status" aria-live="polite" data-toast hidden
+      data-msg-full={t('compare.full')} data-msg-category={t('compare.otherCategory')}></div>
+
+    <script>
+      import '../scripts/site';
+    </script>
+  </body>
+</html>
+
+<style>
+  .tray {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
+    background: var(--ink); color: var(--on-ink);
+    border-top: 3px solid var(--signal);
+    padding-block: var(--s-3);
+    padding-bottom: max(var(--s-3), env(safe-area-inset-bottom));
+  }
+  .tray-inner { display: flex; align-items: center; gap: var(--s-4); flex-wrap: wrap; }
+  .tray-count { font-weight: 650; font-size: var(--t-sm); }
+  .tray-items { display: flex; gap: var(--s-2); list-style: none; flex: 1; flex-wrap: wrap; }
+  .tray-items :global(li) { display: inline-flex; align-items: center; gap: 4px; padding-left: 12px; border: 1px solid #3a5684; border-radius: 999px; font-size: var(--t-xs); }
+  .tray-items :global(button) { width: 36px; height: 36px; display: grid; place-items: center; background: none; border: 0; color: var(--on-ink-muted); cursor: pointer; border-radius: 999px; }
+  .tray-items :global(button:hover) { color: var(--on-ink); }
+  .tray-actions { display: flex; gap: var(--s-2); }
+  .tray-clear { color: var(--on-ink-muted); background: transparent; }
+  .tray-clear:hover { color: var(--on-ink); }
+  .toast {
+    position: fixed; left: 50%; bottom: 96px; z-index: 60; transform: translateX(-50%);
+    max-width: min(92vw, 460px); padding: 12px 16px;
+    background: var(--surface); color: var(--ink); border: 1px solid var(--ink); border-left: 4px solid var(--signal);
+    border-radius: var(--radius-s); font-size: var(--t-sm); box-shadow: 0 16px 40px -20px rgba(16, 40, 74, .6);
+  }
+  @media (max-width: 640px) { .tray-items { display: none; } .tray-inner { justify-content: space-between; } }
+</style>

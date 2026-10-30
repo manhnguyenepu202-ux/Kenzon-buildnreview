@@ -1,0 +1,36 @@
+---
+import Icon from './Icon.astro';
+import { useT, type Lang } from '../i18n/ui';
+interface Props { lang: Lang; id: string; placeholder: string; value?: string; size?: 'lg' | 'md'; suggest?: boolean }
+const { lang, id, placeholder, value = '', size = 'lg', suggest = true } = Astro.props;
+const t = useT(lang);
+---
+<form class:list={['sbox', size]} role="search" action={`/${lang}/search/`} method="get" data-search={suggest ? '' : undefined} data-lang={lang}>
+  <label class="visually-hidden" for={id}>{t('search.label')}</label>
+  <Icon name="search" size={22} class="sbox-icon" />
+  <input
+    id={id}
+    name="q"
+    type="search"
+    value={value}
+    autocomplete="off"
+    placeholder={placeholder}
+    role={suggest ? 'combobox' : undefined}
+    aria-controls={suggest ? `${id}-results` : undefined}
+    aria-autocomplete={suggest ? 'list' : undefined}
+    aria-expanded={suggest ? 'false' : undefined}
+  />
+  <button class="btn btn-buy" type="submit">{t('search.submit')}</button>
+  {suggest && <ul id={`${id}-results`} class="results" role="listbox" hidden></ul>}
+</form>
+
+<style>
+  .sbox { position: relative; display: flex; align-items: center; background: var(--surface); border: 2px solid var(--ink); border-radius: var(--radius-m); padding: 6px; }
+  .sbox:focus-within { box-shadow: 0 0 0 4px color-mix(in srgb, var(--signal) 55%, transparent); }
+  .sbox :global(.sbox-icon) { margin-left: 12px; color: var(--steel); flex: none; }
+  .sbox input { flex: 1; min-width: 0; height: 52px; border: 0; padding: 0 12px; background: transparent; font-size: var(--t-md); color: var(--ink); }
+  .sbox input:focus { outline: none; }
+  .sbox.md input { height: 44px; }
+  .sbox .btn { flex: none; }
+  @media (max-width: 520px) { .sbox .btn { padding: 0 14px; } .sbox :global(.sbox-icon) { display: none; } }
+</style>

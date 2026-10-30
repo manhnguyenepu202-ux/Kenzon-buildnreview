@@ -1,0 +1,35 @@
+name: "Original Prusa MK4S"
+brand: "Prusa Research"
+model: "MK4S"
+category: 3d-printers
+type: fdm-open
+sample: true
+released: 2024
+tone: "#E2661B"
+views: 6150
+scores:
+  performance: 8.4
+  quality: 9.4
+  ease: 8.6
+  value: 7.6
+price:
+  vnd: 29990000
+  usd: 1099
+specs:
+  buildVolume: "250 × 210 × 220 mm"
+  maxSpeed: "~ 300 mm/s"
+  nozzleTemp: "290 °C"
+  bedTemp: "120 °C"
+  enclosure: false
+  multiColor: "MMU3 (tùy chọn / optional)"
+  autoLeveling: true
+  connectivity: "Wi-Fi, Ethernet, USB"
+  weight: "7 kg"
+# Thay bằng link affiliate thật (Shopee/Lazada/AccessTrade cho bản Việt, Amazon cho bản Anh).
+offers:
+  - store: Shopee
+    url: "https://shopee.vn/search?keyword=Original%20Prusa%20MK4S"
+    lang: vi
+  - store: Amazon
+    url: "https://www.amazon.com/s?k=Original%20Prusa%20MK4S"
+    lang: en

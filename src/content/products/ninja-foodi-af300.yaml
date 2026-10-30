@@ -1,0 +1,32 @@
+name: "Ninja Foodi Dual Zone AF300"
+brand: "Ninja"
+model: "AF300"
+category: home
+type: air-fryer
+sample: true
+released: 2021
+tone: "#4A5568"
+views: 10400
+scores:
+  performance: 9.1
+  quality: 8.6
+  ease: 8.8
+  value: 8.7
+price:
+  vnd: 5490000
+  usd: 199
+specs:
+  capacity: "7.6 L (2 × 3.8 L)"
+  power: "2,470 W"
+  programs: 6
+  dualZone: true
+  noise: "~ 58 dB"
+  weight: "8.0 kg"
+# Thay bằng link affiliate thật (Shopee/Lazada/AccessTrade cho bản Việt, Amazon cho bản Anh).
+offers:
+  - store: Shopee
+    url: "https://shopee.vn/search?keyword=Ninja%20Foodi%20Dual%20Zone%20AF300"
+    lang: vi
+  - store: Amazon
+    url: "https://www.amazon.com/s?k=Ninja%20Foodi%20Dual%20Zone%20AF300"
+    lang: en

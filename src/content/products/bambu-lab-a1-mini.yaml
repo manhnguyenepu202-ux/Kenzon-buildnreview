@@ -1,0 +1,35 @@
+name: "Bambu Lab A1 mini"
+brand: "Bambu Lab"
+model: "A1 mini"
+category: 3d-printers
+type: fdm-open
+sample: true
+released: 2023
+tone: "#3C9D6B"
+views: 12100
+scores:
+  performance: 8.6
+  quality: 8.5
+  ease: 9.5
+  value: 9.4
+price:
+  vnd: 6990000
+  usd: 249
+specs:
+  buildVolume: "180 × 180 × 180 mm"
+  maxSpeed: "500 mm/s"
+  nozzleTemp: "300 °C"
+  bedTemp: "80 °C"
+  enclosure: false
+  multiColor: "AMS lite (tùy chọn / optional)"
+  autoLeveling: true
+  connectivity: "Wi-Fi, microSD"
+  weight: "5.5 kg"
+# Thay bằng link affiliate thật (Shopee/Lazada/AccessTrade cho bản Việt, Amazon cho bản Anh).
+offers:
+  - store: Shopee
+    url: "https://shopee.vn/search?keyword=Bambu%20Lab%20A1%20mini"
+    lang: vi
+  - store: Amazon
+    url: "https://www.amazon.com/s?k=Bambu%20Lab%20A1%20mini"
+    lang: en

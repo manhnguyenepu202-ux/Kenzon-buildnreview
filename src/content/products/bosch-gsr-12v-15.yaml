@@ -1,0 +1,33 @@
+name: "Bosch GSR 12V-15"
+brand: "Bosch Professional"
+model: "GSR 12V-15"
+category: tools
+type: drill-driver
+sample: true
+released: 2019
+tone: "#1F5FAE"
+views: 10200
+scores:
+  performance: 7.4
+  quality: 8.9
+  ease: 9.3
+  value: 8.7
+price:
+  vnd: 2390000
+  usd: 129
+specs:
+  voltage: "12 V"
+  maxTorque: "30 Nm"
+  noLoadSpeed: "0–400 / 0–1,300 rpm"
+  chuck: "10 mm"
+  brushless: false
+  hammer: false
+  weight: "1.0 kg"
+# Thay bằng link affiliate thật (Shopee/Lazada/AccessTrade cho bản Việt, Amazon cho bản Anh).
+offers:
+  - store: Shopee
+    url: "https://shopee.vn/search?keyword=Bosch%20GSR%2012V-15"
+    lang: vi
+  - store: Amazon
+    url: "https://www.amazon.com/s?k=Bosch%20GSR%2012V-15"
+    lang: en

@@ -1,0 +1,32 @@
+name: "Philips Airfryer XXL HD9650"
+brand: "Philips"
+model: "HD9650"
+category: home
+type: air-fryer
+sample: true
+released: 2019
+tone: "#3A3F4A"
+views: 11300
+scores:
+  performance: 8.9
+  quality: 9
+  ease: 8.4
+  value: 7.8
+price:
+  vnd: 6990000
+  usd: 299
+specs:
+  capacity: "7.3 L"
+  power: "2,225 W"
+  programs: 5
+  dualZone: false
+  noise: "~ 60 dB"
+  weight: "8.3 kg"
+# Thay bằng link affiliate thật (Shopee/Lazada/AccessTrade cho bản Việt, Amazon cho bản Anh).
+offers:
+  - store: Shopee
+    url: "https://shopee.vn/search?keyword=Philips%20Airfryer%20XXL%20HD9650"
+    lang: vi
+  - store: Amazon
+    url: "https://www.amazon.com/s?k=Philips%20Airfryer%20XXL%20HD9650"
+    lang: en

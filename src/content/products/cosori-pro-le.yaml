@@ -1,0 +1,32 @@
+name: "Cosori Pro LE"
+brand: "Cosori"
+model: "CAF-L501"
+category: home
+type: air-fryer
+sample: true
+released: 2022
+tone: "#718096"
+views: 6900
+scores:
+  performance: 8.2
+  quality: 8
+  ease: 9
+  value: 9.2
+price:
+  vnd: 2290000
+  usd: 99
+specs:
+  capacity: "4.7 L"
+  power: "1,500 W"
+  programs: 9
+  dualZone: false
+  noise: "~ 53 dB"
+  weight: "4.3 kg"
+# Thay bằng link affiliate thật (Shopee/Lazada/AccessTrade cho bản Việt, Amazon cho bản Anh).
+offers:
+  - store: Shopee
+    url: "https://shopee.vn/search?keyword=Cosori%20Pro%20LE"
+    lang: vi
+  - store: Amazon
+    url: "https://www.amazon.com/s?k=Cosori%20Pro%20LE"
+    lang: en

@@ -1,0 +1,35 @@
+name: "Creality K1C"
+brand: "Creality"
+model: "K1C"
+category: 3d-printers
+type: fdm-enclosed
+sample: true
+released: 2024
+tone: "#2B6CB0"
+views: 7300
+scores:
+  performance: 9
+  quality: 8.1
+  ease: 8.2
+  value: 8.6
+price:
+  vnd: 11990000
+  usd: 459
+specs:
+  buildVolume: "220 × 220 × 250 mm"
+  maxSpeed: "600 mm/s"
+  nozzleTemp: "300 °C"
+  bedTemp: "100 °C"
+  enclosure: true
+  multiColor: false
+  autoLeveling: true
+  connectivity: "Wi-Fi, USB"
+  weight: "12.5 kg"
+# Thay bằng link affiliate thật (Shopee/Lazada/AccessTrade cho bản Việt, Amazon cho bản Anh).
+offers:
+  - store: Shopee
+    url: "https://shopee.vn/search?keyword=Creality%20K1C"
+    lang: vi
+  - store: Amazon
+    url: "https://www.amazon.com/s?k=Creality%20K1C"
+    lang: en

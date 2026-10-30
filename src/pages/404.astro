@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+import SearchBox from '../components/SearchBox.astro';
+import { useT } from '../i18n/ui';
+// Hostinger phục vụ một trang 404 cho mọi đường dẫn; dùng tiếng Việt và kèm liên kết bản tiếng Anh.
+const lang = 'vi';
+const t = useT(lang);
+---
+<Base lang={lang} title={t('404.title')} description={t('404.lead')} noindex alternates={false}>
+  <div class="wrap section nf">
+    <p class="code num" aria-hidden="true">404</p>
+    <h1 class="display">{t('404.title')}</h1>
+    <p class="lead">{t('404.lead')}</p>
+    <SearchBox lang={lang} id="q-404" placeholder={t('search.placeholder')} size="md" />
+    <p class="links"><a class="link" href="/vi/">{t('404.home')}</a> <a class="link" href="/en/" lang="en">Back to home (English)</a></p>
+  </div>
+</Base>
+<style>
+  .nf { max-width: 720px; }
+  .code { font-size: clamp(5rem, 3rem + 10vw, 10rem); font-weight: 850; line-height: 1; color: var(--rule-strong); }
+  h1 { font-size: var(--t-2xl); margin: var(--s-3) 0; }
+  .lead { color: var(--steel); margin-bottom: var(--s-5); }
+  .links { display: flex; gap: var(--s-5); margin-top: var(--s-5); flex-wrap: wrap; }
+</style>

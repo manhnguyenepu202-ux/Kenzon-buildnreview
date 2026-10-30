@@ -1,0 +1,98 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { useT, swapLang, languages, langs, type Lang } from '../i18n/ui';
+import { categories } from '../lib/catalog';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = useT(lang);
+const path = Astro.url.pathname;
+---
+<header class="site-header">
+  <div class="wrap bar">
+    <Logo href={`/${lang}/`} />
+
+    <form class="search" role="search" action={`/${lang}/search/`} method="get" data-search data-lang={lang}>
+      <label class="visually-hidden" for="q-header">{t('search.label')}</label>
+      <Icon name="search" class="search-icon" />
+      <input
+        id="q-header"
+        name="q"
+        type="search"
+        autocomplete="off"
+        placeholder={t('search.placeholder')}
+        aria-controls="q-header-results"
+        aria-autocomplete="list"
+        aria-expanded="false"
+        role="combobox"
+      />
+      <ul id="q-header-results" class="results" role="listbox" hidden></ul>
+    </form>
+
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">
+      <Icon name="menu" />
+      <span class="visually-hidden">{t('nav.menu')}</span>
+    </button>
+
+    <nav id="site-nav" class="nav" aria-label={t('nav.categories')}>
+      <ul>
+        {categories.map((c) => {
+          const href = `/${lang}/category/${c.id}/`;
+          return <li><a href={href} aria-current={path.startsWith(href) ? 'page' : undefined}>{c.name[lang]}</a></li>;
+        })}
+        <li><a href={`/${lang}/compare/`} aria-current={path.startsWith(`/${lang}/compare/`) ? 'page' : undefined}>{t('nav.compare')}</a></li>
+      </ul>
+      <div class="lang" role="group" aria-label="Language">
+        {langs.map((l) => (
+          <a href={swapLang(path, l)} hreflang={l} lang={l} aria-current={l === lang ? 'true' : undefined} title={languages[l]}>
+            {l.toUpperCase()}
+          </a>
+        ))}
+      </div>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky; top: 0; z-index: 40;
+    background: color-mix(in srgb, var(--paper) 92%, transparent);
+    backdrop-filter: saturate(1.4) blur(10px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .bar { display: flex; align-items: center; gap: var(--s-5); min-height: 68px; }
+
+  .search { position: relative; flex: 1; max-width: 460px; }
+  .search input {
+    width: 100%; height: 44px; padding: 0 14px 0 42px;
+    border: 1px solid var(--rule-strong); border-radius: var(--radius-s);
+    background: var(--surface); font-size: var(--t-sm);
+  }
+  .search input:focus { outline: none; border-color: var(--ink); box-shadow: 0 0 0 3px color-mix(in srgb, var(--signal) 45%, transparent); }
+  .search :global(.search-icon) { position: absolute; left: 13px; top: 12px; color: var(--steel); pointer-events: none; }
+
+
+  .nav { display: flex; align-items: center; gap: var(--s-5); margin-left: auto; }
+  .nav ul { display: flex; gap: var(--s-1); list-style: none; }
+  .nav ul a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 10px; text-decoration: none; font-size: var(--t-sm); font-weight: 560; border-bottom: 2px solid transparent; }
+  .nav ul a:hover { border-bottom-color: var(--rule-strong); }
+  .nav ul a[aria-current='page'] { border-bottom-color: var(--signal); }
+
+  .lang { display: inline-flex; border: 1px solid var(--rule-strong); border-radius: var(--radius-s); overflow: hidden; }
+  .lang a { display: inline-grid; place-items: center; min-width: 44px; min-height: 40px; font-size: var(--t-xs); font-weight: 700; text-decoration: none; letter-spacing: .04em; }
+  .lang a[aria-current='true'] { background: var(--ink); color: var(--on-ink); }
+
+  .menu-btn { display: none; width: 44px; height: 44px; place-items: center; background: none; border: 1px solid var(--rule-strong); border-radius: var(--radius-s); cursor: pointer; }
+
+  @media (max-width: 1020px) {
+    .bar { flex-wrap: wrap; gap: var(--s-3); padding-block: var(--s-3); }
+    .menu-btn { display: grid; margin-left: auto; }
+    .search { order: 3; flex-basis: 100%; max-width: none; }
+    .nav { order: 4; flex-basis: 100%; display: none; flex-direction: column; align-items: stretch; gap: var(--s-3); padding-bottom: var(--s-3); }
+    .nav.open { display: flex; }
+    .nav ul { flex-direction: column; }
+    .nav ul a { width: 100%; border-bottom: 1px solid var(--rule); }
+    .lang { align-self: flex-start; }
+  }
+</style>

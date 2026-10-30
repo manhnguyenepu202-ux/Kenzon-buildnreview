@@ -1,0 +1,35 @@
+name: "Bambu Lab P1S"
+brand: "Bambu Lab"
+model: "P1S"
+category: 3d-printers
+type: fdm-enclosed
+sample: true
+released: 2023
+tone: "#2E8B57"
+views: 9420
+scores:
+  performance: 9.3
+  quality: 8.8
+  ease: 9.2
+  value: 8.7
+price:
+  vnd: 18990000
+  usd: 699
+specs:
+  buildVolume: "256 × 256 × 256 mm"
+  maxSpeed: "500 mm/s"
+  nozzleTemp: "300 °C"
+  bedTemp: "100 °C"
+  enclosure: true
+  multiColor: "AMS (tùy chọn / optional)"
+  autoLeveling: true
+  connectivity: "Wi-Fi, microSD"
+  weight: "12.9 kg"
+# Thay bằng link affiliate thật (Shopee/Lazada/AccessTrade cho bản Việt, Amazon cho bản Anh).
+offers:
+  - store: Shopee
+    url: "https://shopee.vn/search?keyword=Bambu%20Lab%20P1S"
+    lang: vi
+  - store: Amazon
+    url: "https://www.amazon.com/s?k=Bambu%20Lab%20P1S"
+    lang: en

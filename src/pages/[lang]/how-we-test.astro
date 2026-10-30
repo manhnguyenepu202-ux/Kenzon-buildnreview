@@ -1,0 +1,53 @@
+---
+import Page from '../../layouts/Page.astro';
+import { staticPaths, type Lang } from '../../i18n/ui';
+import { categories, scoreKeys, scoreWeights } from '../../lib/catalog';
+
+export const getStaticPaths = staticPaths;
+const lang = Astro.params.lang as Lang;
+const vi = lang === 'vi';
+---
+<Page
+  lang={lang}
+  title={vi ? 'Cách chúng tôi chấm điểm' : 'How we score products'}
+  description={vi ? 'Mọi sản phẩm được chấm trên bốn tiêu chí với trọng số công khai.' : 'Every product is scored on four criteria with published weights.'}
+>
+  <h2>{vi ? 'Bốn tiêu chí, một công thức' : 'Four criteria, one formula'}</h2>
+  <p>
+    {vi
+      ? 'Mỗi tiêu chí được chấm từ 0 đến 10. Điểm tổng là trung bình có trọng số, làm tròn đến một chữ số thập phân.'
+      : 'Each criterion is scored from 0 to 10. The overall score is a weighted average, rounded to one decimal place.'}
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>{vi ? 'Tiêu chí' : 'Criterion'}</th>
+        {categories.map((c) => <th>{c.name[lang]}</th>)}
+        <th>{vi ? 'Trọng số' : 'Weight'}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {scoreKeys.map((k) => (
+        <tr>
+          <td>{k === 'value' ? (vi ? 'Giá trị' : 'Value') : k === 'ease' ? (vi ? 'Độ dễ dùng' : 'Ease of use') : k === 'quality' ? (vi ? 'Độ hoàn thiện' : 'Quality') : (vi ? 'Hiệu năng' : 'Performance')}</td>
+          {categories.map((c) => <td>{c.scoreLabels[k][lang]}</td>)}
+          <td class="num">{Math.round(scoreWeights[k] * 100)}%</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+
+  <h2>{vi ? 'Đọc thước điểm' : 'Reading the score ruler'}</h2>
+  <p>
+    {vi
+      ? 'Thước điểm có vạch lớn ở mỗi điểm và vạch nhỏ ở mỗi nửa điểm. Phần tô cam là điểm sản phẩm đạt được. Trên 9 là xuất sắc, 8 đến 9 là rất tốt, 7 đến 8 là ổn nhưng có điểm trừ rõ ràng.'
+      : 'The ruler has a major tick at every point and a minor tick at every half point. The orange fill is the score. Above 9 is excellent, 8 to 9 is very good, 7 to 8 is decent with clear drawbacks.'}
+  </p>
+
+  <h2>{vi ? 'Khi nào điểm thay đổi' : 'When scores change'}</h2>
+  <p>
+    {vi
+      ? 'Điểm giá trị được xem lại khi giá thay đổi đáng kể. Khi có phiên bản mới, chúng tôi cập nhật bài cũ và ghi rõ ngày cập nhật ở đầu bài.'
+      : 'Value scores are revisited when prices move significantly. When a new version ships, we update the old review and show the update date at the top.'}
+  </p>
+</Page>

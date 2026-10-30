@@ -1,0 +1,72 @@
+---
+import Base from '../../layouts/Base.astro';
+import SearchBox from '../../components/SearchBox.astro';
+import { useT, staticPaths, type Lang } from '../../i18n/ui';
+
+export const getStaticPaths = staticPaths;
+const lang = Astro.params.lang as Lang;
+const t = useT(lang);
+---
+<Base lang={lang} title={t('search.title')} description={t('site.tagline')} noindex>
+  <div class="wrap section" data-search-page data-lang={lang}
+    data-t-results={t('search.resultsFor')} data-t-empty={t('search.empty')} data-t-prompt={t('search.prompt')}
+    data-t-read={t('card.read')}>
+    <h1 class="display">{t('search.title')}</h1>
+    <SearchBox lang={lang} id="q-page" placeholder={t('search.placeholder')} size="md" suggest={false} />
+    <p class="status" aria-live="polite" data-status>{t('search.prompt')}</p>
+    <ol class="list" data-list></ol>
+  </div>
+</Base>
+
+<script>
+  import { loadIndex, searchItems } from '../../scripts/search-core';
+  const root = document.querySelector<HTMLElement>('[data-search-page]')!;
+  const lang = root.dataset.lang!;
+  const input = root.querySelector<HTMLInputElement>('input[name=q]')!;
+  const status = root.querySelector<HTMLElement>('[data-status]')!;
+  const list = root.querySelector<HTMLOListElement>('[data-list]')!;
+  const esc = (s: string) => s.replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
+
+  async function run(q: string) {
+    if (!q.trim()) { status.textContent = root.dataset.tPrompt!; list.innerHTML = ''; return; }
+    const hits = searchItems(await loadIndex(lang), q);
+    status.textContent = (hits.length ? root.dataset.tResults! : root.dataset.tEmpty!).replace('{n}', String(hits.length)).replace('{q}', q);
+    list.innerHTML = hits.map((h) => `
+      <li><a href="${h.url}">
+        <span class="s-score">${h.score.toFixed(1)}</span>
+        <span class="s-main"><span class="s-brand">${esc(h.brand)}</span><span class="s-name">${esc(h.name)}</span>
+        <span class="s-meta">${esc(h.type)}<span class="s-price">${esc(h.price)}</span></span></span>
+        <span class="s-read">${root.dataset.tRead}</span>
+      </a></li>`).join('');
+  }
+
+  const q = new URL(location.href).searchParams.get('q') || '';
+  input.value = q;
+  run(q);
+  let timer = 0;
+  input.addEventListener('input', () => {
+    clearTimeout(timer);
+    timer = window.setTimeout(() => {
+      const url = new URL(location.href);
+      url.searchParams.set('q', input.value);
+      history.replaceState(null, '', url);
+      run(input.value);
+    }, 150);
+  });
+</script>
+
+<style>
+  h1 { font-size: var(--t-2xl); margin-bottom: var(--s-5); }
+  .status { margin: var(--s-5) 0; color: var(--steel); }
+  .list { list-style: none; padding: 0; border-top: 2px solid var(--ink); }
+  .list :global(a) { display: grid; grid-template-columns: 72px 1fr auto; gap: var(--s-4); align-items: center; padding: var(--s-4) var(--s-2); border-bottom: 1px solid var(--rule); text-decoration: none; }
+  .list :global(a:hover) { background: var(--surface); }
+  .list :global(.s-score) { font-size: var(--t-xl); font-weight: 800; font-stretch: 82%; font-variant-numeric: tabular-nums; box-shadow: inset 0 -6px 0 var(--signal); justify-self: start; }
+  .list :global(.s-main) { display: grid; }
+  .list :global(.s-brand) { font-size: var(--t-xs); color: var(--steel); }
+  .list :global(.s-name) { font-weight: 700; font-size: var(--t-lg); font-stretch: 110%; }
+  .list :global(.s-meta) { font-size: var(--t-sm); color: var(--steel); }
+  .list :global(.s-price) { margin-left: var(--s-4); color: var(--ink); font-weight: 600; }
+  .list :global(.s-read) { font-size: var(--t-sm); font-weight: 650; color: var(--signal-text); }
+  @media (max-width: 560px) { .list :global(.s-read) { display: none; } .list :global(a) { grid-template-columns: 56px 1fr; } }
+</style>

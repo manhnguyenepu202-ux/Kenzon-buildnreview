@@ -1,0 +1,135 @@
+@import '@fontsource-variable/archivo/wdth.css';
+
+/*
+  BuildNReview design tokens
+  Nhận diện: "bản vẽ kỹ thuật + vạch đo". Xanh bản vẽ, giấy lạnh, cam an toàn cho vạch điểm.
+  Điểm nhấn duy nhất: thước đo điểm (ScoreRuler). Mọi thứ khác giữ yên tĩnh.
+*/
+:root {
+  --ink: #10284a;          /* xanh bản vẽ: chữ chính, nền hero */
+  --ink-2: #1c3a63;
+  --paper: #edf0f3;        /* nền trang, lạnh, không phải kem */
+  --surface: #ffffff;
+  --signal: #f26a1b;       /* cam an toàn: vạch điểm, nút mua */
+  --signal-text: #b4480c;  /* cam đủ tương phản cho chữ trên nền sáng */
+  --steel: #52627a;        /* chữ phụ */
+  --rule: #cfd7e1;
+  --rule-strong: #9eabbc;
+  --good: #1f7a4d;
+  --bad: #b3261e;
+  --on-ink: #f3f6fa;
+  --on-ink-muted: #a9b8cc;
+
+  --font: 'Archivo Variable', 'Segoe UI', system-ui, sans-serif;
+  --wide: 125%;
+  --narrow: 82%;
+
+  /* Thang chữ (tỉ lệ 1.25) */
+  --t-xs: 0.8125rem;
+  --t-sm: 0.9375rem;
+  --t-md: 1.0625rem;
+  --t-lg: 1.3125rem;
+  --t-xl: 1.625rem;
+  --t-2xl: clamp(1.75rem, 1.2rem + 2vw, 2.5rem);
+  --t-3xl: clamp(2.4rem, 1.4rem + 4.2vw, 4.6rem);
+
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 64px; --s-9: 96px;
+  --radius-s: 4px;
+  --radius-m: 8px;
+  --max: 1240px;
+  --gutter: clamp(16px, 4vw, 40px);
+  --ease: cubic-bezier(.2, .7, .2, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 88px; }
+body {
+  margin: 0;
+  font-family: var(--font);
+  font-size: var(--t-md);
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--paper);
+  font-feature-settings: 'tnum' 0;
+  -webkit-font-smoothing: antialiased;
+}
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; }
+button, input, select { font: inherit; color: inherit; }
+h1, h2, h3, h4 { margin: 0; line-height: 1.1; font-weight: 760; text-wrap: balance; }
+p { margin: 0; text-wrap: pretty; }
+ul { margin: 0; padding: 0; }
+
+.display { font-stretch: var(--wide); letter-spacing: -0.015em; }
+.num { font-variant-numeric: tabular-nums; font-stretch: var(--narrow); }
+
+.wrap { width: 100%; max-width: var(--max); margin-inline: auto; padding-inline: var(--gutter); }
+.section { padding-block: clamp(48px, 7vw, 96px); }
+.section-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: var(--s-4); margin-bottom: var(--s-6); }
+.section-head h2 { font-size: var(--t-2xl); font-stretch: var(--wide); letter-spacing: -0.01em; }
+.section-head p { color: var(--steel); max-width: 52ch; margin-top: var(--s-2); }
+
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.skip { position: absolute; left: 8px; top: -60px; z-index: 100; background: var(--ink); color: var(--on-ink); padding: 10px 14px; border-radius: var(--radius-s); }
+.skip:focus { top: 8px; }
+
+:focus-visible { outline: 3px solid var(--signal); outline-offset: 2px; border-radius: 2px; }
+
+/* Nút */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--s-2);
+  min-height: 46px; padding: 0 var(--s-5);
+  border-radius: var(--radius-s); border: 1.5px solid transparent;
+  font-weight: 650; font-size: var(--t-sm); text-decoration: none; cursor: pointer;
+  transition: background-color .18s var(--ease), border-color .18s var(--ease), color .18s var(--ease);
+}
+.btn-buy { background: var(--signal); color: var(--ink); }
+.btn-buy:hover { background: #ff7d33; }
+.btn-line { border-color: var(--ink); background: transparent; color: var(--ink); }
+.btn-line:hover { background: var(--ink); color: var(--on-ink); }
+.btn-line[aria-pressed='true'] { background: var(--ink); color: var(--on-ink); }
+.btn svg { width: 18px; height: 18px; flex: none; }
+
+.link { color: var(--ink); text-decoration: underline; text-decoration-color: var(--signal); text-decoration-thickness: 2px; text-underline-offset: 4px; font-weight: 620; }
+.link:hover { color: var(--signal-text); }
+
+.chip {
+  display: inline-flex; align-items: center; min-height: 36px; padding: 0 14px;
+  border: 1px solid var(--rule-strong); border-radius: 999px; font-size: var(--t-sm);
+  text-decoration: none; background: transparent; cursor: pointer;
+}
+.chip:hover { border-color: var(--ink); }
+.chip[aria-current='true'], .chip[aria-pressed='true'] { background: var(--ink); border-color: var(--ink); color: var(--on-ink); }
+
+.notice {
+  display: flex; gap: var(--s-3); align-items: flex-start;
+  padding: var(--s-4); border-left: 4px solid var(--signal); background: #fff4ec;
+  font-size: var(--t-sm); color: #5a2a0a;
+}
+.notice svg { flex: none; width: 20px; height: 20px; margin-top: 2px; }
+
+/* Văn bản dài trong bài review */
+.prose { max-width: 68ch; }
+.prose h2 { font-size: var(--t-xl); margin: var(--s-7) 0 var(--s-3); font-stretch: 110%; }
+.prose p { margin-bottom: var(--s-4); }
+.prose ul { padding-left: 1.2em; margin-bottom: var(--s-4); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+}
+
+/* Danh sách gợi ý tìm kiếm (header, hero, trang tìm kiếm) */
+.results {
+  position: absolute; left: 0; right: 0; top: calc(100% + 8px); z-index: 30;
+  list-style: none; background: var(--surface); color: var(--ink); text-align: left;
+  border: 1px solid var(--ink); border-radius: var(--radius-s);
+  box-shadow: 0 18px 40px -18px rgba(16, 40, 74, .5);
+  max-height: 70vh; overflow: auto;
+}
+.results a { display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; padding: 10px 14px; text-decoration: none; border-bottom: 1px solid var(--rule); }
+.results a:hover, .results [aria-selected='true'] a { background: #eef3f9; }
+.results .r-name { font-weight: 650; }
+.results .r-meta { grid-column: 1; font-size: var(--t-xs); color: var(--steel); }
+.results .r-score { grid-row: 1 / span 2; grid-column: 2; align-self: center; font-weight: 760; font-variant-numeric: tabular-nums; }
+.results .r-all { display: block; padding: 10px 14px; font-weight: 650; color: var(--signal-text); }
+.results .r-empty { padding: 12px 14px; font-size: var(--t-sm); color: var(--steel); }

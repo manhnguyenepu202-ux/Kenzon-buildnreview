@@ -1,0 +1,33 @@
+name: "Roborock S8"
+brand: "Roborock"
+model: "S8"
+category: home
+type: robot-vacuum
+sample: true
+released: 2023
+tone: "#2D3748"
+views: 8400
+scores:
+  performance: 9.2
+  quality: 8.9
+  ease: 8.8
+  value: 8.1
+price:
+  vnd: 12990000
+  usd: 549
+specs:
+  suction: "6,000 Pa"
+  runtime: "180 min"
+  dustbin: "400 ml"
+  mopping: true
+  selfEmpty: "Tùy bản / Model dependent"
+  noise: "~ 67 dB"
+  weight: "3.7 kg"
+# Thay bằng link affiliate thật (Shopee/Lazada/AccessTrade cho bản Việt, Amazon cho bản Anh).
+offers:
+  - store: Shopee
+    url: "https://shopee.vn/search?keyword=Roborock%20S8"
+    lang: vi
+  - store: Amazon
+    url: "https://www.amazon.com/s?k=Roborock%20S8"
+    lang: en

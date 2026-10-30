@@ -1,0 +1,23 @@
+---
+// Trang gốc: chuyển tới bản ngôn ngữ phù hợp. Trên Hostinger, .htaccess làm việc này bằng 302 trước cả khi trang tải.
+---
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BuildNReview</title>
+    <meta name="robots" content="noindex, follow" />
+    <link rel="canonical" href={new URL('/vi/', Astro.site).href} />
+    <link rel="alternate" hreflang="vi" href={new URL('/vi/', Astro.site).href} />
+    <link rel="alternate" hreflang="en" href={new URL('/en/', Astro.site).href} />
+    <link rel="alternate" hreflang="x-default" href={new URL('/vi/', Astro.site).href} />
+    <script is:inline>
+      location.replace((navigator.language || '').toLowerCase().startsWith('vi') ? '/vi/' : '/en/');
+    </script>
+    <meta http-equiv="refresh" content="1; url=/vi/" />
+  </head>
+  <body>
+    <p><a href="/vi/">Tiếng Việt</a> | <a href="/en/">English</a></p>
+  </body>
+</html>
