@@ -3,6 +3,8 @@
 Website review, so sánh và chấm điểm sản phẩm cho ba ngách: **máy in 3D**, **DIY/dụng cụ**, **đồ gia dụng**.
 Song ngữ Việt (`/vi/`) và Anh (`/en/`), xây bằng [Astro](https://astro.build) (Node.js), xuất ra site tĩnh nên chạy được trên mọi gói Hostinger.
 
+Website: https://buildnreview.com
+
 ## Chạy ở máy
 
 Cần Node.js 22.23 trở lên.
@@ -44,45 +46,25 @@ Link affiliate: thay link tìm kiếm Shopee/Amazon trong `offers:` bằng link 
 
 Ảnh sản phẩm: hiện dùng hình minh họa dạng bản vẽ (`src/components/ProductArt.astro`) vì ảnh của hãng thường có bản quyền. Khi có ảnh được phép dùng, truyền prop `image` cho `ProductArt`.
 
-## Đưa lên GitHub
+## Mã nguồn
 
-```bash
-git remote add origin https://github.com/<tai-khoan>/buildnreview.git
-git push -u origin main
-```
+Repo: https://github.com/manhnguyenepu202-ux/Kenzon-buildnreview (nhánh `main`).
 
 ## Deploy lên Hostinger
 
-Site là HTML tĩnh trong `dist/`, nên **gói rẻ nhất (Premium/Single Web Hosting) là đủ**. Không cần gói Business hay VPS trừ khi sau này muốn thêm tính năng phía server.
+Website đang chạy tại **https://buildnreview.com**, dùng tính năng Node.js Web App của Hostinger kết nối thẳng với repo GitHub này.
 
-### Cách 1: tự động qua GitHub Actions (khuyên dùng)
+- **Tự động:** mỗi lần push lên `main`, Hostinger tự chạy `npm run build` và đăng thư mục `dist/`. Xem tiến trình ở hPanel → **Deployments**; bấm **Redeploy** nếu cần chạy lại.
+- **Cấu hình:** framework Astro, build và output mặc định, Node 22.x, thư mục gốc `./`.
+- **Đổi tên miền:** đặt biến môi trường `SITE_URL` (hPanel → **Environment variables**), ví dụ `https://ten-mien-moi.com`, rồi Redeploy. Biến này dùng cho canonical, hreflang và sitemap.
 
-Mỗi lần push lên `main`, workflow `.github/workflows/deploy.yml` sẽ build và upload qua FTP.
-
-1. hPanel → **Files → FTP Accounts**: ghi lại *FTP IP/hostname*, *username*, đặt *password*.
-2. GitHub repo → **Settings → Secrets and variables → Actions**:
-   - Secrets: `FTP_SERVER`, `FTP_USERNAME`, `FTP_PASSWORD`
-   - Variables: `SITE_URL` = `https://ten-mien-cua-ban.com`
-3. Push lên `main` (hoặc vào tab **Actions → Deploy to Hostinger → Run workflow**).
-4. Nếu file bị upload sai thư mục: tài khoản FTP chính thường mở ở thư mục tên miền, nên `server-dir: ./public_html/` là đúng. Nếu FTP của bạn mở thẳng vào `public_html`, đổi thành `./`.
-
-### Cách 2: upload tay
-
-```bash
-npm run build
-```
-
-Nén **nội dung bên trong** `dist/` (gồm cả file ẩn `.htaccess`), vào hPanel → **File Manager → public_html**, upload và giải nén.
-
-### Cách 3: gói Business/Cloud có "Node.js Web App"
-
-hPanel → **Websites → Add Website → Node.js Apps**, kết nối repo GitHub, chọn framework **Astro**, build command `npm run build`, output `dist`.
+Dự phòng nếu chuyển sang gói chỉ có hosting tĩnh: chạy `npm run build`, nén **nội dung bên trong** `dist/` (gồm cả file ẩn `.htaccess`), upload vào **File Manager → public_html** và giải nén.
 
 ### Sau khi lên mạng
 
-- Bật SSL miễn phí trong hPanel → **Security → SSL**. `.htaccess` đã tự chuyển HTTP sang HTTPS và bỏ `www`.
-- Gửi `https://ten-mien/sitemap-index.xml` vào Google Search Console.
+- Gửi `https://buildnreview.com/sitemap-index.xml` vào Google Search Console.
 - Kiểm tra dữ liệu có cấu trúc bằng [Rich Results Test](https://search.google.com/test/rich-results).
+- `public/.htaccess` chuyển HTTP sang HTTPS, bỏ `www`, chọn ngôn ngữ ở trang gốc và đặt cache.
 
 ## Cấu trúc
 
