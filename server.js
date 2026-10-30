@@ -12,7 +12,8 @@ async function start() {
     console.log('[db] Empty database: loading the starter reviews…');
     await seed();
   }
-  await syncContent();
+  // A broken content pack must never keep the site offline.
+  await syncContent().catch((err) => console.error('[content] sync failed:', err));
   createApp().listen(config.port, () => {
     console.log(`BuildNReview running on http://localhost:${config.port} (database: ${dialect})`);
   });

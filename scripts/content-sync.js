@@ -60,7 +60,8 @@ export async function syncContent({ log = console.log } = {}) {
   if (total) log(`[content] published ${added.categories} categories, ${added.products} reviews, ${added.comparisons} comparisons, ${added.guides} guides.`);
 }
 
-if (import.meta.url === pathToFileURL(process.argv[1]).href) {
+// Run directly (npm run content:sync). process.argv[1] can be missing under hosting process managers.
+if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
   const { connect } = await import('../src/db/index.js');
   const { migrate } = await import('../src/db/schema.js');
   await connect();
