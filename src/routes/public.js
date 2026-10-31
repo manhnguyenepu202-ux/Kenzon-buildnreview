@@ -26,7 +26,7 @@ r.use((req, res, next) => {
 /* ---------- home ---------- */
 r.get('/en/', wrap(async (req, res) => {
   const [categories, popular, featured, latest, comparisons, guides, total] = await Promise.all([
-    listCategories(),
+    listCategories({ nonEmpty: true }),
     listProducts({ sort: 'popular', limit: 8 }),
     listProducts({ featured: true, sort: 'score', limit: 4 }),
     listProducts({ sort: 'updated', limit: 6 }),
@@ -103,7 +103,7 @@ r.get('/en/compare/', wrap(async (req, res) => {
   const [comparisons, all, categories] = await Promise.all([
     listComparisons({ withProducts: true }),
     listProducts({ sort: 'name' }),
-    listCategories(),
+    listCategories({ nonEmpty: true }),
   ]);
   const picked = slugs.length ? await getProductsBySlugs([...new Set(slugs)]) : [];
   res.render('pages/compare-index', {
@@ -155,7 +155,7 @@ r.get('/en/best/:slug/', wrap(async (req, res, next) => {
 r.get('/en/search/', wrap(async (req, res) => {
   const q = String(req.query.q || '').trim().slice(0, 80);
   const results = await listProducts(q ? { q, sort: 'score', limit: 48 } : { sort: 'score' });
-  const categories = await listCategories();
+  const categories = await listCategories({ nonEmpty: true });
   res.render('pages/search', {
     page: { title: q ? `Search results for “${q}”` : 'Search reviews', description: 'Search all BuildNReview reviews.', canonical: '/en/search/', noindex: true },
     q, results, categories,
@@ -214,7 +214,7 @@ r.get('/robots.txt', (req, res) => {
 r.get(['/sitemap-index.xml', '/sitemap-0.xml'], (req, res) => res.redirect(301, '/sitemap.xml'));
 
 r.get('/sitemap.xml', wrap(async (req, res) => {
-  const [cats, products, comps, guides] = await Promise.all([listCategories(), listProducts({}), listComparisons(), listGuides()]);
+  const [cats, products, comps, guides] = await Promise.all([listCategories({ nonEmpty: true }), listProducts({}), listComparisons(), listGuides()]);
   const urls = [
     { loc: '/en/', pri: '1.0' },
     ...cats.map((c) => ({ loc: c.url, pri: '0.8' })),

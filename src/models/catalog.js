@@ -27,12 +27,14 @@ function hydrateCategory(r) {
   };
 }
 
-export async function listCategories() {
+// nonEmpty: public pages skip categories with no published reviews.
+export async function listCategories({ nonEmpty = false } = {}) {
   const rows = await all(
     `SELECT c.*, (SELECT COUNT(*) FROM products p WHERE p.category_id = c.id AND p.status = 'published') AS product_count
      FROM categories c ORDER BY c.sort_order, c.name`,
   );
-  return rows.map(hydrateCategory);
+  const cats = rows.map(hydrateCategory);
+  return nonEmpty ? cats.filter((c) => c.product_count > 0) : cats;
 }
 
 export async function getCategory(by, value) {

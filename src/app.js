@@ -54,7 +54,7 @@ export function createApp() {
       res.locals.config = config;
       res.locals.path = req.path;
       res.locals.settings = await getSettings();
-      res.locals.navCategories = req.path.startsWith('/admin') ? [] : await listCategories();
+      res.locals.navCategories = req.path.startsWith('/admin') ? [] : await listCategories({ nonEmpty: true });
       next();
     } catch (err) { next(err); }
   });
