@@ -124,6 +124,16 @@ const ART = {
     <path d="M120 72v30" class="l w"/>
     <path d="M117 102l3 8 3-8" class="a"/>
     <path d="M62 122c18-10 30 6 48-2s28-8 40 0" class="dim"/>`,
+  'security-camera': `
+    <path d="M120 22v22" class="l w"/>
+    <rect x="96" y="14" width="48" height="10" rx="3" class="b2"/>
+    <rect x="70" y="44" width="100" height="78" rx="20" class="t"/>
+    <circle cx="120" cy="82" r="24" class="b"/>
+    <circle cx="120" cy="82" r="12" class="glass"/>
+    <circle cx="120" cy="82" r="4" class="ad"/>
+    <rect x="58" y="134" width="124" height="26" rx="4" class="b2"/>
+    <path d="M70 140l20 14M94 140l20 14M118 140l20 14M142 140l20 14" class="dim"/>
+    <circle cx="156" cy="58" r="3" class="a"/>`,
   'camera-lens': `
     <rect x="58" y="44" width="124" height="96" rx="10" class="t"/>
     <path d="M58 64h124M58 120h124" class="l"/>
