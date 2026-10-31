@@ -3,6 +3,9 @@
   <div class="cat-media" style="--tone:<%= c.tone || '#7a8b5c' %>">
     <% if (c.image_url) { %>
       <img src="<%= c.image_url %>" alt="" loading="lazy" decoding="async" width="600" height="440">
+    <% } else if (c.cover_url) { %>
+      <%# No category photo set in /admin: show the category's top-rated product photo. %>
+      <img class="cat-product" src="<%= c.cover_url %>" alt="" loading="lazy" decoding="async" width="600" height="440">
     <% } else { %>
       <div class="cat-art"><%- h.productVisual({ name: c.name, art_type: c.art_type, tone: c.tone }) %></div>
     <% } %>

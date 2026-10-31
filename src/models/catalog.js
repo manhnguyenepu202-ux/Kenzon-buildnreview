@@ -27,13 +27,25 @@ function hydrateCategory(r) {
   };
 }
 
+// Hand-picked category cover photos where the top product's main image carries promo badges or text.
+// Any other category falls back to its top-rated product photo; a cover set in /admin wins over both.
+const COVER_PICKS = {
+  '3d-printers': 'https://cdn.shopify.com/s/files/1/0893/0603/8637/files/K2_Pro_Combo-_1.png?v=1762929981',
+  'laser-engravers': 'https://cdn.shopify.com/s/files/1/0906/9422/2121/files/LASERPECKER-LX2-laser-cutter-white-image.png?v=1780490025',
+  'pen-plotters': 'https://cdn.shopify.com/s/files/1/0824/7050/2715/files/1f399e7050ccd0cbd4ad75a5428c4d45.jpg?v=1774517146',
+  'security-cameras': 'https://cdn.shopify.com/s/files/1/0610/8830/1292/files/SolarCamP1Max.png?v=1757680855',
+};
+
 // nonEmpty: public pages skip categories with no published reviews.
 export async function listCategories({ nonEmpty = false } = {}) {
   const rows = await all(
-    `SELECT c.*, (SELECT COUNT(*) FROM products p WHERE p.category_id = c.id AND p.status = 'published') AS product_count
+    `SELECT c.*, (SELECT COUNT(*) FROM products p WHERE p.category_id = c.id AND p.status = 'published') AS product_count,
+       (SELECT p.image_url FROM products p
+         WHERE p.category_id = c.id AND p.status = 'published' AND p.image_url IS NOT NULL AND p.image_url <> ''
+         ORDER BY p.featured DESC, p.overall DESC, p.id ASC LIMIT 1) AS cover_url
      FROM categories c ORDER BY c.sort_order, c.name`,
   );
-  const cats = rows.map(hydrateCategory);
+  const cats = rows.map((r) => ({ ...hydrateCategory(r), cover_url: COVER_PICKS[r.slug] || r.cover_url }));
   return nonEmpty ? cats.filter((c) => c.product_count > 0) : cats;
 }
 
