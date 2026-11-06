@@ -1,18 +1,27 @@
 import { get, run } from '../src/db/index.js';
+import { overallScore } from '../src/models/catalog.js';
 import { priceUpdate } from '../src/deals/price-update-2026-11.js';
 import { priceUpdateFixes } from '../src/deals/price-update-2026-11b.js';
+import { scoreUpdate } from '../src/deals/price-update-2026-11c.js';
 
 const KEY = { products: 'slug', comparisons: 'slug', guides: 'slug' };
 
 /** Applies each update in src/deals once per database (a settings flag records it). */
 export async function applyPriceUpdate({ log = console.log } = {}) {
-  for (const { flag, prices, edits } of [priceUpdate, priceUpdateFixes]) {
+  for (const { flag, prices, edits, valueScores = {} } of [priceUpdate, priceUpdateFixes, scoreUpdate]) {
     if (await get('SELECT skey FROM settings WHERE skey = ?', [flag])) continue;
 
     let priced = 0;
     for (const [slug, price] of Object.entries(prices)) {
       await run('UPDATE products SET price_usd = ? WHERE slug = ?', [price, slug]);
       priced++;
+    }
+
+    for (const [slug, value] of Object.entries(valueScores)) {
+      const row = await get('SELECT scores FROM products WHERE slug = ?', [slug]);
+      if (!row) continue;
+      const scores = { ...JSON.parse(row.scores || '{}'), value };
+      await run('UPDATE products SET scores = ?, overall = ? WHERE slug = ?', [JSON.stringify(scores), overallScore(scores), slug]);
     }
 
     let changed = 0;
