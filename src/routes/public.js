@@ -6,6 +6,7 @@ import {
 import { listComparisons, getComparison, listGuides, getGuide } from '../models/content.js';
 import { getMedia } from '../models/settings.js';
 import { markdown, slugify, absUrl, truncate, isoDate } from '../lib/helpers.js';
+import { blackFriday } from '../deals/black-friday.js';
 
 const r = Router();
 const wrap = (fn) => (req, res, next) => fn(req, res, next).catch(next);
@@ -37,6 +38,45 @@ r.get('/en/', wrap(async (req, res) => {
   res.render('pages/home', {
     page: { title: 'BuildNReview: 3D printer, DIY tool and home appliance reviews', description: res.locals.settings.site_tagline, canonical: '/en/' },
     categories, popular, featured, latest, comparisons: comparisons.slice(0, 4), comparisonCount: comparisons.length, guides, total,
+  });
+}));
+
+/* ---------- Black Friday deals ---------- */
+r.get('/en/black-friday/', wrap(async (req, res) => {
+  const bf = blackFriday;
+  const [products, categories] = await Promise.all([getProductsBySlugs(bf.deals.map((d) => d.slug)), listCategories({ nonEmpty: true })]);
+  const bySlug = new Map(products.map((p) => [p.slug, p]));
+  const deals = bf.deals.filter((d) => bySlug.has(d.slug)).map((d) => ({
+    ...d,
+    product: bySlug.get(d.slug),
+    save: Math.round(d.list - d.price),
+    pct: Math.round((1 - d.price / d.list) * 100),
+    drop: d.prev ? Math.round(d.prev - d.price) : 0,
+  }));
+  const groups = categories
+    .map((c) => ({ id: c.id, name: c.name, count: deals.filter((d) => d.product.category_id === c.id).length }))
+    .filter((g) => g.count);
+  const faq = dealFaq(bf);
+  res.render('pages/black-friday', {
+    page: {
+      title: `Black Friday ${bf.year} deals on 3D printers, lasers and scanners`,
+      description: `${deals.length} Black Friday deals on products we have reviewed, with real store prices, our scores and honest notes on which discounts are worth it.`,
+      canonical: '/en/black-friday/',
+      image: deals[0]?.product.image_url || undefined,
+    },
+    bf, deals, groups, faq,
+    picks: deals.filter((d) => d.pick),
+    drops: deals.filter((d) => d.drop > 0).length,
+    jsonLd: [
+      {
+        '@context': 'https://schema.org', '@type': 'ItemList', name: `Black Friday ${bf.year} deals`,
+        itemListElement: deals.map((d, i) => ({ '@type': 'ListItem', position: i + 1, url: absUrl(d.product.url), name: d.product.name })),
+      },
+      {
+        '@context': 'https://schema.org', '@type': 'FAQPage',
+        mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+      },
+    ],
   });
 }));
 
@@ -219,6 +259,7 @@ r.get('/sitemap.xml', wrap(async (req, res) => {
     { loc: '/en/', pri: '1.0' },
     ...cats.map((c) => ({ loc: c.url, pri: '0.8' })),
     ...products.map((p) => ({ loc: p.url, lastmod: isoDate(p.updated_at), pri: '0.9' })),
+    { loc: '/en/black-friday/', lastmod: blackFriday.checkedAt, pri: '0.9' },
     { loc: '/en/compare/', pri: '0.6' },
     ...comps.map((c) => ({ loc: c.url, lastmod: isoDate(c.updated_at), pri: '0.7' })),
     { loc: '/en/best/', pri: '0.6' },
@@ -233,6 +274,16 @@ r.get('/sitemap.xml', wrap(async (req, res) => {
 export default r;
 
 /* ================= helpers ================= */
+
+function dealFaq(bf) {
+  return [
+    { q: `When is Black Friday ${bf.year}?`, a: `Black Friday is Friday, November 27, ${bf.year}, and Cyber Monday is November 30. Several stores started early, so many prices on this page are already live.` },
+    { q: 'How do you choose these deals?', a: 'We only list products we have reviewed, and we read each price from the brand’s own US store on the date shown. A commission never changes which products appear or how they score.' },
+    { q: 'Is the crossed-out price the real old price?', a: 'It is the list price the store shows, and products often sell below it for months. That is why we mark real price drops separately: those products are cheaper now than when we last recorded the price.' },
+    { q: 'Should I buy now or wait until November 27?', a: 'If a product shows a price drop and you need it soon, buying now is reasonable. Otherwise check the store’s price-protection policy, because some brands cut prices again closer to Black Friday.' },
+    { q: 'Why does the price differ from the store?', a: 'Sale prices change often and vary by region, warehouse and bundle. The store’s checkout price is the one that counts, so always confirm it before you buy.' },
+  ];
+}
 
 /**
  * The "Maker pick" box shown on every review. It promotes the category's sponsor product

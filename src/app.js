@@ -6,6 +6,7 @@ import cookieSession from 'cookie-session';
 import config, { ROOT } from './config.js';
 import * as helpers from './lib/helpers.js';
 import { listCategories } from './models/catalog.js';
+import { blackFriday } from './deals/black-friday.js';
 import { getSettings } from './models/settings.js';
 import publicRoutes from './routes/public.js';
 import adminRoutes from './routes/admin.js';
@@ -53,6 +54,7 @@ export function createApp() {
       res.locals.h = helpers;
       res.locals.config = config;
       res.locals.path = req.path;
+      res.locals.dealLive = Date.now() < Date.parse(blackFriday.endsAt);
       res.locals.settings = await getSettings();
       res.locals.navCategories = req.path.startsWith('/admin') ? [] : await listCategories({ nonEmpty: true });
       next();

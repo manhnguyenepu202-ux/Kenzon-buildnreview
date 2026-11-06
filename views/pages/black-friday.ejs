@@ -1,0 +1,106 @@
+<%- include('../partials/head') %>
+<% const checked = h.fmtDate(bf.checkedAt); %>
+<section class="deal-hero">
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="wrap deal-hero-grid">
+    <div>
+      <nav class="crumbs crumbs-light" aria-label="Breadcrumb">
+        <ol><li><a href="/en/">Home</a></li><li aria-current="page">Black Friday</li></ol>
+      </nav>
+      <p class="eyebrow eyebrow-lime">Black Friday <%= bf.year %></p>
+      <h1>Deals worth buying, <em>not just discounts.</em></h1>
+      <p class="page-lede"><%= deals.length %> deals on products we have reviewed, with prices read directly from each brand’s store and our honest take on every one.</p>
+      <p class="page-meta">Prices checked <%= checked %> · <%= drops %> real price drops since <%= bf.previousCheck %></p>
+    </div>
+    <div class="countdown" data-countdown="<%= bf.startsAt %>">
+      <p class="countdown-label">Black Friday starts in</p>
+      <div class="countdown-units">
+        <div><strong data-unit="days">--</strong><span>days</span></div>
+        <div><strong data-unit="hours">--</strong><span>hours</span></div>
+        <div><strong data-unit="minutes">--</strong><span>min</span></div>
+      </div>
+      <p class="countdown-note">November 27. Many sales have already started.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section-tight">
+  <div class="wrap">
+    <p class="disclosure-line"><%= settings.disclosure_short %> <a href="/en/disclosure/">Learn more</a></p>
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Our top picks</p>
+        <h2>Six deals we would buy first</h2>
+      </div>
+    </div>
+    <div class="deal-grid deal-grid-picks">
+      <% picks.forEach((d, i) => { %><%- include('../partials/deal-card', { d, eager: i < 3 }) %><% }) %>
+    </div>
+  </div>
+</section>
+
+<section class="section section-tint" id="all-deals">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Every deal</p>
+        <h2>Browse all <%= deals.length %> deals</h2>
+      </div>
+    </div>
+    <div class="deal-tools">
+      <div class="deal-chips" role="group" aria-label="Filter deals">
+        <button type="button" class="deal-chip" data-deal-filter="all" aria-pressed="true">All</button>
+        <button type="button" class="deal-chip" data-deal-filter="drop" aria-pressed="false">Price drops</button>
+        <% groups.forEach((g) => { %>
+          <button type="button" class="deal-chip" data-deal-filter="<%= g.id %>" aria-pressed="false"><%= g.name %></button>
+        <% }) %>
+      </div>
+      <div class="deal-sort">
+        <span data-deal-status aria-live="polite"><%= deals.length %> deals</span>
+        <label class="visually-hidden" for="deal-sort">Sort deals</label>
+        <select id="deal-sort" data-deal-sort>
+          <option value="order">Editor’s order</option>
+          <option value="drop">Biggest price drop</option>
+          <option value="score">Top rated</option>
+          <option value="save">Most below list price</option>
+          <option value="price">Lowest price</option>
+        </select>
+      </div>
+    </div>
+    <div class="deal-grid" data-deal-grid>
+      <% deals.forEach((d, i) => { %><%- include('../partials/deal-card', { d, order: deals.length - i, grid: true }) %><% }) %>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap deal-info">
+    <div>
+      <p class="eyebrow">How to read this page</p>
+      <h2>A discount is only real if the price moved</h2>
+      <p>Most stores in this niche show a high list price all year, so a big percentage can mean very little. We separate two things:</p>
+      <dl class="deal-legend">
+        <div><dt><span class="deal-flag">Price drop</span></dt><dd>The store’s price is lower now than the price we recorded on <%= bf.previousCheck %>. This is the strongest signal on the page.</dd></div>
+        <div><dt><span class="deal-list">Below list</span></dt><dd>The price is under the store’s crossed-out list price, but it has not moved since our last check.</dd></div>
+      </dl>
+      <p>Every product here has a <a href="/en/how-we-test/">scored review</a> based on published tests and owner reports, and our notes keep the flaws in view.</p>
+
+      <% if (bf.storeSales.length) { %>
+        <h3>Store-wide sales</h3>
+        <ul class="deal-sales">
+          <% bf.storeSales.forEach((s) => { %>
+            <li><strong><%= s.brand %></strong> <%= s.note %> <a href="/go/<%= s.slug %>" rel="sponsored nofollow noopener" target="_blank">Visit store</a></li>
+          <% }) %>
+        </ul>
+      <% } %>
+    </div>
+    <div class="deal-faq">
+      <p class="eyebrow">Questions</p>
+      <h2>Black Friday FAQ</h2>
+      <% faq.forEach((f) => { %>
+        <details><summary><%= f.q %></summary><p><%= f.a %></p></details>
+      <% }) %>
+    </div>
+  </div>
+</section>
+<%- include('../partials/foot') %>

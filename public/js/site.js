@@ -148,6 +148,50 @@
     map.forEach((a, id) => { const el = document.getElementById(id); if (el) io.observe(el); });
   }
 
+  /* ---------- Black Friday: countdown, filter and sort ---------- */
+  const countdown = document.querySelector('[data-countdown]');
+  if (countdown) {
+    const target = Date.parse(countdown.dataset.countdown);
+    const parts = [...countdown.querySelectorAll('[data-unit]')];
+    const units = { days: 864e5, hours: 36e5, minutes: 6e4 };
+    const tick = () => {
+      let rest = target - Date.now();
+      if (rest <= 0) { countdown.hidden = true; return false; }
+      parts.forEach((el) => {
+        const size = units[el.dataset.unit];
+        el.textContent = String(Math.floor(rest / size)).padStart(2, '0');
+        rest %= size;
+      });
+      return true;
+    };
+    if (tick()) setInterval(tick, 30000);
+  }
+
+  const dealGrid = document.querySelector('[data-deal-grid]');
+  if (dealGrid) {
+    const cards = [...dealGrid.children];
+    const status = document.querySelector('[data-deal-status]');
+    const chips = [...document.querySelectorAll('[data-deal-filter]')];
+    const apply = (key) => {
+      let shown = 0;
+      cards.forEach((c) => {
+        const on = key === 'all' || (key === 'drop' ? c.dataset.drop !== '0' : c.dataset.cat === key);
+        c.hidden = !on;
+        if (on) shown++;
+      });
+      chips.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.dealFilter === key)));
+      status.textContent = `${shown} ${shown === 1 ? 'deal' : 'deals'}`;
+    };
+    chips.forEach((b) => b.addEventListener('click', () => apply(b.dataset.dealFilter)));
+    document.querySelector('[data-deal-sort]').addEventListener('change', (e) => {
+      const by = e.target.value;
+      const num = (c, k) => Number(c.dataset[k]);
+      [...cards]
+        .sort((a, b) => (by === 'price' ? num(a, 'price') - num(b, 'price') : num(b, by) - num(a, by)))
+        .forEach((c) => dealGrid.append(c));
+    });
+  }
+
   /* ---------- Google Analytics (only when an ID is set in Admin > Settings) ---------- */
   const ga = document.body.dataset.ga;
   if (ga) {

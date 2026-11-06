@@ -1,0 +1,26 @@
+<%# Deal card. Locals: d (deal with product), eager (optional), order and grid (optional, for filtering and sorting) %>
+<% const p = d.product; const isGrid = typeof grid !== 'undefined' && grid; %>
+<article class="deal-card"<% if (isGrid) { %> data-cat="<%= p.category_id %>" data-drop="<%= d.drop %>" data-score="<%= p.overall %>" data-save="<%= d.save %>" data-price="<%= d.price %>" data-order="<%= order %>"<% } %>>
+  <a class="deal-media" href="<%= p.url %>" tabindex="-1" aria-hidden="true">
+    <%- h.productVisual(p, { eager: typeof eager !== 'undefined' && eager }) %>
+    <% if (d.drop > 0) { %><span class="deal-flag">Price drop</span><% } %>
+  </a>
+  <div class="deal-body">
+    <% if (d.pick && !isGrid) { %><p class="deal-pick"><%= d.pick %></p><% } else { %><p class="card-brand"><%= p.brand %></p><% } %>
+    <h3><a href="<%= p.url %>"><%= p.name %></a></h3>
+    <% if (d.variant) { %><p class="deal-variant"><%= d.variant %></p><% } %>
+    <p class="deal-why"><%= d.why %></p>
+    <p class="deal-price">
+      <strong><%= h.fmtPrice(d.price) %></strong>
+      <s><span class="visually-hidden">List price </span><%= h.fmtPrice(d.list) %></s>
+    </p>
+    <p class="deal-note">
+      <span><% if (d.drop > 0) { %><b>Down <%= h.fmtPrice(d.drop) %></b> since <%= bf.previousCheck %><% } else { %><%= d.pct %>% below store list price<% } %></span>
+      <span class="deal-score"><%= p.overall.toFixed(1) %>/10</span>
+    </p>
+    <div class="deal-actions">
+      <a class="btn btn-dark btn-sm" href="<%= h.goUrl(p) %>" rel="sponsored nofollow noopener" target="_blank">View deal at <%= p.brand %></a>
+      <a class="read-link" href="<%= p.url %>">Review</a>
+    </div>
+  </div>
+</article>

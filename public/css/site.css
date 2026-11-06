@@ -613,6 +613,80 @@ svg:not(.art-svg) { fill: none; stroke: currentColor; stroke-width: 2; stroke-li
 .footer-base { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--night-line); color: var(--on-night-muted); font-size: 13px; }
 
 /* ---------- responsive ---------- */
+/* ---------- Black Friday deals ---------- */
+.nav .nav-deal { color: var(--bad); font-weight: 700; }
+.deal-strip { background: var(--night); color: var(--on-night); }
+.deal-strip-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px; }
+.deal-strip p { margin: 0; color: var(--on-night-muted); }
+.deal-strip strong { color: var(--on-night); }
+
+.deal-hero { position: relative; overflow: hidden; background: var(--night); color: var(--on-night); padding-block: clamp(36px, 6vw, 72px); }
+.deal-hero-grid { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: clamp(28px, 5vw, 64px); align-items: center; }
+.deal-hero h1 { font-size: clamp(36px, 5.4vw, 64px); line-height: 1.04; letter-spacing: -0.03em; font-weight: 700; margin: 10px 0 16px; }
+.deal-hero h1 em { display: block; font-family: var(--serif); font-weight: 400; color: var(--lime); letter-spacing: -0.01em; }
+.countdown { border: 1px solid var(--night-line); background: var(--night-2); border-radius: var(--r-l); padding: 22px; }
+.countdown-label { margin: 0 0 14px; font-size: 13px; font-weight: 600; color: var(--on-night-muted); }
+.countdown-units { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.countdown-units div { background: var(--night); border-radius: var(--r-m); padding: 14px 6px; text-align: center; }
+.countdown-units strong { display: block; font-size: 34px; line-height: 1; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--lime); }
+.countdown-units span { display: block; margin-top: 6px; font-size: 12px; color: var(--on-night-muted); }
+.countdown-note { margin: 14px 0 0; font-size: 13px; color: var(--on-night-muted); }
+
+.deal-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.deal-card { display: flex; flex-direction: column; background: var(--white); border: 1px solid var(--line); border-radius: var(--r-l); overflow: hidden; }
+.deal-card[hidden] { display: none; }
+.deal-media { position: relative; display: block; padding: 14px 14px 0; }
+.deal-media .visual { aspect-ratio: 4 / 3; }
+.deal-flag { display: inline-block; padding: 4px 10px; border-radius: 999px; background: var(--lime); color: var(--lime-ink); font-size: 12px; font-weight: 700; }
+.deal-media .deal-flag { position: absolute; top: 24px; left: 24px; }
+.deal-list { display: inline-block; padding: 4px 10px; border-radius: 999px; background: var(--cream-2); color: var(--ink-2); font-size: 12px; font-weight: 700; }
+.deal-body { display: flex; flex-direction: column; gap: 8px; padding: 16px 20px 20px; flex: 1; }
+.deal-body p { margin: 0; }
+.deal-pick { font-size: 12.5px; font-weight: 700; color: var(--good); }
+.deal-body h3 { font-size: 18px; line-height: 1.25; font-weight: 650; letter-spacing: -0.015em; }
+.deal-body h3 a { color: inherit; text-decoration: none; }
+.deal-body h3 a:hover { text-decoration: underline; }
+.deal-variant { font-size: 13px; color: var(--muted); }
+.deal-why { font-size: 14.5px; line-height: 1.5; color: var(--ink-2); }
+.deal-price { display: flex; align-items: baseline; gap: 10px; margin-top: auto !important; padding-top: 8px; }
+.deal-price strong { font-size: 28px; font-weight: 750; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.deal-price s { font-size: 15px; color: var(--muted); }
+.deal-note { display: flex; justify-content: space-between; gap: 10px; font-size: 13.5px; color: var(--muted); }
+.deal-note b { color: var(--good); }
+.deal-score { font-weight: 650; color: var(--ink-2); white-space: nowrap; }
+.deal-actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 8px; }
+
+.deal-tools { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 20px; }
+.deal-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.deal-chip { min-height: 40px; padding: 0 14px; border: 1px solid var(--line-2); border-radius: 999px; background: var(--white); color: var(--ink); font: inherit; font-size: 14px; font-weight: 550; cursor: pointer; }
+.deal-chip:hover { border-color: var(--ink); }
+.deal-chip[aria-pressed='true'] { background: var(--ink); border-color: var(--ink); color: #fff; }
+.deal-sort { display: flex; align-items: center; gap: 12px; font-size: 14px; color: var(--muted); }
+.deal-sort select { min-height: 40px; padding: 0 10px; border: 1px solid var(--line-2); border-radius: var(--r-s); background: var(--white); color: var(--ink); font: inherit; }
+
+.deal-info { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 72px); }
+.deal-info h2 { font-size: clamp(26px, 3vw, 34px); line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 14px; }
+.deal-info h3 { margin: 26px 0 10px; font-size: 18px; }
+.deal-legend { display: grid; gap: 12px; margin: 16px 0; }
+.deal-legend div { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 12px; align-items: start; }
+.deal-legend dd { margin: 0; font-size: 15px; color: var(--ink-2); }
+.deal-sales { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; font-size: 15px; }
+.deal-faq details { border-top: 1px solid var(--line); padding: 14px 0; }
+.deal-faq details:last-child { border-bottom: 1px solid var(--line); }
+.deal-faq summary { cursor: pointer; font-weight: 600; }
+.deal-faq details p { margin: 10px 0 0; color: var(--ink-2); font-size: 15px; line-height: 1.55; }
+
+@media (max-width: 960px) {
+  .deal-hero-grid, .deal-info { grid-template-columns: minmax(0, 1fr); }
+  .countdown { max-width: 380px; }
+  .deal-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+}
+@media (max-width: 640px) {
+  .deal-grid { grid-template-columns: minmax(0, 1fr); }
+  .deal-strip-inner { flex-direction: column; align-items: flex-start; }
+  .deal-actions .btn { flex: 1; }
+}
+
 @media (max-width: 1100px) {
   .grid-cards, .grid-cats, .grid-vs, .grid-guides { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .grid-vs > :nth-child(4), .grid-guides > :nth-child(4) { display: none; }
