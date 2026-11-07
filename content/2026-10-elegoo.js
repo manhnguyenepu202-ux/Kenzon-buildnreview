@@ -27,7 +27,7 @@ export default {
       affiliate_label: LABEL,
       title: 'ELEGOO Centauri Carbon 2 Combo review: enclosed four-colour CoreXY for $449',
       summary: 'An enclosed CoreXY printer with a 350°C hotend and four-colour CANVAS system, $449 ($399 single-colour). Reviewers rate print quality close to Bambu; purge waste is high.',
-      verdict: 'The Centauri Carbon 2 Combo is one of the cheapest ways into enclosed, four-colour CoreXY printing. 3DWithUs scored it 4.4 with no failed prints, Creative Bloq gave 4.5/5, and Hackster compared print quality to Bambu Lab. Multicolour prints waste a lot of filament in purges, assembly takes more work than pricier rivals, and original owners can’t upgrade. At $449 it is excellent value.',
+      verdict: 'The Centauri Carbon 2 Combo is one of the cheapest ways into enclosed, four-colour CoreXY printing. 3DWithUs scored it 4.4 with no failed prints, Creative Bloq gave 4.5/5, Hackster compared print quality to Bambu Lab, and Tom’s Hardware went from box to first print in under 20 minutes. Multicolour prints waste a lot of filament in purges, assembly takes more work than pricier rivals, and original owners can’t upgrade. At $449 it is excellent value.',
       best_for: 'Makers who want enclosed multicolour printing on a budget',
       pros: [
         'Four-colour CANVAS system included for $449',
@@ -51,7 +51,7 @@ export default {
         { label: 'Multicolour', value: 'CANVAS, 4 filaments' },
         { label: 'Price', value: 'Combo $449 · single-colour $399' },
       ],
-      scores: { performance: 8.6, quality: 8.6, ease: 8.0, value: 9.2 },
+      scores: { performance: 8.7, quality: 8.7, ease: 8.4, value: 8.8 },
       body: `## What is it?
 
 The Centauri Carbon 2 is ELEGOO’s second enclosed CoreXY printer. The Combo version adds the CANVAS system, which feeds up to four filaments for multicolour prints. It has a 350°C hotend, a 110°C bed and a 256 mm cube build volume.
@@ -66,7 +66,11 @@ On 31 October 2026 the official store sells the Combo for **$449** and the singl
 - A multicolour Gengar about 5 inches tall in about 14 hours. The purge waste was almost as much as the model.
 - A HueForge picture covering about 80% of the bed in about 6 hours.
 
-There were no print failures. Hackster called the print quality comparable to Bambu Lab’s CoreXY printers and said firmware problems from the original model seemed fixed. Creative Bloq scored it 4.5/5 for build and quality.
+There were no print failures.
+
+Tom’s Hardware (February 2026) went from box to first print in under 20 minutes. It printed seven multicolour chameleons in 4 hours 55 minutes with no colour bleed on default purge settings, and TPU down to 95A fed through CANVAS without trouble. The 5-inch screen was easy to use and the camera has AI print-failure detection. It found the spool holders fussy with some third-party spools and the loading routine too cool for high-temperature filaments.
+
+Hackster called the print quality comparable to Bambu Lab’s CoreXY printers and said firmware problems from the original model seemed fixed. Creative Bloq scored it 4.5/5 for build and quality.
 
 ## Problems
 

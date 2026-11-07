@@ -27,7 +27,7 @@ export default {
       affiliate_label: LABEL,
       title: 'Anycubic Kobra S1 Combo review: enclosed four-colour CoreXY now $429',
       summary: 'An enclosed CoreXY printer with a four-spool ACE filament dryer, now $429 with ACE 2 Pro. Reviewers rate print quality alongside Bambu; software hiccups and purge waste remain.',
-      verdict: 'The Kobra S1 Combo is Anycubic’s answer to the Bambu P1S Combo. The Gadgeteer found it as good as any printer in its collection, and MakerHacks rated its single-colour quality among the best it had tested. Reviewers hit screen freezes and a cancelled print that kept going, purge waste is high, and owner sentiment on Reddit is mixed on reliability. At $429 with the newer ACE 2 Pro, it is exceptional value.',
+      verdict: 'The Kobra S1 Combo is Anycubic’s answer to the Bambu P1S Combo. The Gadgeteer found it as good as any printer in its collection, and MakerHacks rated its single-colour quality among the best it had tested. Creative Bloq’s first unit threw constant errors and died before a replacement worked well, MakerHacks hit screen freezes and a cancelled print that kept going, purge waste is high, and owner sentiment on Reddit is mixed on reliability. At $429 with the newer ACE 2 Pro, it is strong value if you can live with the reliability reports.',
       best_for: 'Makers who want enclosed multicolour printing for the lowest price',
       pros: [
         'Print quality reviewers compare to Bambu Lab',
@@ -49,7 +49,7 @@ export default {
         { label: 'Multicolour', value: 'ACE 2 Pro, 4 spools with drying; up to 8 with two units' },
         { label: 'Price', value: '$429 with ACE 2 Pro (list $599)' },
       ],
-      scores: { performance: 8.6, quality: 8.8, ease: 7.6, value: 9.2 },
+      scores: { performance: 8.3, quality: 8.7, ease: 7.6, value: 8.8 },
       body: `## What is it?
 
 The Kobra S1 is Anycubic’s enclosed CoreXY printer. The Combo pairs it with the ACE (Anycubic Colour Engine), which holds four spools, feeds them automatically and dries filament while it prints.
@@ -59,6 +59,7 @@ On 1 November 2026 the US store sells the Kobra S1 with the newer **ACE 2 Pro fo
 ## What reviewers found
 
 - **The Gadgeteer** found prints as good as any printer in its collection, including Bambu Lab machines.
+- **Creative Bloq** (updated May 2025) had constant errors on its first unit, which it traced to a clogged nozzle and a faulty filament-break sensor, until the printer died. Anycubic sent a replacement that worked well, including eight-colour prints, and the reviewer praised the customer service. Remote printing from the app stayed buggy. With the door closed in quiet mode, the fans were almost silent.
 - **MakerHacks** rated single-colour print quality among the highest of any machine it had tested. It saw software hiccups: screen freezes and a cancelled print that kept going. Purging with the ACE generated a lot of waste.
 - **3Dnatives** and **bgeek** praised the value; build quality impressions vary, with a metal internal frame but a plastic outer shell.
 - A Reddit-based aggregate scores owner sentiment at 2.9/5 from 310 ratings: people like value and print quality but complain about reliability. Treat that as user mood, not a test.
@@ -81,6 +82,7 @@ At $429, the Kobra S1 Combo is one of the cheapest enclosed multicolour CoreXY p
 ## Sources
 
 - [The Gadgeteer: Anycubic Kobra S1 Combo review](https://the-gadgeteer.com/2025/07/16/anycubic-kobra-s1-3d-printer-combo-review-punching-above-its-price-point/)
+- [Creative Bloq: Kobra S1 Combo review](https://www.creativebloq.com/3d/anycubic-kobra-s1-combo-review-excellent-when-it-works-frustrating-when-it-doesnt)
 - [MakerHacks: Anycubic Kobra S1 Combo review](https://www.makerhacks.com/anycubic-kobra-s1-combo-review/)
 - [3Dnatives: testing the Kobra S1 Combo](https://www.3dnatives.com/en/test-of-the-anycubic-kobra-s1-combo-060520254/)
 - [TechRadar: Kobra S1 Combo review](https://www.techradar.com/pro/anycubic-kobra-s1-combo-review)
