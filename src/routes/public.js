@@ -7,6 +7,7 @@ import { listComparisons, getComparison, listGuides, getGuide } from '../models/
 import { getMedia } from '../models/settings.js';
 import { markdown, slugify, absUrl, truncate, isoDate } from '../lib/helpers.js';
 import { blackFriday } from '../deals/black-friday.js';
+import { listPosts, getPost } from '../models/blog.js';
 
 const r = Router();
 const wrap = (fn) => (req, res, next) => fn(req, res, next).catch(next);
@@ -35,9 +36,57 @@ r.get('/en/', wrap(async (req, res) => {
     listGuides({ withProducts: true }),
     countProducts(),
   ]);
+  const posts = listPosts().slice(0, 3);
   res.render('pages/home', {
     page: { title: 'BuildNReview: 3D printer, DIY tool and home appliance reviews', description: res.locals.settings.site_tagline, canonical: '/en/' },
-    categories, popular, featured, latest, comparisons: comparisons.slice(0, 4), comparisonCount: comparisons.length, guides, total,
+    categories, popular, featured, latest, comparisons: comparisons.slice(0, 4), comparisonCount: comparisons.length, guides, total, posts: await withCovers(posts),
+  });
+}));
+
+/* ---------- blog ---------- */
+async function withCovers(posts) {
+  const covers = await getProductsBySlugs([...new Set(posts.map((p) => p.cover).filter(Boolean))]);
+  const bySlug = new Map(covers.map((c) => [c.slug, c]));
+  return posts.map((p) => ({ ...p, coverProduct: bySlug.get(p.cover) || null }));
+}
+
+r.get('/en/blog/', wrap(async (req, res) => {
+  const posts = await withCovers(listPosts());
+  res.render('pages/blog', {
+    page: {
+      title: 'Blog: guides to 3D printers, lasers and scanners',
+      description: 'Practical, honest guides on 3D printers, laser engravers and 3D scanners: how the technology works and what the spec sheets leave out.',
+      canonical: '/en/blog/',
+    },
+    posts,
+    jsonLd: [breadcrumbs([['Home', '/en/'], ['Blog', '/en/blog/']])],
+  });
+}));
+
+r.get('/en/blog/:slug/', wrap(async (req, res, next) => {
+  const post = getPost(req.params.slug);
+  if (!post) return next();
+  const all = listPosts();
+  const i = all.findIndex((p) => p.slug === post.slug);
+  const { html: bodyHtml, toc } = withAnchors(markdown(post.body));
+  const [related, [withCover]] = await Promise.all([getProductsBySlugs(post.related), withCovers([post])]);
+  const image = withCover.coverProduct?.image_url;
+  res.render('pages/blog-post', {
+    page: { title: post.title, description: post.description, canonical: post.url, ogType: 'article', image },
+    post, bodyHtml, toc, related,
+    newer: all[i - 1] || null,
+    older: all[i + 1] || null,
+    more: all.filter((p) => p.slug !== post.slug).slice(0, 4),
+    jsonLd: [
+      breadcrumbs([['Home', '/en/'], ['Blog', '/en/blog/'], [post.title, post.url]]),
+      {
+        '@context': 'https://schema.org', '@type': 'BlogPosting', headline: post.title, description: post.description,
+        datePublished: post.date, dateModified: post.updated, mainEntityOfPage: absUrl(post.url),
+        ...(image ? { image } : {}),
+        author: { '@type': 'Organization', name: 'BuildNReview' },
+        publisher: { '@type': 'Organization', name: 'BuildNReview' },
+      },
+    ],
   });
 }));
 
@@ -260,6 +309,8 @@ r.get('/sitemap.xml', wrap(async (req, res) => {
     ...cats.map((c) => ({ loc: c.url, pri: '0.8' })),
     ...products.map((p) => ({ loc: p.url, lastmod: isoDate(p.updated_at), pri: '0.9' })),
     { loc: '/en/black-friday/', lastmod: blackFriday.checkedAt, pri: '0.9' },
+    { loc: '/en/blog/', pri: '0.7' },
+    ...listPosts().map((p) => ({ loc: p.url, lastmod: p.updated, pri: '0.7' })),
     { loc: '/en/compare/', pri: '0.6' },
     ...comps.map((c) => ({ loc: c.url, lastmod: isoDate(c.updated_at), pri: '0.7' })),
     { loc: '/en/best/', pri: '0.6' },

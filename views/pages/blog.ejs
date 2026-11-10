@@ -1,0 +1,28 @@
+<%- include('../partials/head') %>
+<section class="page-hero">
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="wrap">
+    <nav class="crumbs crumbs-light" aria-label="Breadcrumb">
+      <ol><li><a href="/en/">Home</a></li><li aria-current="page">Blog</li></ol>
+    </nav>
+    <p class="eyebrow eyebrow-lime">The BuildNReview blog</p>
+    <h1>Straight answers from the workbench</h1>
+    <p class="page-lede">Practical guides on 3D printers, lasers and scanners: how the technology really works, what the spec sheets leave out, and how to spend your money well.</p>
+  </div>
+</section>
+
+<section class="section section-tight">
+  <div class="wrap">
+    <% if (posts.length) { %>
+      <%- include('../partials/post-card', { post: posts[0], large: true }) %>
+      <% if (posts.length > 1) { %>
+        <div class="post-grid">
+          <% posts.slice(1).forEach((post) => { %><%- include('../partials/post-card', { post }) %><% }) %>
+        </div>
+      <% } %>
+    <% } else { %>
+      <p>No posts yet.</p>
+    <% } %>
+  </div>
+</section>
+<%- include('../partials/foot') %>

@@ -1,0 +1,56 @@
+<%- include('../partials/head') %>
+<article>
+  <header class="post-hero">
+    <div class="wrap post-hero-inner">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <ol><li><a href="/en/">Home</a></li><li><a href="/en/blog/">Blog</a></li><li aria-current="page"><%= post.title %></li></ol>
+      </nav>
+      <p class="eyebrow"><%= post.topic || 'Guide' %></p>
+      <h1><%= post.title %></h1>
+      <p class="post-lede"><%= post.description %></p>
+      <p class="byline">By the BuildNReview team · <time datetime="<%= post.date %>"><%= h.fmtDate(post.date) %></time><% if (post.updated && post.updated !== post.date) { %> · Updated <time datetime="<%= post.updated %>"><%= h.fmtDate(post.updated) %></time><% } %> · <%= post.minutes %> min read</p>
+    </div>
+  </header>
+
+  <div class="wrap review-layout">
+    <div>
+      <p class="disclosure-line"><%= settings.disclosure_short %> <a href="/en/disclosure/">Learn more</a></p>
+      <div class="prose post-prose"><%- bodyHtml %></div>
+
+      <aside class="post-about">
+        <p class="eyebrow">About this article</p>
+        <p>We write from published test results, owner reports and manufacturers’ specifications, and we say where each number comes from. We don’t claim hands-on testing we haven’t done. <a href="/en/how-we-test/">How we review</a></p>
+      </aside>
+
+      <% if (related.length) { %>
+        <section class="post-related" aria-labelledby="related-h">
+          <h2 id="related-h">Reviews mentioned in this article</h2>
+          <div class="grid-cards grid-cards-3">
+            <% related.forEach((p) => { %><%- include('../partials/product-card', { p }) %><% }) %>
+          </div>
+        </section>
+      <% } %>
+
+      <nav class="post-nav" aria-label="More articles">
+        <% if (newer) { %><a href="<%= newer.url %>"><small>Newer</small><span><%= newer.title %></span></a><% } else { %><span></span><% } %>
+        <% if (older) { %><a class="older" href="<%= older.url %>"><small>Older</small><span><%= older.title %></span></a><% } %>
+      </nav>
+    </div>
+
+    <aside class="review-side">
+      <div class="side-sticky">
+        <% if (toc.length) { %>
+          <nav class="toc" aria-label="On this page">
+            <p class="eyebrow">On this page</p>
+            <ol><% toc.forEach((t) => { %><li><a href="#<%= t.id %>"><%= t.text %></a></li><% }) %></ol>
+          </nav>
+        <% } %>
+        <div class="toc post-side-more">
+          <p class="eyebrow">More from the blog</p>
+          <ol><% more.forEach((m) => { %><li><a href="<%= m.url %>"><%= m.title %></a></li><% }) %></ol>
+        </div>
+      </div>
+    </aside>
+  </div>
+</article>
+<%- include('../partials/foot') %>

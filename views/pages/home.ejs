@@ -173,6 +173,23 @@
   </div>
 </section>
 
+<% if (posts.length) { %>
+<section class="section section-tint">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">From the blog</p>
+        <h2>Know before you buy</h2>
+      </div>
+      <a class="text-link" href="/en/blog/">All articles</a>
+    </div>
+    <div class="post-grid">
+      <% posts.forEach((post) => { %><%- include('../partials/post-card', { post }) %><% }) %>
+    </div>
+  </div>
+</section>
+<% } %>
+
 <section class="section">
   <div class="wrap">
     <div class="section-head">

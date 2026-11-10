@@ -1,0 +1,15 @@
+<%# Blog post card. Locals: post (with coverProduct), big (optional) %>
+<% const big = typeof large !== 'undefined' && large; const c = post.coverProduct; %>
+<article class="post-card<%= big ? ' post-card-lg' : '' %>">
+  <a class="post-media" href="<%= post.url %>" tabindex="-1" aria-hidden="true" style="--tone:<%= c && c.tone ? c.tone : '#7a8b5c' %>">
+    <% if (c && c.image_url) { %>
+      <img src="<%= h.img(c.image_url, big ? 900 : 600) %>" alt="" loading="<%= big ? 'eager' : 'lazy' %>" decoding="async" width="600" height="450">
+    <% } %>
+  </a>
+  <div class="post-body">
+    <p class="post-topic"><%= post.topic || 'Guide' %></p>
+    <h3><a href="<%= post.url %>"><%= post.title %></a></h3>
+    <p class="post-desc"><%= post.description %></p>
+    <p class="post-meta"><time datetime="<%= post.date %>"><%= h.fmtDate(post.date) %></time> · <%= post.minutes %> min read</p>
+  </div>
+</article>
