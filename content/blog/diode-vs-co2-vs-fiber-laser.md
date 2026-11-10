@@ -1,5 +1,6 @@
 ---
 title: Diode, CO2 or fiber? How to choose the right laser for what you actually make
+strapline: Match the laser to your material first, then worry about watts.
 description: The wavelength decides what a laser can mark and cut, long before wattage does. Here is how diode, CO2 and fiber lasers really differ, with real prices and test results.
 date: 2026-11-10
 topic: Laser engravers

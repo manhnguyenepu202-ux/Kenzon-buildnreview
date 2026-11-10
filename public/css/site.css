@@ -722,6 +722,27 @@ svg:not(.art-svg) { fill: none; stroke: currentColor; stroke-width: 2; stroke-li
 .post-lede { font-size: clamp(17px, 1.8vw, 20px); line-height: 1.55; color: var(--ink-2); margin: 0 0 14px; }
 .post-prose { max-width: 72ch; }
 .review-layout > * { min-width: 0; }
+.post-disclosure { margin: 6px 0 0; font-size: 13.5px; color: var(--muted); }
+.post-trust { margin: 0 0 26px; padding: 12px 16px; border-radius: var(--r-m); background: var(--cream-2); font-size: 14.5px; color: var(--ink-2); }
+.post-trust strong { display: block; color: var(--ink); margin-bottom: 2px; }
+.post-more { margin-top: 32px; }
+.post-more h2 { font-size: 22px; margin-bottom: 10px; }
+.post-more p { margin: 0 0 8px; font-size: 16px; }
+.prose .inline-product { display: grid; grid-template-columns: 96px minmax(0, 1fr) auto; align-items: center; gap: 16px; margin: 6px 0 26px; padding: 14px; border: 1px solid var(--line); border-radius: var(--r-l); background: var(--white); line-height: 1.4; }
+.inline-product-media { display: block; width: 96px; height: 96px; border-radius: var(--r-m); background: var(--cream); overflow: hidden; }
+.inline-product-media img { width: 100%; height: 100%; object-fit: contain; mix-blend-mode: multiply; }
+.prose .inline-product p { margin: 0; }
+.inline-product-name { font-size: 17px; font-weight: 650; }
+.prose .inline-product-name a { text-decoration: none; }
+.inline-product-meta { margin-top: 4px !important; font-size: 14px; color: var(--muted); }
+.inline-product-meta strong { color: var(--ink); }
+.inline-product-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+.prose .inline-product-actions .btn { color: #fff; text-decoration: none; white-space: nowrap; }
+@media (max-width: 640px) {
+  .prose .inline-product { grid-template-columns: 72px minmax(0, 1fr); }
+  .inline-product-media { width: 72px; height: 72px; }
+  .inline-product-actions { grid-column: 1 / -1; flex-direction: row; justify-content: space-between; align-items: center; }
+}
 .post-about { margin: 32px 0; padding: 18px 22px; border: 1px solid var(--line); border-radius: var(--r-l); background: var(--white); font-size: 15px; color: var(--ink-2); }
 .post-about p { margin: 0; }
 .post-about .eyebrow { margin-bottom: 8px; }

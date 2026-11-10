@@ -1,5 +1,6 @@
 ---
 title: How to spot a real Black Friday deal on a 3D printer or laser
+strapline: Ignore the percentage. Check the price history.
 description: We checked 37 maker-tool prices against what they cost a week earlier. Only 11 had actually dropped. Here is how to tell a real deal from a permanent "sale".
 date: 2026-11-07
 topic: Buying advice

@@ -1,5 +1,6 @@
 ---
 title: Why 3D printer speed claims mislead, and the numbers that actually matter
+strapline: Top speed, acceleration and hotend flow: what really decides how long a print takes.
 description: A "600 mm/s" headline rarely survives a real print. Here is how top speed, acceleration and hotend flow interact, and how to read a spec sheet without being fooled.
 date: 2026-11-09
 topic: 3D printers

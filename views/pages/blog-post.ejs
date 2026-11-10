@@ -7,19 +7,27 @@
       </nav>
       <p class="eyebrow"><%= post.topic || 'Guide' %></p>
       <h1><%= post.title %></h1>
-      <p class="post-lede"><%= post.description %></p>
-      <p class="byline">By the BuildNReview team · <time datetime="<%= post.date %>"><%= h.fmtDate(post.date) %></time><% if (post.updated && post.updated !== post.date) { %> · Updated <time datetime="<%= post.updated %>"><%= h.fmtDate(post.updated) %></time><% } %> · <%= post.minutes %> min read</p>
+      <p class="post-lede"><%= post.strapline || post.description %></p>
+      <p class="byline">By the BuildNReview team · Published <time datetime="<%= post.date %>"><%= h.fmtDate(post.date) %></time><% if (post.updated && post.updated !== post.date) { %> · Updated <time datetime="<%= post.updated %>"><%= h.fmtDate(post.updated) %></time><% } %> · <%= post.minutes %> min read</p>
+      <p class="post-disclosure">When you buy through links on our site, we may earn an affiliate commission. It never changes our verdicts. <a href="/en/disclosure/">Here’s how it works.</a></p>
     </div>
   </header>
 
   <div class="wrap review-layout">
     <div>
-      <p class="disclosure-line"><%= settings.disclosure_short %> <a href="/en/disclosure/">Learn more</a></p>
+      <p class="post-trust"><strong>Why you can trust BuildNReview</strong> For every product we cover, we compare published test results, owner reports and official specifications, and we show where each number comes from. <a href="/en/how-we-test/">How we review</a></p>
       <div class="prose post-prose"><%- bodyHtml %></div>
 
+      <% if (tutorials.length) { %>
+        <div class="post-more">
+          <h2>Related guides</h2>
+          <% tutorials.slice(0, 3).forEach((t) => { %><p><strong>More:</strong> <a href="<%= t.url %>"><%= t.title %></a></p><% }) %>
+        </div>
+      <% } %>
+
       <aside class="post-about">
-        <p class="eyebrow">About this article</p>
-        <p>We write from published test results, owner reports and manufacturers’ specifications, and we say where each number comes from. We don’t claim hands-on testing we haven’t done. <a href="/en/how-we-test/">How we review</a></p>
+        <p class="eyebrow">About the author</p>
+        <p><strong>The BuildNReview team</strong> researches 3D printers, laser engravers, CNC routers and 3D scanners. We read every independent test we can find, check prices on the brands’ own stores and keep our reviews updated when prices or firmware change. We don’t claim hands-on testing we haven’t done. <a href="/en/about/">About us</a></p>
       </aside>
 
       <% if (related.length) { %>

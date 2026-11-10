@@ -68,8 +68,9 @@ r.get('/en/blog/:slug/', wrap(async (req, res, next) => {
   if (!post) return next();
   const all = listPosts();
   const i = all.findIndex((p) => p.slug === post.slug);
-  const { html: bodyHtml, toc } = withAnchors(markdown(post.body));
-  const [related, [withCover]] = await Promise.all([getProductsBySlugs(post.related), withCovers([post])]);
+  const boxSlugs = [...post.body.matchAll(/\{\{product:\s*([a-z0-9-]+)\s*\}\}/g)].map((m) => m[1]);
+  const [related, [withCover], boxProducts] = await Promise.all([getProductsBySlugs(post.related), withCovers([post]), getProductsBySlugs(boxSlugs)]);
+  const { html: bodyHtml, toc } = withAnchors(withProductBoxes(markdown(post.body), boxProducts, res.locals.h));
   const image = withCover.coverProduct?.image_url;
   res.render('pages/blog-post', {
     page: { title: post.title, description: post.description, canonical: post.url, ogType: 'article', image },
@@ -77,6 +78,7 @@ r.get('/en/blog/:slug/', wrap(async (req, res, next) => {
     newer: all[i - 1] || null,
     older: all[i + 1] || null,
     more: all.filter((p) => p.slug !== post.slug).slice(0, 4),
+    tutorials: all.filter((p) => p.slug !== post.slug && p.topic === post.topic).concat(all.filter((p) => p.slug !== post.slug && p.topic !== post.topic)).slice(0, 4),
     jsonLd: [
       breadcrumbs([['Home', '/en/'], ['Blog', '/en/blog/'], [post.title, post.url]]),
       {
@@ -350,6 +352,31 @@ async function pickSponsor(product) {
   const candidates = await listProducts({ sort: 'score', excludeId: product.id });
   const withLink = candidates.filter((p) => p.affiliate_url);
   return withLink.find((p) => p.category_id === product.category_id) || withLink[0] || null;
+}
+
+/**
+ * Replaces a {{product: slug}} paragraph in a blog post with an inline price box, the way news sites show a product
+ * widget mid-article. Unknown or unpublished slugs are dropped.
+ */
+function withProductBoxes(html, products, h) {
+  const bySlug = new Map(products.map((p) => [p.slug, p]));
+  return html.replace(/<p>\{\{product:\s*([a-z0-9-]+)\s*\}\}<\/p>/g, (m, slug) => {
+    const p = bySlug.get(slug);
+    if (!p) return '';
+    const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+    const store = esc((p.affiliate_label || '').replace(/^Check price at /, '') || p.brand);
+    return `<aside class="inline-product">
+  <a class="inline-product-media" href="${p.url}" tabindex="-1" aria-hidden="true">${p.image_url ? `<img src="${esc(h.img(p.image_url, 320))}" alt="" loading="lazy" decoding="async" width="160" height="160">` : ''}</a>
+  <div class="inline-product-body">
+    <p class="inline-product-name"><a href="${p.url}">${esc(p.name)}</a></p>
+    <p class="inline-product-meta">Our score <strong>${p.overall.toFixed(1)}/10</strong> · ${esc(p.best_for || '')}</p>
+  </div>
+  <div class="inline-product-actions">
+    ${p.affiliate_url ? `<a class="btn btn-dark btn-sm" href="${h.goUrl(p)}" rel="sponsored nofollow noopener" target="_blank">${p.price_usd ? `${h.fmtPrice(p.price_usd)} at ${store}` : `Check price at ${store}`}</a>` : ''}
+    <a class="read-link" href="${p.url}">Read our review</a>
+  </div>
+</aside>`;
+  });
 }
 
 /** Adds id anchors to <h2> headings and returns a table of contents. */

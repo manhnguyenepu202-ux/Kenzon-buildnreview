@@ -1,5 +1,6 @@
 ---
 title: The hidden cost of multicolour 3D printing, and how to cut it
+strapline: Colour changes, not colours, decide how much plastic ends up in the bin.
 description: Every colour change on a single-nozzle printer flushes plastic into the bin. Here is how much really goes to waste, why, and the settings and design habits that cut it.
 date: 2026-11-08
 topic: 3D printers
