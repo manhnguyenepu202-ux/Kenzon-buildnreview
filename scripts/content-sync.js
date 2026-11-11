@@ -22,6 +22,17 @@ export async function syncContent({ log = console.log } = {}) {
   const added = { categories: 0, products: 0, comparisons: 0, guides: 0 };
   const idBySlug = async (table, slug) => (await get(`SELECT id FROM ${table} WHERE slug = ?`, [slug]))?.id;
 
+  // An item with `replace: '<tag>'` may overwrite an existing row of the same slug, once per database
+  // (a settings flag records it), e.g. to turn an old starter draft into a full review. Later admin edits stand.
+  const replaceOnce = async (table, item) => {
+    if (!item.replace) return false;
+    const flag = `r:${item.replace}:${table[0]}:${item.slug}`.slice(0, 80);
+    if (await get('SELECT skey FROM settings WHERE skey = ?', [flag])) return false;
+    await run('INSERT INTO settings (skey, svalue) VALUES (?, ?)', [flag, new Date().toISOString()]);
+    return true;
+  };
+  let replaced = 0;
+
   const newCategories = [];
   for (const c of packs.flatMap((p) => p.categories || [])) {
     if (await idBySlug('categories', c.slug)) continue;
@@ -31,9 +42,15 @@ export async function syncContent({ log = console.log } = {}) {
   }
 
   for (const p of packs.flatMap((pk) => pk.products || [])) {
-    if (await idBySlug('products', p.slug)) continue;
+    const existingId = await idBySlug('products', p.slug);
     const categoryId = await idBySlug('categories', p.category);
     if (!categoryId) { log(`[content] skipped ${p.slug}: unknown category "${p.category}"`); continue; }
+    if (existingId) {
+      if (!(await replaceOnce('products', p))) continue;
+      await saveProduct({ ...p, category_id: categoryId, is_sample: p.is_sample ?? true }, existingId);
+      replaced++;
+      continue;
+    }
     await saveProduct({ ...p, category_id: categoryId, is_sample: p.is_sample ?? true });
     added.products++;
   }
@@ -45,7 +62,13 @@ export async function syncContent({ log = console.log } = {}) {
   }
 
   for (const c of packs.flatMap((p) => p.comparisons || [])) {
-    if (await idBySlug('comparisons', c.slug)) continue;
+    const existingId = await idBySlug('comparisons', c.slug);
+    if (existingId) {
+      if (!(await replaceOnce('comparisons', c))) continue;
+      await saveComparison({ ...c, product_slugs: c.products }, existingId);
+      replaced++;
+      continue;
+    }
     await saveComparison({ ...c, product_slugs: c.products });
     added.comparisons++;
   }
@@ -57,6 +80,7 @@ export async function syncContent({ log = console.log } = {}) {
   }
 
   const total = Object.values(added).reduce((a, b) => a + b, 0);
+  if (replaced) log(`[content] replaced ${replaced} existing rows.`);
   if (total) log(`[content] published ${added.categories} categories, ${added.products} reviews, ${added.comparisons} comparisons, ${added.guides} guides.`);
 }
 
