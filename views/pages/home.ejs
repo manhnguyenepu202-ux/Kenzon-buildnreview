@@ -29,7 +29,7 @@
     <div class="hero-tiles" aria-hidden="true">
       <% tiles.slice(0, 4).forEach((t, i) => { %>
         <a class="tile tile-<%= i + 1 %>" href="<%= t.p.url %>" tabindex="-1">
-          <img src="<%= h.img(t.src, 560) %>" alt="" width="500" height="500" <%- i < 2 ? 'fetchpriority="high"' : '' %> decoding="async">
+          <img src="<%= h.img(t.src, 560) %>" alt="<%= t.p.name %>" width="500" height="500" <%- i < 2 ? 'fetchpriority="high"' : '' %> decoding="async">
           <span class="tile-tag"><span><%= t.p.name %></span> <b><%= t.p.overall.toFixed(1) %></b></span>
         </a>
       <% }) %>

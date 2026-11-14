@@ -3,7 +3,7 @@ import { all, run, get, now } from '../db/index.js';
 /** Defaults are used until the admin saves a value on the Settings page. */
 export const DEFAULT_SETTINGS = {
   site_tagline: 'Independent reviews of 3D printers, DIY tools and home appliances.',
-  affiliate_default_url: 'https://us.snapmaker.com/?ref=tatsuki_mura',
+  affiliate_default_url: 'https://snapmaker.sjv.io/0GZm4Y',
   affiliate_default_label: 'Shop Snapmaker',
   sponsor_heading: 'Maker pick',
   sponsor_text: 'Want to make your own parts, signs and fixes? Snapmaker machines 3D print, laser engrave and CNC carve in one workshop.',

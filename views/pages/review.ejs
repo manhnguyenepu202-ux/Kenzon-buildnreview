@@ -18,7 +18,7 @@
             <div class="gallery-thumbs">
               <% [p.image_url, ...p.gallery].filter(Boolean).forEach((src, i) => { %>
                 <button type="button" class="thumb" data-src="<%= h.img(src, 1000) %>" aria-label="Show image <%= i + 1 %>" aria-pressed="<%= i === 0 %>">
-                  <img src="<%= h.img(src, 160) %>" alt="" width="96" height="96" loading="lazy" decoding="async">
+                  <img src="<%= h.img(src, 160) %>" alt="<%= p.name %> photo <%= i + 1 %>" width="96" height="96" loading="lazy" decoding="async">
                 </button>
               <% }) %>
             </div>

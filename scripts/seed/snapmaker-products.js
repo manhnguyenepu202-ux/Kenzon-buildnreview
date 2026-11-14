@@ -1,7 +1,6 @@
 // Snapmaker products. Specs and prices come from the official US store (us.snapmaker.com, October 2026).
-// Every product links to its store page with the BuildNReview affiliate code.
-const REF = 'ref=tatsuki_mura';
-const store = (handle) => `https://us.snapmaker.com/products/${handle}?${REF}`;
+// Every product links to the BuildNReview Snapmaker affiliate link (Impact).
+const store = () => 'https://snapmaker.sjv.io/0GZm4Y'; // Impact short link (no deep links)
 const cdn = (file) => `https://cdn.shopify.com/s/files/1/0585/1499/7435/${file}`;
 
 export default [

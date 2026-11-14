@@ -3,7 +3,7 @@
 <article class="post-card<%= big ? ' post-card-lg' : '' %>">
   <a class="post-media" href="<%= post.url %>" tabindex="-1" aria-hidden="true" style="--tone:<%= c && c.tone ? c.tone : '#7a8b5c' %>">
     <% if (c && c.image_url) { %>
-      <img src="<%= h.img(c.image_url, big ? 900 : 600) %>" alt="" loading="<%= big ? 'eager' : 'lazy' %>" decoding="async" width="600" height="450">
+      <img src="<%= h.img(c.image_url, big ? 900 : 600) %>" alt="<%= post.title %>" loading="<%= big ? 'eager' : 'lazy' %>" decoding="async" width="600" height="450">
     <% } %>
   </a>
   <div class="post-body">

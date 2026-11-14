@@ -1,6 +1,19 @@
 <%
   const siteName = config.siteName;
-  const fullTitle = page.title.includes(siteName) ? page.title : `${page.title} | ${siteName}`;
+  // Google shows roughly 60 characters of a title. Add the site name only when it still fits,
+  // and shorten very long titles to the part before the colon (og:title keeps the full text).
+  const MAX = 60;
+  const suffix = ` | ${siteName}`;
+  let docTitle = page.title;
+  if (!docTitle.includes(siteName)) {
+    if (docTitle.length + suffix.length <= MAX) docTitle += suffix;
+    else if (docTitle.length > 65 && docTitle.includes(': ') && docTitle.indexOf(': ') >= 20) {
+      const head = docTitle.slice(0, docTitle.indexOf(': '));
+      docTitle = head.length + suffix.length <= MAX ? head + suffix : head;
+    }
+  }
+  const fullTitle = docTitle;
+  const ogTitle = page.title;
   const canonical = page.canonical ? h.absUrl(page.canonical) : null;
   const ogImage = page.image ? (page.image.startsWith('http') ? page.image : h.absUrl(page.image)) : h.absUrl('/img/og.png');
   const ld = typeof jsonLd !== 'undefined' ? jsonLd : [];
@@ -19,7 +32,7 @@
   <meta name='impact-site-verification' value='e6d25444-4651-401c-a895-55dbe22bd3a5'>
   <meta property="og:site_name" content="<%= siteName %>">
   <meta property="og:type" content="<%= page.ogType || 'website' %>">
-  <meta property="og:title" content="<%= fullTitle %>">
+  <meta property="og:title" content="<%= ogTitle %>">
   <meta property="og:description" content="<%= page.description %>">
   <% if (canonical) { %><meta property="og:url" content="<%= canonical %>"><% } %>
   <meta property="og:image" content="<%= ogImage %>">

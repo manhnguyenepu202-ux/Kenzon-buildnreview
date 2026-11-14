@@ -5,6 +5,7 @@ import { seed } from './scripts/seed-data.js';
 import { syncContent } from './scripts/content-sync.js';
 import { hidePhotoless } from './scripts/hide-photoless.js';
 import { applyPriceUpdate } from './scripts/apply-price-update.js';
+import { applyAffiliateUpdate } from './scripts/apply-affiliate-update.js';
 import { createApp } from './src/app.js';
 
 async function start() {
@@ -18,6 +19,7 @@ async function start() {
   await syncContent().catch((err) => console.error('[content] sync failed:', err));
   await hidePhotoless().catch((err) => console.error('[cleanup] failed:', err));
   await applyPriceUpdate().catch((err) => console.error('[prices] failed:', err));
+  await applyAffiliateUpdate().catch((err) => console.error('[affiliate] failed:', err));
   createApp().listen(config.port, () => {
     console.log(`BuildNReview running on http://localhost:${config.port} (database: ${dialect})`);
   });
