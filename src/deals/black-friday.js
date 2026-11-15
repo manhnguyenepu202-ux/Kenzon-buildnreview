@@ -14,7 +14,7 @@ export const blackFriday = {
     { slug: 'laserpecker-lx2', price: 1299, list: 1999, prev: 1499, variant: '20W Standard Bundle', pick: 'Biggest price drop', why: 'Enclosed laser cutter with a 500 × 305 mm bed, now $200 below what it cost a week ago.' },
     { slug: 'creality-k2-pro-combo', price: 799, list: 1099, variant: 'K2 Pro + CFS', pick: 'Best multicolour deal', why: 'Quiet, heated-chamber printer with a long run of perfect prints in testing. Reviewed at $999.' },
     { slug: 'anycubic-photon-mono-m7-pro', price: 459, list: 669, pick: 'Best resin deal', why: 'Fast 14K resin printer with a heated vat and automatic refill. Reviewed at $669, on sale at $549.' },
-    { slug: 'snapmaker-10w-laser-module', price: 149, list: 459, pick: 'Best cheap upgrade', why: 'Ran jobs 5–6× faster than the stock 1.6W laser in DIY Machines’ tests.' },
+    { slug: 'snapmaker-10w-laser-module', price: 149, list: 459, why: 'Ran jobs 5–6× faster than the stock 1.6W laser in DIY Machines’ tests. Sold out at Snapmaker on 15 November; check before you plan around it.' },
     { slug: 'sculpfun-sf-a9', price: 799.99, list: 1699.99, variant: 'A9 40W, US warehouse', pick: 'Best laser cutter value', why: 'Measured 41W and cut 10 mm plywood in one pass. Open frame, so budget for safety gear.' },
 
     { slug: 'creality-k2-plus-combo', price: 1199, list: 1499, variant: 'K2 Plus + 1 CFS', why: 'A 350 mm build volume and up to 16 colours. One tester hit repeated filament feed errors.' },
@@ -44,7 +44,7 @@ export const blackFriday = {
     { slug: 'snapmaker-40w-laser-module', price: 429, list: 999, why: 'The serious cutting upgrade for a Snapmaker 2.0 or Artisan.' },
     { slug: 'snapmaker-200w-cnc-module', price: 159, list: 299, why: 'More power for wood and aluminium on a Snapmaker 2.0.' },
     { slug: 'snapmaker-air-purifier', price: 369, list: 499, why: 'Clears laser and CNC fumes from an enclosed machine.' },
-    { slug: 'snapdryer-bundle', price: 119, list: 169, why: 'Dries and stores four spools to prevent stringing.' },
+    { slug: 'snapdryer-bundle', price: 119, list: 169, pick: 'Best cheap upgrade', why: 'Dries and stores four spools to prevent stringing. Works with any printer, not just Snapmaker.' },
     { slug: 'biqu-panda-breath', price: 89.99, list: 115, prev: 95.85, variant: 'US warehouse', why: 'Active chamber heating for a Bambu Lab P1S. Hands-on data is limited.' },
     { slug: 'bigtreetech-panda-sense-pro', price: 85.35, list: 99.99, prev: 89.99, why: 'Eight-in-one air monitor for a room with printers.' },
 

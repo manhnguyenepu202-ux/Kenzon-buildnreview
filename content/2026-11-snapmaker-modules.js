@@ -1,9 +1,10 @@
 // Snapmaker batch 2: 10W laser, rotary module, 2.0 dual extrusion, Artisan dual extrusion. Researched 1 November 2026.
-// Prices and images: us.snapmaker.com/products.json, 1 Nov 2026. Affiliate: Impact link snapmaker.sjv.io/0GZm4Y.
+// Prices and images: us.snapmaker.com/products.json, 1 Nov 2026. Affiliate: Impact deep links (snapmaker.sjv.io/c/6833997/1346054/16240?u=…).
 // Already on the site: U1, Artisan, 40W laser, 200W CNC, air purifier, SnapDryer bundle.
 // Snapmaker 2.0 machines, J1s and Ray are no longer listed on the US store, so they are skipped.
 // Snapmaker affiliate (Impact). The short link does not support deep links, so every button uses it.
-const snap = () => 'https://snapmaker.sjv.io/0GZm4Y';
+const IMPACT = 'https://snapmaker.sjv.io/c/6833997/1346054/16240'; // full Impact link: ?u= deep links keep the click ID
+const snap = (handle) => `${IMPACT}?u=${encodeURIComponent(`https://us.snapmaker.com/products/${handle}`)}`;
 const cdn = (file) => `https://cdn.shopify.com/s/files/1/0585/1499/7435/${file}`;
 const DATE = '2026-11-01 05:00:00';
 const LABEL = 'Check price at Snapmaker';

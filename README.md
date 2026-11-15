@@ -46,7 +46,7 @@ SEO: schema `Product` + `Review` + `BreadcrumbList` + `ItemList`, canonical, Ope
 - Mỗi sản phẩm có ô **Product affiliate URL** trong Admin. Nút "Check price" trỏ qua `/go/<slug>` để đếm lượt click, rồi chuyển tới link thật.
 - 6 sản phẩm Snapmaker đã gắn sẵn link trang sản phẩm kèm mã `?ref=tatsuki_mura`.
 - **Mọi bài review** đều có ô **"Maker pick"** quảng bá một sản phẩm Snapmaker (link affiliate). Chọn sản phẩm cho từng danh mục ở Admin → Categories.
-- Link affiliate Snapmaker (Impact): `https://snapmaker.sjv.io/0GZm4Y` — dùng cho nút "Shop Snapmaker" ở menu và mọi nút mua Snapmaker. Đổi trong Admin → Settings.
+- Link affiliate Snapmaker (Impact): `https://snapmaker.sjv.io/c/6833997/1346054/16240` — nút "Shop Snapmaker" ở menu. Mỗi sản phẩm Snapmaker dùng deep link `…/16240?u=<link trang sản phẩm>` để vào thẳng trang sản phẩm (link rút gọn 0GZm4Y không hỗ trợ deep link).
 - Lượt click hiện ở Dashboard.
 
 ## Nội dung mẫu: việc cần làm trước khi quảng bá

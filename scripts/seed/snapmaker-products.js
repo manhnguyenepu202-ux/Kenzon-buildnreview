@@ -1,6 +1,7 @@
 // Snapmaker products. Specs and prices come from the official US store (us.snapmaker.com, October 2026).
 // Every product links to the BuildNReview Snapmaker affiliate link (Impact).
-const store = () => 'https://snapmaker.sjv.io/0GZm4Y'; // Impact short link (no deep links)
+const IMPACT = 'https://snapmaker.sjv.io/c/6833997/1346054/16240'; // full Impact link: ?u= deep links keep the click ID
+const store = (handle) => `${IMPACT}?u=${encodeURIComponent(`https://us.snapmaker.com/products/${handle}`)}`;
 const cdn = (file) => `https://cdn.shopify.com/s/files/1/0585/1499/7435/${file}`;
 
 export default [
