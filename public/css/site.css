@@ -606,6 +606,9 @@ svg:not(.art-svg) { fill: none; stroke: currentColor; stroke-width: 2; stroke-li
 .footer-brand p { margin-top: 16px; color: var(--on-night-muted); font-size: 15px; max-width: 30em; }
 .footer-disclosure { font-size: 13px !important; }
 .footer-disclosure a { color: var(--on-night); }
+.site-footer .footer-social { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 20px; }
+.site-footer .footer-social a { font-size: 14px; font-weight: 600; color: var(--on-night); text-decoration: underline; text-underline-offset: 3px; }
+.site-footer .footer-social a:hover { color: var(--lime); }
 .site-footer h2 { font-size: 13px; letter-spacing: .18em; text-transform: uppercase; color: var(--on-night-muted); font-weight: 600; margin-bottom: 16px; }
 .site-footer ul { list-style: none; display: grid; gap: 10px; }
 .site-footer ul a { text-decoration: none; font-size: 15px; color: #d6d9e3; }
