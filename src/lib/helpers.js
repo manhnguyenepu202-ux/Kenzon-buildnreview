@@ -61,6 +61,7 @@ export function productVisual(p, { eager = false, width = 640 } = {}) {
 
 /** Visible affiliate URL goes through /go/ so clicks are counted and the real link can change later. */
 export const goUrl = (p) => `/go/${p.slug}`;
+export { amazonUrl } from './amazon.js';
 
 export const absUrl = (path) => `${config.siteUrl}${path}`;
 
