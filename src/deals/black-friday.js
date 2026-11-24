@@ -12,16 +12,16 @@ export const blackFriday = {
   deals: [
     { slug: 'snapmaker-u1', price: 699, list: 999, prev: 749, pick: 'Best 3D printer deal', why: 'Our top-rated printer. Four independent toolheads make colour prints with far less waste than filament swapping.' },
     { slug: 'laserpecker-lx2', price: 1299, list: 1999, prev: 1499, variant: '20W Standard Bundle', pick: 'Biggest price drop', why: 'Enclosed laser cutter with a 500 × 305 mm bed, now $200 below what it cost a week ago.' },
-    { slug: 'creality-k2-pro-combo', price: 799, list: 1099, variant: 'K2 Pro + CFS', pick: 'Best multicolour deal', why: 'Quiet, heated-chamber printer with a long run of perfect prints in testing. Reviewed at $999.' },
-    { slug: 'anycubic-photon-mono-m7-pro', price: 459, list: 669, pick: 'Best resin deal', why: 'Fast 14K resin printer with a heated vat and automatic refill. Reviewed at $669, on sale at $549.' },
-    { slug: 'snapmaker-10w-laser-module', price: 149, list: 459, why: 'Ran jobs 5–6× faster than the stock 1.6W laser in DIY Machines’ tests. Sold out at Snapmaker on 15 November; check before you plan around it.' },
+    { slug: 'creality-k2-pro-combo', price: 749, list: 1099, variant: 'K2 Pro + CFS', pick: 'Best multicolour deal', why: 'Quiet, heated-chamber printer with a long run of perfect prints in testing. Reviewed at $999.' },
+    { slug: 'anycubic-photon-mono-m7-pro', price: 489, list: 669, pick: 'Best resin deal', why: 'Fast 14K resin printer with a heated vat and automatic refill. Reviewed at $669, on sale at $549.' },
+    { slug: 'snapmaker-10w-laser-module', price: 149, list: 459, why: 'Ran jobs 5–6× faster than the stock 1.6W laser in DIY Machines’ tests. Still sold out at Snapmaker on 24 November; check before you plan around it.' },
     { slug: 'sculpfun-sf-a9', price: 799.99, list: 1699.99, variant: 'A9 40W, US warehouse', pick: 'Best laser cutter value', why: 'Measured 41W and cut 10 mm plywood in one pass. Open frame, so budget for safety gear.' },
 
     { slug: 'creality-k2-plus-combo', price: 1199, list: 1499, variant: 'K2 Plus + 1 CFS', why: 'A 350 mm build volume and up to 16 colours. One tester hit repeated filament feed errors.' },
     { slug: 'anycubic-kobra-x-combo', price: 469, list: 599, variant: '7-colour combo', why: 'Compact bed-slinger that Tom’s Hardware and TechRadar both prefer to the Kobra 4.' },
     { slug: 'anycubic-kobra-4-combo', price: 299, list: 499, why: 'Very quiet four-colour printer with a filament dryer built into the ACE 2 Pro.' },
     { slug: 'anycubic-kobra-s1-max', price: 599, list: 899, why: '350 mm cube and a 65°C chamber for the money. Long-term test data is still thin.' },
-    { slug: 'anycubic-photon-mono-4', price: 159, list: 219, why: 'A cheap first resin printer with fine 10K detail. No app, camera or heated vat.' },
+    { slug: 'anycubic-photon-mono-4', price: 240, list: 252, why: 'A cheap first resin printer with fine 10K detail. No app, camera or heated vat.' },
     { slug: 'snapmaker-artisan-3-in-1', price: 1799, list: 2999, prev: 1849, variant: 'Artisan Standard', why: '3D printer, laser and CNC in one enclosed machine, down $50 this week.' },
 
     { slug: 'laserpecker-lp2-plus', price: 759, list: 1099, prev: 809, variant: 'Basic Bundle', why: 'Portable 10W laser that cuts 3 mm wood in one pass.' },
