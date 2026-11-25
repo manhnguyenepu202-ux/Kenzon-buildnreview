@@ -5,7 +5,7 @@ export const AMAZON_LINKS = {
   'snapmaker-u1': 'https://link.amazon/B09Rit4gR', // bnr-web-20
   'bambu-lab-p1s': 'https://link.amazon/B03a9r5KX',
   // Batch 1
-  'bambu-lab-a1': 'https://link.amazon/B08YcqJWa',
+  'bambu-lab-a1': 'https://link.amazon/B0hnbdHc9', // A1 Combo + LED Lamp Kit (replaced 25 Nov)
   'xtool-m2': 'https://link.amazon/A031rSk1Q',
   'creality-k2-plus-combo': 'https://link.amazon/B0hZtPgSE',
   'flashforge-creator-5': 'https://link.amazon/B00nEXjPK',
@@ -23,5 +23,6 @@ export const AMAZON_LINKS = {
   'creality-sparkx-i7-combo': 'https://link.amazon/B02LyMTVj',
   // Batch 4
   'bambu-lab-p2s': 'https://link.amazon/B02AkDki2',
+  'bambu-lab-a1-mini': 'https://link.amazon/B081gplcf', // A1 mini + LED Lamp Kit. A1 mini Combo: https://link.amazon/B0dDkE3rY
 };
 export const amazonUrl = (p) => AMAZON_LINKS[p.slug] || null;
