@@ -1,6 +1,6 @@
 // Amazon Associates links, keyed by product slug.
 // Shown as a second button next to the manufacturer's affiliate link.
-// TODO: most links below were made for Facebook posts (bnr-fb-20). Replace them with bnr-web-20 links over time.
+// Rule (25 Nov 2026): one bnr-fb-20 link per product, used on the website and in Facebook posts.
 export const AMAZON_LINKS = {
   'snapmaker-u1': 'https://link.amazon/B09Rit4gR', // bnr-web-20
   'bambu-lab-p1s': 'https://link.amazon/B03a9r5KX',
@@ -21,5 +21,7 @@ export const AMAZON_LINKS = {
   'anycubic-kobra-x-combo': 'https://link.amazon/B0damxH1k',
   'anycubic-kobra-s1-max': 'https://link.amazon/B0jjWTlfN',
   'creality-sparkx-i7-combo': 'https://link.amazon/B02LyMTVj',
+  // Batch 4
+  'bambu-lab-p2s': 'https://link.amazon/B02AkDki2',
 };
 export const amazonUrl = (p) => AMAZON_LINKS[p.slug] || null;
