@@ -229,12 +229,15 @@ r.get('/en/best/', wrap(async (req, res) => {
   });
 }));
 
+// Custom share images for best-of guides (file in public/social/).
+const GUIDE_SHARE_IMAGES = { 'best-multicolor-3d-printers': '/social/best-multicolor-3d-printers-social.jpg' };
+
 r.get('/en/best/:slug/', wrap(async (req, res, next) => {
   const guide = await getGuide('slug', req.params.slug);
   if (!guide) return next();
   const category = guide.category_id ? await getCategory('id', guide.category_id) : null;
   res.render('pages/guide', {
-    page: { title: guide.title, description: truncate(guide.intro), canonical: guide.url, ogType: 'article', image: guide.entries[0]?.product.image_url },
+    page: { title: guide.title, description: truncate(guide.intro), canonical: guide.url, ogType: 'article', image: GUIDE_SHARE_IMAGES[guide.slug] ? absUrl(GUIDE_SHARE_IMAGES[guide.slug]) : guide.entries[0]?.product.image_url },
     guide, category,
     jsonLd: [
       breadcrumbs([['Home', '/en/'], ['Best of', '/en/best/'], [guide.title, guide.url]]),
