@@ -5,6 +5,7 @@ description: Four popular Bambu Lab P1S accessories compared: the original AMS, 
 date: 2026-11-25
 topic: 3D printers
 cover: bambu-lab-p1s
+image: /social/best-bambu-lab-p1s-accessories-social.jpg
 related: bambu-lab-p1s, bambu-lab-p2s, bambu-lab-a1
 ---
 

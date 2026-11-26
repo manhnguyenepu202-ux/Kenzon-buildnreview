@@ -56,8 +56,14 @@ export function productVisual(p, { eager = false, width = 640 } = {}) {
   if (p.image_url) {
     return `<div class="visual" style="--tone:${escapeHtml(tone)}"><img src="${escapeHtml(img(p.image_url, width))}" alt="${escapeHtml(p.name)}" loading="${eager ? 'eager' : 'lazy'}" decoding="async" width="600" height="600"></div>`;
   }
+  if (SOFTWARE_TILES.has(p.slug)) {
+    return `<div class="visual" style="--tone:${escapeHtml(tone)}"><img src="/img/software/${escapeHtml(p.slug)}.jpg" alt="${escapeHtml(p.name)}" loading="${eager ? 'eager' : 'lazy'}" decoding="async" width="600" height="600"></div>`;
+  }
   return `<div class="visual is-art" style="--tone:${escapeHtml(tone)}">${artSvg(p.art_type, p.name)}</div>`;
 }
+
+/** Original illustrated tiles (public/img/software/<slug>.jpg) for software reviews that have no photo. */
+const SOFTWARE_TILES = new Set(['shopify-for-makers', 'etsy-for-makers', 'vista-social', 'pacdora', 'invideo-ai', 'tripo-ai', 'meshy-ai']);
 
 /** Visible affiliate URL goes through /go/ so clicks are counted and the real link can change later. */
 export const goUrl = (p) => `/go/${p.slug}`;

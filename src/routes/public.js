@@ -71,7 +71,8 @@ r.get('/en/blog/:slug/', wrap(async (req, res, next) => {
   const boxSlugs = [...post.body.matchAll(/\{\{product:\s*([a-z0-9-]+)\s*\}\}/g)].map((m) => m[1]);
   const [related, [withCover], boxProducts] = await Promise.all([getProductsBySlugs(post.related), withCovers([post]), getProductsBySlugs(boxSlugs)]);
   const { html: bodyHtml, toc } = withAnchors(withProductBoxes(markdown(post.body), boxProducts, res.locals.h));
-  const image = withCover.coverProduct?.image_url;
+  // A post can set its own share image (front matter "image: /social/<file>.jpg"); otherwise use the cover product photo.
+  const image = post.image ? absUrl(post.image) : withCover.coverProduct?.image_url;
   res.render('pages/blog-post', {
     page: { title: post.title, description: post.description, canonical: post.url, ogType: 'article', image },
     post, bodyHtml, toc, related,
